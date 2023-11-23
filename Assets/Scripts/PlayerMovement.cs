@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D), typeof(Animator))]
-public class PlayerMovement : MonoBehaviour
+[RequireComponent(typeof(Rigidbody2D), typeof(PolygonCollider2D), typeof(Animator))]
+public class PlayerMovement : MovementBehaviour
 {
     [DoNotSerialize] public Rigidbody2D rb;
     public float speed;
@@ -18,8 +18,8 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-        transform.Translate(horizontal * speed * Time.deltaTime, vertical * speed * Time.deltaTime, transform.position.z);
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
+        Move(horizontal, vertical, speed);
     }
 }
