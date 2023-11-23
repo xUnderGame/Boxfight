@@ -6,14 +6,13 @@ using UnityEngine;
 abstract class Character : MonoBehaviour
 {
     public CharacterScriptable Cs;
+    public AnimationBehaviour anim;
+    public MovementBehaviour mov;
 
     private int currentHP;
     private float currentSpeed;
     private float currentDmg;
 
-    public AnimationBehaviour anim;
-
-    public MovementBehaviour mov;
 
     private void Awake()
     {
