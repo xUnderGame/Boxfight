@@ -8,26 +8,17 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MovementBehaviour
 {
     public float speed;
-
-    void OnEnable() {
-        GetComponent<PlayerInput>().actions["OnMove"].performed += ctx => OnMove();
-    }
+    private Vector2 movement = new();
 
     // Update is called once per frame
     void Update()
     {
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
-        // Move(horizontal, vertical, speed);
-        if (Input.GetKeyDown(KeyCode.Space)) Dash(horizontal, vertical);
+        Move(movement.x, movement.y, speed);
     }
 
-    // public void MovePlayer(InputAction.CallbackContext context) {
-    //     Debug.Log($"{context.ReadValue<Vector2>().x}, {context.ReadValue<Vector2>().y}");
-    //     Move(context.ReadValue<Vector2>().x, context.ReadValue<Vector2>().y, speed);
-    // }
+    // Moves the player.
+    private void OnMove(InputValue ctx) { movement = ctx.Get<Vector2>(); }
 
-    public void OnMove() {
-        Debug.Log("hi");
-    }
+    // Makes the player dash forward.
+    private void OnDash() { Dash(movement.x, movement.y); }
 }
