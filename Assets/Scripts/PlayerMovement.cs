@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,10 +10,7 @@ public class PlayerMovement : MovementBehaviour
     private Vector2 movement = new();
 
     // Update is called once per frame
-    void Update()
-    {
-        Move(movement.x, movement.y, speed);
-    }
+    void Update() { Move(movement.x, movement.y, speed); }
 
     // Moves the player.
     private void OnMove(InputValue ctx) { movement = ctx.Get<Vector2>(); }
