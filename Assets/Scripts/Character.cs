@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D),typeof(PolygonCollider2D), typeof(SpriteRenderer))]
+[RequireComponent(typeof(Rigidbody2D), typeof(PolygonCollider2D), typeof(SpriteRenderer))]
 abstract class Character : MonoBehaviour
 {
     public CharacterScriptable Cs;
@@ -22,5 +22,4 @@ abstract class Character : MonoBehaviour
         anim = GetComponent<AnimationBehaviour>();
         mov = GetComponent<MovementBehaviour>();
     }
-
 }
