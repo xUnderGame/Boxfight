@@ -1,11 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    void Start()
-    {
+    public static GameManager Instance;
 
+    public void Awake()
+    {
+        if (Instance) return;
+        Instance = this;
+    }
+
+    public void ChangeScene(string sceneName) {
+        SceneManager.LoadScene(sceneName);
     }
 }
