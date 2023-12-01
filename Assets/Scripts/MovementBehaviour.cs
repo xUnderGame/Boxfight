@@ -6,10 +6,10 @@ using UnityEngine;
 [RequireComponent(typeof(CooldownBehaviour))]
 public class MovementBehaviour : MonoBehaviour
 {
-    public Rigidbody2D rb;
-    public Renderer rd;
-    public CooldownBehaviour cd;
-    [DoNotSerialize] public bool canDash = true;
+    [HideInInspector] public Rigidbody2D rb;
+    [HideInInspector] public Renderer rd;
+    [HideInInspector] public CooldownBehaviour cd;
+    public bool canDash = true;
 
     public void Awake()
     {

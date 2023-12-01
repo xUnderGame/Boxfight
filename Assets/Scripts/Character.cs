@@ -3,23 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(PolygonCollider2D), typeof(SpriteRenderer))]
-abstract class Character : MonoBehaviour
+public abstract class Character : MonoBehaviour, IDamageable
 {
-    public CharacterScriptable Cs;
-    public AnimationBehaviour anim;
-    public MovementBehaviour mov;
+    public CharacterScriptable cs;
+    [HideInInspector] public AnimationBehaviour anim;
+    [HideInInspector] public MovementBehaviour mov;
 
+    private int maxHP;
     private int currentHP;
     private float currentSpeed;
     private float currentDmg;
 
-
     private void Awake()
     {
-        currentHP = Cs.baseHP;
-        currentSpeed = Cs.baseSpeed;
-        currentDmg = Cs.baseDmg;
+        maxHP = cs.baseHP;
+        currentHP = cs.baseHP;
+        currentSpeed = cs.baseSpeed;
+        currentDmg = cs.baseDmg;
         anim = GetComponent<AnimationBehaviour>();
         mov = GetComponent<MovementBehaviour>();
+    }
+
+    // Hurt character
+    public virtual void Hurt() {
+
+    }
+
+    // Kill character
+    public virtual void Kill() {
+
     }
 }

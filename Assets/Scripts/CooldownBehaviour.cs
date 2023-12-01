@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CooldownBehaviour : MonoBehaviour
@@ -13,7 +12,7 @@ public class CooldownBehaviour : MonoBehaviour
         returnMainCD(false);
 
         // Wait until cooldown is finished
-        do { Debug.Log($"{currentTime - Time.time}'s left"); yield return new WaitForSeconds(0.1f); }
+        do { yield return new WaitForSeconds(0.1f); }
         while (currentTime > Time.time);
         returnMainCD(true);
     }

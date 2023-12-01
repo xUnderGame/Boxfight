@@ -405,6 +405,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3083926321154595949, guid: b8a966cd3079c1c4583e8fa26059a4a1, type: 3}
+      propertyPath: m_Color.b
+      value: 0.58976907
+      objectReference: {fileID: 0}
+    - target: {fileID: 3083926321154595949, guid: b8a966cd3079c1c4583e8fa26059a4a1, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3083926321154595949, guid: b8a966cd3079c1c4583e8fa26059a4a1, type: 3}
+      propertyPath: m_Color.r
+      value: 0.5529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 3285857869107948056, guid: b8a966cd3079c1c4583e8fa26059a4a1, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3285857869107948056, guid: b8a966cd3079c1c4583e8fa26059a4a1, type: 3}
+      propertyPath: m_Color.g
+      value: 0.92595947
+      objectReference: {fileID: 0}
+    - target: {fileID: 3285857869107948056, guid: b8a966cd3079c1c4583e8fa26059a4a1, type: 3}
+      propertyPath: m_Color.r
+      value: 0.28773582
+      objectReference: {fileID: 0}
     - target: {fileID: 3692714540914150903, guid: b8a966cd3079c1c4583e8fa26059a4a1, type: 3}
       propertyPath: m_Camera
       value: 
