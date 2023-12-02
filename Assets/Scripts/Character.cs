@@ -9,19 +9,16 @@ public abstract class Character : MonoBehaviour, IDamageable, ILoadScriptable
     [HideInInspector] public AnimationBehaviour anim;
     [HideInInspector] public MovementBehaviour mov;
 
-    private int maxHP;
-    private int currentHP;
-    private float currentSpeed;
-    private float currentDmg;
+    public int maxHP;
+    public int currentHP;
+    public float currentSpeed;
+    public float currentDmg;
 
     private void Awake()
     {
-        maxHP = cs.baseHP;
-        currentHP = cs.baseHP;
-        currentSpeed = cs.baseSpeed;
-        currentDmg = cs.baseDmg;
         anim = GetComponent<AnimationBehaviour>();
         mov = GetComponent<MovementBehaviour>();
+        LoadScriptable();
     }
 
     // Hurt character
@@ -35,7 +32,11 @@ public abstract class Character : MonoBehaviour, IDamageable, ILoadScriptable
     }
 
     // Loads a scriptable
-    public void LoadScriptable() {
-        
+    public void LoadScriptable()
+    {
+        maxHP = cs.baseHP;
+        currentHP = cs.baseHP;
+        currentSpeed = cs.baseSpeed;
+        currentDmg = cs.baseDmg;
     }
 }

@@ -12,7 +12,7 @@ public class CooldownBehaviour : MonoBehaviour
         returnMainCD(false);
 
         // Wait until cooldown is finished
-        do { yield return new WaitForSeconds(0.1f); }
+        do { yield return new WaitForSeconds(0.025f); }
         while (currentTime > Time.time);
         returnMainCD(true);
     }

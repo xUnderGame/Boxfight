@@ -236,6 +236,8 @@ MonoBehaviour:
   anim: {fileID: 0}
   mov: {fileID: 0}
   inv: {fileID: 11400000, guid: 24dac9f5068197a45ac93ab46bfd4ea3, type: 2}
+  currentEnergy: 100
+  maxEnergy: 100
 --- !u!114 &5109893024875175655
 MonoBehaviour:
   m_ObjectHideFlags: 0

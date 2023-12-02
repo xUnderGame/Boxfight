@@ -11,10 +11,11 @@ GameObject:
   - component: {fileID: 3399254211651660177}
   - component: {fileID: 7128401339639811228}
   - component: {fileID: 3132437244574625973}
+  - component: {fileID: 1394498745388921038}
   - component: {fileID: 7253208939561392380}
   - component: {fileID: 455971289856488708}
   m_Layer: 0
-  m_Name: Pistol
+  m_Name: Default Pistol
   m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -132,6 +133,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1394498745388921038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4914977504732083170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b8350710f698b84d8f81e11693711d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7253208939561392380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,6 +162,7 @@ MonoBehaviour:
   firingSpeed: 0
   weaponSprite: {fileID: 0}
   projectile: {fileID: 0}
+  canShoot: 0
   ws: {fileID: 11400000, guid: 28918a20b9f363e4fa95bced1f7b9752, type: 2}
 --- !u!114 &455971289856488708
 MonoBehaviour:

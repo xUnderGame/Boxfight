@@ -7,8 +7,9 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     [HideInInspector] public static GameManager Instance;
-    [HideInInspector] public static GameUI gameUI = new();
+    [HideInInspector] public GameUI gameUI = new();
     [HideInInspector] public GameObject playerObject;
+    [HideInInspector] public Player player;
 
     public void Awake()
     {
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour
 
         // Misc setup..
         playerObject = GameObject.Find("Player");
+        player = playerObject.GetComponent<Player>();
 
         // Setting GameUI stuff up!
         gameUI.main = GameObject.Find("Game UI");

@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: Inventory
   m_EditorClassIdentifier: 
   activePowerups: []
-  weapons: []
+  weapons:
+  - {fileID: 0}
+  activeWeapon: {fileID: 0}
   weaponIndex: 0
