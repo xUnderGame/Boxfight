@@ -312,6 +312,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stronger Pistol
       objectReference: {fileID: 0}
+    - target: {fileID: 4914977504732083170, guid: 626a1fc5819a0b84cafb6580666b2834, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 7128401339639811228, guid: 626a1fc5819a0b84cafb6580666b2834, type: 3}
       propertyPath: m_Color.b
       value: 0.23137254
@@ -385,6 +389,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Default Pistol
       objectReference: {fileID: 0}
+    - target: {fileID: 4914977504732083170, guid: 626a1fc5819a0b84cafb6580666b2834, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 7128401339639811228, guid: 626a1fc5819a0b84cafb6580666b2834, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -453,6 +461,10 @@ PrefabInstance:
     - target: {fileID: 4914977504732083170, guid: 626a1fc5819a0b84cafb6580666b2834, type: 3}
       propertyPath: m_Name
       value: Even Stronger Pistol
+      objectReference: {fileID: 0}
+    - target: {fileID: 4914977504732083170, guid: 626a1fc5819a0b84cafb6580666b2834, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 7128401339639811228, guid: 626a1fc5819a0b84cafb6580666b2834, type: 3}
       propertyPath: m_Color.b

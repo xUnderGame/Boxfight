@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(CooldownBehaviour))]
@@ -24,7 +23,11 @@ public abstract class Weapon : MonoBehaviour, ILoadScriptable
         canShoot = true;
     }
 
+    // Loads the weapon scriptable upon starting, not enabling!
     public void Start() { LoadScriptable(); }
+
+    // Point weapon at cursor position
+    public void FixedUpdate() { if (gameObject.CompareTag("Equipped")) PointWeaponAtCursor(); }
 
     // Checks if you can shoot
     public bool CanShoot() { return GameManager.Instance.player.currentEnergy >= energyCost && canShoot; }
@@ -43,7 +46,13 @@ public abstract class Weapon : MonoBehaviour, ILoadScriptable
     }
 
     // Sets the weapon sprite (not the UI texture!)
-    public void SetWeaponSprite(Sprite sprite) {
-        gameObject.GetComponent<SpriteRenderer>().sprite = sprite;
+    public void SetWeaponSprite(Sprite sprite) { gameObject.GetComponent<SpriteRenderer>().sprite = sprite; }
+
+    // Points weapon to cursor
+    public void PointWeaponAtCursor()
+    {
+        Vector3 lookDir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - gameObject.transform.position;
+        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
+        gameObject.transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 }

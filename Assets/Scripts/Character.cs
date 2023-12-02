@@ -9,10 +9,10 @@ public abstract class Character : MonoBehaviour, IDamageable, ILoadScriptable
     [HideInInspector] public AnimationBehaviour anim;
     [HideInInspector] public MovementBehaviour mov;
 
-    public int maxHP;
-    public int currentHP;
-    public float currentSpeed;
-    public float currentDmg;
+    [HideInInspector] public int maxHP;
+    [HideInInspector] public int currentHP;
+    [HideInInspector] public float currentSpeed;
+    [HideInInspector] public float currentDmg;
 
     private void Awake()
     {

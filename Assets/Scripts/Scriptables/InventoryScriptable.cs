@@ -40,12 +40,13 @@ public class InventoryScriptable : ScriptableObject
 
         // Adds the weapon
         weapons.Add(pickup.GetComponent<Weapon>());
+        pickup.tag = "Equipped";
 
         // Sets the new position of the weapon
         pickup.transform.parent = GameManager.Instance.playerObject.transform.Find("Weapons");
         pickup.transform.position = new Vector3(
             GameManager.Instance.playerObject.transform.position.x,
-            GameManager.Instance.playerObject.transform.position.y + 0.25f,
+            GameManager.Instance.playerObject.transform.position.y,
             pickup.transform.position.z
         );
         Debug.Log($"Picked up weapon {pickup.name}");
