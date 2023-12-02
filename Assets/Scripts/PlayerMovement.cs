@@ -27,5 +27,12 @@ public class PlayerMovement : MonoBehaviour
     // Makes the player dash forward.
     private void OnDash() { mov.Dash(movement.x, movement.y); }
 
-    private void OnFire() { inv.weapons[inv.selectedWeapon].Shoot(); }
+    private void OnFire() { inv.activeWeapon.Shoot(); }
+
+
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log($"hii {other.name}!");
+        if (other.TryGetComponent(out IInteractable interactable)) interactable?.Interact();
+    }
 }

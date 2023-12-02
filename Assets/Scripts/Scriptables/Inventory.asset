@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activePowerups: []
   weapons: []
-  selectedWeapon: 0
+  weaponIndex: 0

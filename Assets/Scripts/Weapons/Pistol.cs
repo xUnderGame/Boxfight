@@ -4,9 +4,17 @@ using UnityEngine;
 
 public class Pistol : Weapon
 {
-    private readonly WeaponScriptable ws;
+    public PistolScriptable ws;
 
-    void Start()
+    public override void Shoot()
+    {
+        Instantiate(projectile,
+        gameObject.transform.position,
+        Quaternion.identity,
+        gameObject.transform);
+    }
+
+    public override void LoadScriptable()
     {
         energyCost = ws.energyCost;
         damage = ws.damage;

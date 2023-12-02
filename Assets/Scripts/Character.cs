@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(PolygonCollider2D), typeof(SpriteRenderer))]
-public abstract class Character : MonoBehaviour, IDamageable
+public abstract class Character : MonoBehaviour, IDamageable, ILoadScriptable
 {
     public CharacterScriptable cs;
     [HideInInspector] public AnimationBehaviour anim;
@@ -32,5 +32,10 @@ public abstract class Character : MonoBehaviour, IDamageable
     // Kill character
     public virtual void Kill() {
 
+    }
+
+    // Loads a scriptable
+    public void LoadScriptable() {
+        
     }
 }

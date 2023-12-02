@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public abstract class Weapon : MonoBehaviour
+public abstract class Weapon : MonoBehaviour, ILoadScriptable
 {
     public int energyCost;
     public float damage;
@@ -17,9 +17,11 @@ public abstract class Weapon : MonoBehaviour
         projectile = (GameObject)Resources.Load("Prefabs/Projectiles/Default");
     }
 
+    public void Start() { LoadScriptable(); }
+
     // Shoots the weapon
-    public virtual void Shoot()
-    {
-        Instantiate(projectile, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-    }
+    public abstract void Shoot();
+
+    // Loads a scriptable
+    public abstract void LoadScriptable();
 }

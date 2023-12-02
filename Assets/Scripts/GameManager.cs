@@ -8,12 +8,16 @@ public class GameManager : MonoBehaviour
 {
     [HideInInspector] public static GameManager Instance;
     [HideInInspector] public static GameUI gameUI = new();
+    [HideInInspector] public GameObject playerObject;
 
     public void Awake()
     {
         // GameManager Instance
         if (Instance) { Destroy(gameObject); return; }
         else Instance = this;
+
+        // Misc setup..
+        playerObject = GameObject.Find("Player");
 
         // Setting GameUI stuff up!
         gameUI.main = GameObject.Find("Game UI");
