@@ -17,7 +17,8 @@ public abstract class Weapon : MonoBehaviour, ILoadScriptable
     
     public void Awake()
     {
-        weaponSprite = Resources.Load("Prefabs/Weapons/Default Pistol").GetComponent<Sprite>(); // Fallback weapon sprite
+        // Fallback weapon sprite (Cannot get component from a prefab, crashes)
+        // weaponSprite = Resources.Load("Prefabs/Weapons/Pistol").GetComponent<Sprite>();
         projectile = (GameObject)Resources.Load("Prefabs/Projectiles/Default"); // Fallback weapon projectile
         cd = GetComponent<CooldownBehaviour>();
         canShoot = true;
@@ -38,6 +39,11 @@ public abstract class Weapon : MonoBehaviour, ILoadScriptable
     public void DiscountMana()
     {
         GameManager.Instance.player.currentEnergy -= energyCost;
-        GameManager.Instance.player.UpdateEnergyUI();
+        GameManager.Instance.gameUI.UpdateEnergyUI();
+    }
+
+    // Sets the weapon sprite (not the UI texture!)
+    public void SetWeaponSprite(Sprite sprite) {
+        gameObject.GetComponent<SpriteRenderer>().sprite = sprite;
     }
 }

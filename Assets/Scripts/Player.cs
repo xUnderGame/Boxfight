@@ -8,11 +8,9 @@ public class Player : Character
     public float currentEnergy;
     public float maxEnergy;
 
-    public void Start() { UpdateEnergyUI(); UpdateHealthUI(); }
-
-    // Updates the energy UI
-    public void UpdateEnergyUI() { GameManager.Instance.gameUI.manaValue.text = $"{currentEnergy}/{maxEnergy}"; }
-
-    // Updates the HP UI
-    public void UpdateHealthUI() { GameManager.Instance.gameUI.hpValue.text = $"{currentHP}/{maxHP}"; }
+    public void Start()
+    {
+        GameManager.Instance.gameUI.UpdateEnergyUI();
+        GameManager.Instance.gameUI.UpdateHealthUI();
+    }
 }

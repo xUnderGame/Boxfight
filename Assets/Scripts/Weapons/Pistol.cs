@@ -17,14 +17,17 @@ public class Pistol : Weapon
         gameObject.transform);
 
         // Discount the player mana and start cooldown coroutine
-        StartCoroutine(cd.StartCooldown(0.15f, result => canShoot = result, canShoot));
+        StartCoroutine(cd.StartCooldown(firingSpeed, result => canShoot = result, canShoot));
         DiscountMana();
     }
 
     public override void LoadScriptable()
     {
+        weaponSprite = ws.weaponSprite;
         energyCost = ws.energyCost;
         damage = ws.damage;
         firingSpeed = ws.firingSpeed;
+        
+        SetWeaponSprite(weaponSprite);
     }
 }
