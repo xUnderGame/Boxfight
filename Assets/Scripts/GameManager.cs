@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
         if (Instance) { Destroy(gameObject); return; }
         else Instance = this;
 
-        // Misc setup..
+        // Misc setup...
         playerObject = GameObject.Find("Player");
         player = playerObject.GetComponent<Player>();
 
@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
         public void UpdateHealthUI() { hpValue.text = $"{Instance.player.currentHP}/{Instance.player.maxHP}"; }
 
         // Updates the weapons UI
-        public void UpdateWeaponsUI(InventoryScriptable sc)
+        public void UpdateWeaponsUI(InventoryScriptable sc, int oldIndex = 1)
         {
             // Primary weapon sprite and mana cost
             primaryWeapon.transform.Find("Sprite").GetComponent<RawImage>().texture
@@ -64,12 +64,12 @@ public class GameManager : MonoBehaviour
             sc.activeWeapon.energyCost.ToString();
 
             // Secondary weapon sprite and mana cost (HARDCODED!!! Kinda...?)
-            if (sc.weapons.Count < 2) return;
+            if (sc.weapons.Count != sc.weapons.Capacity) return;
             secondaryWeapon.transform.Find("Sprite").GetComponent<RawImage>().texture
-            = sc.weapons[1].weaponSprite.texture;
+            = sc.weapons[oldIndex].weaponSprite.texture;
             
             secondaryWeapon.transform.Find("Energy Cost").GetComponent<Text>().text =
-            sc.weapons[1].energyCost.ToString();
+            sc.weapons[oldIndex].energyCost.ToString();
         }
     }
 }

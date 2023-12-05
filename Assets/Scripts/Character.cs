@@ -22,13 +22,13 @@ public abstract class Character : MonoBehaviour, IDamageable, ILoadScriptable
     }
 
     // Hurt character
-    public virtual void Hurt() {
-
+    public virtual void Hurt(float damage) {
+        Debug.Log($"Ow! Took {damage} damage.");
     }
 
     // Kill character
     public virtual void Kill() {
-
+        Debug.Log($"RIP. {gameObject.name} died!");
     }
 
     // Loads a scriptable

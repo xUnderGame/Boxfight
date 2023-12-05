@@ -8,6 +8,7 @@ public abstract class Weapon : MonoBehaviour, ILoadScriptable
     [HideInInspector] public int energyCost;
     [HideInInspector] public float damage;
     [HideInInspector] public float firingSpeed;
+    [HideInInspector] public float projectileSpeed;
     [HideInInspector] public Sprite weaponSprite;
     [HideInInspector] public GameObject projectile;
     [HideInInspector] public bool canShoot;

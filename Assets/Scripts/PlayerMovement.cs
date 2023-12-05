@@ -38,6 +38,6 @@ public class PlayerMovement : MonoBehaviour
     {
         Debug.Log($"hii {other.name}!");
         if (other.TryGetComponent(out IInteractable interactable)) interactable?.Interact();
-        if (other.TryGetComponent(out IDamageable damageable)) damageable?.Hurt();
+        // if (other.TryGetComponent(out IDamageable damageable)) damageable?.Hurt();
     }
 }

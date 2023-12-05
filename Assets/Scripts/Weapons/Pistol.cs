@@ -27,6 +27,7 @@ public class Pistol : Weapon
         energyCost = ws.energyCost;
         damage = ws.damage;
         firingSpeed = ws.firingSpeed;
+        projectileSpeed = ws.projectileSpeed;
         
         SetWeaponSprite(weaponSprite);
     }

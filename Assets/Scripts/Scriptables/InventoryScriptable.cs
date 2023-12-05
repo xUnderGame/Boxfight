@@ -25,6 +25,7 @@ public class InventoryScriptable : ScriptableObject
     public void SwapWeapon()
     {
         if (weapons.Count < 2 || !activeWeapon.canShoot) return;
+        int oldIndex = weaponIndex;
         weaponIndex = Convert.ToInt32(!Convert.ToBoolean(weaponIndex));
 
         // Swap weapons and enable/disable
@@ -32,6 +33,7 @@ public class InventoryScriptable : ScriptableObject
         activeWeapon = weapons[weaponIndex];
         activeWeapon.gameObject.SetActive(true);
         Debug.Log($"Weapon swapped with {activeWeapon.name}");
+        GameManager.Instance.gameUI.UpdateWeaponsUI(this, oldIndex);
     }
 
     // Picks up a weapon

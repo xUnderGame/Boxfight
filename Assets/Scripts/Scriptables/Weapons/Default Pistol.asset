@@ -15,5 +15,6 @@ MonoBehaviour:
   energyCost: 1
   damage: 1
   firingSpeed: 0.15
+  projectileSpeed: 1
   weaponSprite: {fileID: 21300000, guid: ad7e995f036dcb24ab9761beb3a327eb, type: 3}
   projectile: {fileID: 1180622746647987742, guid: 82ef4f3b7466f764389d76344b41faef, type: 3}
