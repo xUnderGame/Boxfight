@@ -56,4 +56,12 @@ public abstract class Weapon : MonoBehaviour, ILoadScriptable
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
         gameObject.transform.rotation = Quaternion.Euler(0, 0, angle);
     }
+
+    // Points weapon at player
+    public void PointWeaponAtPlayer()
+    {
+        Vector3 lookDir = Camera.main.ScreenToWorldPoint(GameManager.Instance.playerObject.transform.position) - gameObject.transform.position;
+        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
+        gameObject.transform.rotation = Quaternion.Euler(0, 0, angle);
+    }
 }

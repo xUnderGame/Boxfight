@@ -11,10 +11,13 @@ public class Pistol : Weapon
         if (!CanShoot()) return;
 
         // Shoot the bullet
-        Instantiate(projectile,
+        GameObject tempBullet = Instantiate(projectile,
         gameObject.transform.position,
         Quaternion.identity,
         gameObject.transform);
+        Physics2D.IgnoreCollision(transform.root.GetComponent<Collider2D>(), tempBullet.GetComponent<Collider2D>());
+        tempBullet.transform.parent = GameObject.Find("Bullet Pool").transform;
+        tempBullet.GetComponent<Projectile>().bulletSpeed = projectileSpeed;
 
         // Discount the player mana and start cooldown coroutine
         StartCoroutine(cd.StartCooldown(firingSpeed, result => canShoot = result, canShoot));

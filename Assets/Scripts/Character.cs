@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(PolygonCollider2D), typeof(SpriteRenderer))]
+[RequireComponent(typeof(Rigidbody2D), typeof(Collider2D), typeof(SpriteRenderer))]
 public abstract class Character : MonoBehaviour, IDamageable, ILoadScriptable
 {
     public CharacterScriptable cs;
@@ -23,7 +23,7 @@ public abstract class Character : MonoBehaviour, IDamageable, ILoadScriptable
 
     // Hurt character
     public virtual void Hurt(float damage) {
-        Debug.Log($"Ow! Took {damage} damage.");
+        Debug.Log($"Ow! {gameObject.name} took {damage} damage.");
     }
 
     // Kill character
