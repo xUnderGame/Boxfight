@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+[RequireComponent(typeof(CooldownBehaviour))]
 public class MovementBehaviour : MonoBehaviour
 {
-    public Rigidbody2D rb;
-    public Renderer rd;
+    [HideInInspector] public Rigidbody2D rb;
+    [HideInInspector] public Renderer rd;
+    [HideInInspector] public CooldownBehaviour cd;
+    public bool canDash = true;
 
     public void Awake()
     {
+        cd = GetComponent<CooldownBehaviour>();
         rb = GetComponent<Rigidbody2D>();
         rd = GetComponent<Renderer>();
     }
@@ -19,8 +23,14 @@ public class MovementBehaviour : MonoBehaviour
     
     // Makes the character "dash" forward.
     public void Dash(float x, float y, float force = 15f, bool doIframes = true) {
+        if (!canDash) return;
+
+        // Dashes
         rb.AddForce(new Vector2(x, y) * force, ForceMode2D.Impulse);
         if (doIframes) StartCoroutine(DashIframes());
+
+        // Start cooldown
+        StartCoroutine(cd.StartCooldown(0.5f, result => canDash = result, canDash));
     }
 
     // Changes color of the character renderer and gives some iframes (not yet implemented)

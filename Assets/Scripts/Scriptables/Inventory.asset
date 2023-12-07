@@ -9,6 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8aba8be05845b2844a41782c303c1c2a, type: 3}
-  m_Name: Player
+  m_Script: {fileID: 11500000, guid: 7e4bf816ec63e29439467ab969807dda, type: 3}
+  m_Name: Inventory
   m_EditorClassIdentifier: 
+  activePowerups: []
+  weapons:
+  - {fileID: 0}
+  activeWeapon: {fileID: 0}
+  weaponIndex: 0

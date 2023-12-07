@@ -13,7 +13,5 @@ public class AnimationBehaviour : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    
-
 
 }
