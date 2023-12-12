@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public GameUI gameUI = new();
     [HideInInspector] public GameObject playerObject;
     [HideInInspector] public Player player;
+    [HideInInspector] public GameObject pickupPool;
+    public GameObject nearestPickup;
 
     public void Awake()
     {
@@ -18,6 +20,7 @@ public class GameManager : MonoBehaviour
         else Instance = this;
 
         // Misc setup...
+        pickupPool = GameObject.Find("Pickup Pool");
         playerObject = GameObject.Find("Player");
         player = playerObject.GetComponent<Player>();
 

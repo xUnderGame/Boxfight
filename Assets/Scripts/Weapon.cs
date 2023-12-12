@@ -12,6 +12,7 @@ public abstract class Weapon : MonoBehaviour, ILoadScriptable
     [HideInInspector] public Sprite weaponSprite;
     [HideInInspector] public GameObject projectile;
     [HideInInspector] public bool canShoot;
+    [HideInInspector] public bool isSwapable;
 
     protected CooldownBehaviour cd;
     
@@ -55,6 +56,11 @@ public abstract class Weapon : MonoBehaviour, ILoadScriptable
         Vector3 lookDir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - gameObject.transform.position;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
         gameObject.transform.rotation = Quaternion.Euler(0, 0, angle);
+
+        // Flip sprite
+        SpriteRenderer flip = gameObject.GetComponent<SpriteRenderer>();
+        if (gameObject.transform.rotation.z > 0.68f || gameObject.transform.rotation.z < -0.68f) flip.flipY = true;
+        else flip.flipY = false;
     }
 
     // Points weapon at player
@@ -64,4 +70,8 @@ public abstract class Weapon : MonoBehaviour, ILoadScriptable
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
         gameObject.transform.rotation = Quaternion.Euler(0, 0, angle);
     }
+
+    // Checking if the player is near the swappable weapon
+    void OnTriggerEnter2D(Collider2D other) { if (other.gameObject.name == "Pickup Area") GameManager.Instance.nearestPickup = gameObject; }
+    void OnTriggerExit2D(Collider2D other) { if (other.gameObject.name == "Pickup Area") GameManager.Instance.nearestPickup = null; }
 }
