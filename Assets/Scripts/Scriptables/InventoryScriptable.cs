@@ -16,7 +16,7 @@ public class InventoryScriptable : ScriptableObject
     {
         activePowerups = new();
         weapons = new(capacity: 2);
-        activeWeapon = null; // Might cause problems in the future?
+        activeWeapon = null;
         weaponIndex = 0;
     }
 
@@ -60,4 +60,7 @@ public class InventoryScriptable : ScriptableObject
 
         return true;
     }
+
+    // Changes weapon with the one on the floor.
+    public void ChangeWeapon() { }
 }

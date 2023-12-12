@@ -9,4 +9,5 @@ public abstract class Projectile : MonoBehaviour
     public abstract void FixedUpdate();
     public abstract void Travel();
     public abstract void OnTriggerEnter2D(Collider2D hit);
+    public void OnBecameInvisible() { Destroy(gameObject); } // Destroy itself upon leaving the screen space
 }

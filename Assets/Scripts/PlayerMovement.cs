@@ -28,10 +28,13 @@ public class PlayerMovement : MonoBehaviour
     private void OnDash() { mov.Dash(movement.x, movement.y); }
 
     // Fires current weapon.
-    private void OnFire() { inv.activeWeapon.Shoot(); }
+    private void OnFire() { if (inv.activeWeapon) inv.activeWeapon.Shoot(); }
 
     // Swaps the current weapon.
-    private void OnSwapSwapon() { inv.SwapWeapon(); }
+    private void OnSwapWeapon() { inv.SwapWeapon(); }
+
+    // Picks up the weapon on the floor and drops the current active weapon.
+    private void OnChangeWeapon() { inv.SwapWeapon(); }
 
     // Interactables and damageables.
     public void OnTriggerEnter2D(Collider2D other)

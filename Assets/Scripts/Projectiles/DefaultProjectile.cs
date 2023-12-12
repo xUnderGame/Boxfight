@@ -17,11 +17,12 @@ public class DefaultProjectile : Projectile
         moveTowards = Camera.main.ScreenToWorldPoint(Input.mousePosition) - gameObject.transform.position;
     }
 
-    // Update is called once per frame
     public override void FixedUpdate() { Travel(); }
 
+    // Makes the trojectile travel.
     public override void Travel() { transform.Translate(moveTowards.normalized * (bulletSpeed - fixedSpeedDecrease), Space.World); }
 
+    // When the projectile hits something...
     public override void OnTriggerEnter2D(Collider2D hit)
     {
         if (hit.TryGetComponent(out IDamageable damageable)) damageable?.Hurt(weapon.damage);
