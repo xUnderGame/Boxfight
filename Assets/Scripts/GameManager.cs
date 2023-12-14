@@ -60,16 +60,18 @@ public class GameManager : MonoBehaviour
         public void UpdateWeaponsUI(InventoryScriptable sc, int oldIndex = 1)
         {
             // Primary weapon sprite and mana cost
-            primaryWeapon.transform.Find("Sprite").GetComponent<RawImage>().texture
-            = sc.activeWeapon.weaponSprite.texture;
+            RawImage primaryImage = primaryWeapon.transform.Find("Sprite").GetComponent<RawImage>();
+            primaryImage.texture = sc.activeWeapon.weaponSprite.texture;
+            // primaryImage.color = sc.activeWeapon.gameObject.GetComponent<SpriteRenderer>().color;
 
             primaryWeapon.transform.Find("Energy Cost").GetComponent<Text>().text =
             sc.activeWeapon.energyCost.ToString();
 
-            // Secondary weapon sprite and mana cost (HARDCODED!!! Kinda...?)
+            // Secondary weapon sprite and mana cost
             if (sc.weapons.Count != sc.weapons.Capacity) return;
-            secondaryWeapon.transform.Find("Sprite").GetComponent<RawImage>().texture
-            = sc.weapons[oldIndex].weaponSprite.texture;
+            RawImage secondaryImage = secondaryWeapon.transform.Find("Sprite").GetComponent<RawImage>();
+            secondaryImage.texture = sc.weapons[oldIndex].weaponSprite.texture;
+            // secondaryImage.color = sc.weapons[oldIndex].gameObject.GetComponent<SpriteRenderer>().color;
             
             secondaryWeapon.transform.Find("Energy Cost").GetComponent<Text>().text =
             sc.weapons[oldIndex].energyCost.ToString();

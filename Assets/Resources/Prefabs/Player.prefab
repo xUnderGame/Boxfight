@@ -328,7 +328,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6389552924496195001}
   - component: {fileID: 360684894517183145}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pickup Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}

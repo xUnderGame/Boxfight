@@ -20,13 +20,12 @@ public class InventoryScriptable : ScriptableObject
         weaponIndex = 0;
     }
 
-
     // Swaps current weapon
     public void SwapWeapon()
     {
         if (weapons.Count < 2 || !activeWeapon.canShoot) return;
         int oldIndex = weaponIndex;
-        weaponIndex = Convert.ToInt32(!Convert.ToBoolean(weaponIndex));
+        weaponIndex = MirrorWeaponIndex();
 
         // Swap weapons and enable/disable
         activeWeapon.gameObject.SetActive(false);
@@ -37,9 +36,16 @@ public class InventoryScriptable : ScriptableObject
     }
 
     // Picks up a weapon
-    public bool PickupWeapon(GameObject pickup) {
-        if (weapons.Count >= weapons.Capacity) return false;
+    public void PickupWeapon() {
+        if (!GameManager.Instance.nearestPickup) return;
 
+        // Decides if it should pick up the weapon OR swap it with the currently equipped one
+        if (weapons.Count >= weapons.Capacity) { ChangeWeapon(); return; }
+
+        // Disables the collider
+        GameObject pickup = GameManager.Instance.nearestPickup;
+        pickup.GetComponent<BoxCollider2D>().enabled = false;
+        
         // Adds the weapon
         weapons.Add(pickup.GetComponent<Weapon>());
         pickup.tag = "Equipped";
@@ -52,7 +58,7 @@ public class InventoryScriptable : ScriptableObject
         else activeWeapon = weapons[0]; // Might cause problems...? (Does not for now)
         GameManager.Instance.gameUI.UpdateWeaponsUI(this);
 
-        return true;
+        Debug.Log($"Picked up weapon {pickup.name}");
     }
 
     // Sets the weapon position where the player is
@@ -64,31 +70,32 @@ public class InventoryScriptable : ScriptableObject
             GameManager.Instance.playerObject.transform.position.y,
             pickup.transform.position.z
         );
-        Debug.Log($"Picked up weapon {pickup.name}");
     }
 
     // Changes weapon with the one on the floor.
     public void ChangeWeapon()
     {
-        if (!GameManager.Instance.nearestPickup) return;
+        if (!GameManager.Instance.nearestPickup || !activeWeapon.canShoot || weapons.Count < 2) return;
+        GameObject pickup = GameManager.Instance.nearestPickup;
 
         // "Unequip"
         activeWeapon.transform.parent = GameManager.Instance.pickupPool.transform;
+        activeWeapon.gameObject.GetComponent<Collider2D>().enabled = true;
         activeWeapon.tag = "Untagged";
 
         // Equip new weapon
-        GameManager.Instance.nearestPickup.transform.parent = GameManager.Instance.playerObject.transform.Find("Weapons");
-        activeWeapon = GameManager.Instance.nearestPickup.GetComponent<Weapon>();
-        SetWeaponPosition(GameManager.Instance.nearestPickup);
+        pickup.transform.parent = GameManager.Instance.playerObject.transform.Find("Weapons");
+        activeWeapon = pickup.GetComponent<Weapon>();
+        SetWeaponPosition(pickup);
+        weapons[weaponIndex] = activeWeapon;
         activeWeapon.tag = "Equipped";
-        weapons[0] = activeWeapon;
 
+        Debug.Log($"Swapped active weapon with {pickup.name}");
         GameManager.Instance.nearestPickup = null;
+        GameManager.Instance.gameUI.UpdateWeaponsUI(this, MirrorWeaponIndex());
     }
 
-    // Unequip/drop weapon
-    // public void UnequipActiveWeapon()
-    // {
+    // Mirrors the weapon index (Only used for UI purposes rn)
+    public int MirrorWeaponIndex() { return Convert.ToInt32(!Convert.ToBoolean(weaponIndex)); }
 
-    // }
 }
