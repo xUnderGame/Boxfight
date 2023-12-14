@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DefaultProjectile : Projectile
+public class ShotgunProjectile : Projectile
 {
     private Weapon weapon;
     private Vector2 moveTowards;
@@ -14,12 +14,14 @@ public class DefaultProjectile : Projectile
     void Awake()
     {
         // Projectile info
-        gameObject.name = "Default Projectile";
-        bulletSpeed = 1.15f;
+        gameObject.name = "Shotgun Pellet";
+        bulletSpeed = 1;
+        bulletSpread = 2.5f;
 
         // Where to shoot, active weapon...
         weapon = GameManager.Instance.player.inv.activeWeapon;
         moveTowards = Camera.main.ScreenToWorldPoint(Input.mousePosition) - gameObject.transform.position;
+        moveTowards = new(moveTowards.x + Random.Range(-bulletSpread, bulletSpread), moveTowards.y + Random.Range(-bulletSpread, bulletSpread));
     }
 
     public override void FixedUpdate() { Travel(); }

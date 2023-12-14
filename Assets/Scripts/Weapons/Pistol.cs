@@ -14,10 +14,10 @@ public class Pistol : Weapon
         GameObject tempBullet = Instantiate(projectile,
         gameObject.transform.position,
         Quaternion.identity,
-        gameObject.transform);
+        GameManager.Instance.bulletPool.transform);
+
+        // Ignore collision
         Physics2D.IgnoreCollision(transform.root.GetComponent<Collider2D>(), tempBullet.GetComponent<Collider2D>());
-        tempBullet.transform.parent = GameObject.Find("Bullet Pool").transform;
-        tempBullet.GetComponent<Projectile>().bulletSpeed = projectileSpeed;
 
         // Discount the player mana and start cooldown coroutine
         StartCoroutine(cd.StartCooldown(firingSpeed, result => canShoot = result, canShoot));
@@ -30,7 +30,7 @@ public class Pistol : Weapon
         energyCost = ws.energyCost;
         damage = ws.damage;
         firingSpeed = ws.firingSpeed;
-        projectileSpeed = ws.projectileSpeed;
+        projectile = ws.projectile;
         
         SetWeaponSprite(weaponSprite);
     }

@@ -8,11 +8,9 @@ public abstract class Weapon : MonoBehaviour, ILoadScriptable
     [HideInInspector] public int energyCost;
     [HideInInspector] public float damage;
     [HideInInspector] public float firingSpeed;
-    [HideInInspector] public float projectileSpeed;
     [HideInInspector] public Sprite weaponSprite;
     [HideInInspector] public GameObject projectile;
     [HideInInspector] public bool canShoot;
-    [HideInInspector] public bool isSwapable;
 
     protected CooldownBehaviour cd;
     
@@ -29,7 +27,7 @@ public abstract class Weapon : MonoBehaviour, ILoadScriptable
     public void Start() { LoadScriptable(); }
 
     // Point weapon at cursor position
-    public void FixedUpdate() { if (gameObject.CompareTag("Equipped")) PointWeaponAtCursor(); }
+    public void Update() { if (gameObject.CompareTag("Equipped")) PointWeaponAtCursor(); }
 
     // Checks if you can shoot
     public bool CanShoot() { return GameManager.Instance.player.currentEnergy >= energyCost && canShoot; }

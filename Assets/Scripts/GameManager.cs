@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public GameObject playerObject;
     [HideInInspector] public Player player;
     [HideInInspector] public GameObject pickupPool;
+    [HideInInspector] public GameObject bulletPool;
     public GameObject nearestPickup;
 
     public void Awake()
@@ -21,6 +22,7 @@ public class GameManager : MonoBehaviour
 
         // Misc setup...
         pickupPool = GameObject.Find("Pickup Pool");
+        bulletPool = GameObject.Find("Bullet Pool");
         playerObject = GameObject.Find("Player");
         player = playerObject.GetComponent<Player>();
 
