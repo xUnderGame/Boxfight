@@ -9,11 +9,14 @@ public class PlayerMovement : MonoBehaviour
 {
     public float speed;
     private Vector2 movement = new();
+    private Coroutine meleeCoroutine;
+    private GameObject meleeAttack;
     private MovementBehaviour mov;
     private InventoryScriptable inv;
 
     void Awake() 
     {
+        meleeAttack = gameObject.transform.Find("Melee Area").gameObject;
         mov = GetComponent<MovementBehaviour>();
         inv = GetComponent<Player>().inv;
     }
@@ -30,11 +33,28 @@ public class PlayerMovement : MonoBehaviour
     // Fires current weapon.
     private void OnFire() { if (inv.activeWeapon) inv.activeWeapon.Shoot(); }
 
+    // Melee attack event
+    private void OnMelee()
+    {
+        Debug.Log("hi");
+        if (meleeCoroutine != null) { StopCoroutine(meleeCoroutine); meleeAttack.SetActive(false); }
+        meleeCoroutine = StartCoroutine(MeleeAttack());
+    }
+
     // Swaps the current weapon.
     private void OnSwapWeapon() { inv.SwapWeapon(); }
 
     // Picks up the weapon on the floor and drops the current active weapon.
     private void OnPickupWeapon() { inv.PickupWeapon(); }
+
+
+    // Melee attacks
+    private IEnumerator MeleeAttack()
+    {
+        meleeAttack.SetActive(true);
+        yield return new WaitForSeconds(0.2f);
+        meleeAttack.SetActive(false);
+    }
 
     // Interactables and damageables.
     public void OnTriggerEnter2D(Collider2D other)

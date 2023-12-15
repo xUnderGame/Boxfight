@@ -5,7 +5,6 @@ using UnityEngine;
 public class ShotgunProjectile : Projectile
 {
     private Weapon weapon;
-    private Vector2 moveTowards;
     private readonly float fixedSpeedDecrease = 0.9f;
 
     // Has a funny bug where if you switch weapon the same frame after shooting,
@@ -18,16 +17,14 @@ public class ShotgunProjectile : Projectile
         bulletSpeed = 1;
         bulletSpread = 2.5f;
 
-        // Where to shoot, active weapon...
+        // Active weapon...
         weapon = GameManager.Instance.player.inv.activeWeapon;
-        moveTowards = Camera.main.ScreenToWorldPoint(Input.mousePosition) - gameObject.transform.position;
-        moveTowards = new(moveTowards.x + Random.Range(-bulletSpread, bulletSpread), moveTowards.y + Random.Range(-bulletSpread, bulletSpread));
     }
 
     public override void FixedUpdate() { Travel(); }
 
     // Makes the trojectile travel.
-    public override void Travel() { transform.Translate(moveTowards.normalized * (bulletSpeed - fixedSpeedDecrease), Space.World); }
+    public override void Travel() { transform.Translate(transform.right * (bulletSpeed - fixedSpeedDecrease)); }
 
     // When the projectile hits something...
     public override void OnTriggerEnter2D(Collider2D hit)
