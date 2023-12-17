@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Default Pistol", menuName = "Weapon Scriptables/Pistol")]
-public class PistolScriptable : ScriptableObject
+[CreateAssetMenu(fileName = "Default Sniper", menuName = "Weapon Scriptables/Sniper")]
+public class SniperScriptable : ScriptableObject
 {
     public int energyCost;
     public float damage;

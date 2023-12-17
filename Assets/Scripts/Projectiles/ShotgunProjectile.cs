@@ -27,7 +27,7 @@ public class ShotgunProjectile : Projectile
     // When the projectile hits something...
     public override void OnTriggerEnter2D(Collider2D hit)
     {
-        if (hit.TryGetComponent(out IDamageable damageable)) damageable?.Hurt(weapon.damage);
+        if (hit.TryGetComponent(out IDamageable damageable)) damageable?.Hurt(weapon.damage, gameObject);
         Destroy(gameObject);
     }
 }

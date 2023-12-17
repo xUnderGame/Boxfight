@@ -22,13 +22,38 @@ public abstract class Character : MonoBehaviour, IDamageable, ILoadScriptable
     }
 
     // Hurt character
-    public virtual void Hurt(float damage) {
+    public virtual void Hurt(float damage, GameObject damageSource) {
+        // Hurt the character
         Debug.Log($"Ow! {gameObject.name} took {damage} damage.");
+
+        // Spawn energy bits if the character hit wasn't a player
+        if (!gameObject.CompareTag("Player")) {
+            int droplets = Random.Range(0, 4); // 20% base chance to drop energy on hit
+            if (droplets == 0 || damageSource.name == "Melee Area") DropEnergyBit(Random.Range(1, 4));
+        }
     }
 
     // Kill character
     public virtual void Kill() {
         Debug.Log($"RIP. {gameObject.name} died!");
+    }
+
+    // Drops an energy bit near a character
+    private void DropEnergyBit(int amount = 1)
+    {
+        for (int i = 0; i < amount; i++)
+        {
+            Instantiate(
+                GameManager.Instance.energyBitPrefab,
+                new Vector3(
+                    transform.position.x + Random.Range(-1.5f, 1.5f),
+                    transform.position.y + Random.Range(-1.5f, 1.5f),
+                    transform.position.z
+                ),
+                Quaternion.identity,
+                GameManager.Instance.pickupPool.transform
+            );   
+        }
     }
 
     // Loads a scriptable

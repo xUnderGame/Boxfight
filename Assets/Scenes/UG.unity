@@ -1177,6 +1177,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2336676407895767433, guid: c2f6a3d97243a0f4a90535678fc0c49e, type: 3}
+      propertyPath: m_Color.g
+      value: 0.87058824
+      objectReference: {fileID: 0}
     - target: {fileID: 8196906035966876808, guid: c2f6a3d97243a0f4a90535678fc0c49e, type: 3}
       propertyPath: m_Name
       value: Energy Bit

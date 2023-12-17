@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -12,6 +13,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public Player player;
     [HideInInspector] public GameObject pickupPool;
     [HideInInspector] public GameObject bulletPool;
+    [HideInInspector] public GameObject energyBitPrefab;
     public GameObject nearestPickup;
 
     public void Awake()
@@ -21,6 +23,7 @@ public class GameManager : MonoBehaviour
         else Instance = this;
 
         // Misc setup...
+        energyBitPrefab = (GameObject)Resources.Load("Prefabs/Interactables/Energy Bit");
         pickupPool = GameObject.Find("Pickup Pool");
         bulletPool = GameObject.Find("Bullet Pool");
         playerObject = GameObject.Find("Player");

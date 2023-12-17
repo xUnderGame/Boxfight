@@ -36,7 +36,6 @@ public class PlayerMovement : MonoBehaviour
     // Melee attack event
     private void OnMelee()
     {
-        Debug.Log("hi");
         if (meleeCoroutine != null) { StopCoroutine(meleeCoroutine); meleeAttack.SetActive(false); }
         meleeCoroutine = StartCoroutine(MeleeAttack());
     }
@@ -52,6 +51,7 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator MeleeAttack()
     {
         meleeAttack.SetActive(true);
+        meleeAttack.GetComponent<Collider2D>().enabled = true;
         yield return new WaitForSeconds(0.2f);
         meleeAttack.SetActive(false);
     }
