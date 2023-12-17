@@ -5,7 +5,6 @@ using UnityEngine;
 public class ShotgunProjectile : Projectile
 {
     private Weapon weapon;
-    private readonly float fixedSpeedDecrease = 0.9f;
 
     // Has a funny bug where if you switch weapon the same frame after shooting,
     // it gains the stats of the other weapon.
@@ -14,17 +13,16 @@ public class ShotgunProjectile : Projectile
     {
         // Projectile info
         gameObject.name = "Shotgun Pellet";
-        bulletSpeed = 1;
-        bulletSpread = 2.5f;
+        bulletSpeed = 5;
 
         // Active weapon...
         weapon = GameManager.Instance.player.inv.activeWeapon;
     }
 
-    public override void FixedUpdate() { Travel(); }
+    public override void LateUpdate() { Travel(); }
 
     // Makes the trojectile travel.
-    public override void Travel() { transform.Translate(transform.right * (bulletSpeed - fixedSpeedDecrease)); }
+    public override void Travel() { transform.Translate(bulletSpeed * Time.deltaTime * transform.right); }
 
     // When the projectile hits something...
     public override void OnTriggerEnter2D(Collider2D hit)

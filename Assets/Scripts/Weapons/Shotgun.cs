@@ -6,27 +6,31 @@ using UnityEngine;
 public class Shotgun : Weapon
 {
     public ShotgunScriptable ws;
-    private int bulletsPerShot;
+    private float bulletSpread;
+    private float bulletsPerShot;
 
     public override void Shoot()
     {
         if (!CanShoot()) return;
-        int offset = -20;
 
         // Shoot the bullets!
+        float offset = bulletSpread * -1;
+        float addition = bulletSpread / bulletsPerShot * (bulletsPerShot / 2f);
         for (int i = 0; i < bulletsPerShot; i++)
         {
+            // Defines the angle
             var dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - gameObject.transform.position;
-            float ang = (Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg) + offset;
+            float ang = (Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg / 2) + offset;
+            offset += addition;
 
+            // Instantiates
             GameObject tempBullet = Instantiate(projectile,
             gameObject.transform.position,
-            Quaternion.Euler(new Vector3(0, 0, ang - 90f)),
+            Quaternion.Euler(new Vector3(0, 0, ang)),
             GameManager.Instance.bulletPool.transform);
 
-            // Ignore collision
+            // Ignores collision
             Physics2D.IgnoreCollision(transform.root.GetComponent<Collider2D>(), tempBullet.GetComponent<Collider2D>());
-            offset += 10;
         }
 
         // Discount the player mana and start cooldown coroutine
@@ -41,6 +45,7 @@ public class Shotgun : Weapon
         damage = ws.damage;
         firingSpeed = ws.firingSpeed;
         bulletsPerShot = ws.bulletsPerShot;
+        bulletSpread = ws.bulletSpread;
         projectile = ws.projectile;
 
         SetWeaponSprite(weaponSprite);

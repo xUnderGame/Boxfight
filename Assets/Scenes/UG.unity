@@ -294,6 +294,80 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2f6a3d97243a0f4a90535678fc0c49e, type: 3}
+--- !u!1001 &563175156
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 569763193}
+    m_Modifications:
+    - target: {fileID: 3399254211651660177, guid: 692c051b6add7f24fb4b55a526438989, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399254211651660177, guid: 692c051b6add7f24fb4b55a526438989, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399254211651660177, guid: 692c051b6add7f24fb4b55a526438989, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399254211651660177, guid: 692c051b6add7f24fb4b55a526438989, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399254211651660177, guid: 692c051b6add7f24fb4b55a526438989, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399254211651660177, guid: 692c051b6add7f24fb4b55a526438989, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399254211651660177, guid: 692c051b6add7f24fb4b55a526438989, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399254211651660177, guid: 692c051b6add7f24fb4b55a526438989, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399254211651660177, guid: 692c051b6add7f24fb4b55a526438989, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399254211651660177, guid: 692c051b6add7f24fb4b55a526438989, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4208475817567277711, guid: 692c051b6add7f24fb4b55a526438989, type: 3}
+      propertyPath: ws
+      value: 
+      objectReference: {fileID: 11400000, guid: 16a8f7786afb580489ee90644e775811, type: 2}
+    - target: {fileID: 4914977504732083170, guid: 692c051b6add7f24fb4b55a526438989, type: 3}
+      propertyPath: m_Name
+      value: More Ammo Shotgun
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128401339639811228, guid: 692c051b6add7f24fb4b55a526438989, type: 3}
+      propertyPath: m_Color.b
+      value: 0.043137256
+      objectReference: {fileID: 0}
+    - target: {fileID: 7128401339639811228, guid: 692c051b6add7f24fb4b55a526438989, type: 3}
+      propertyPath: m_Color.g
+      value: 0.30980393
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 692c051b6add7f24fb4b55a526438989, type: 3}
+--- !u!4 &563175157 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3399254211651660177, guid: 692c051b6add7f24fb4b55a526438989, type: 3}
+  m_PrefabInstance: {fileID: 563175156}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &569763192
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,6 +401,7 @@ Transform:
   - {fileID: 704648226}
   - {fileID: 860716802}
   - {fileID: 1432455888}
+  - {fileID: 563175157}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &704648226 stripped

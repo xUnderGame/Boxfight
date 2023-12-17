@@ -10,10 +10,14 @@ public class Pistol : Weapon
     {
         if (!CanShoot()) return;
 
+        // Defines the angle
+        var dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - gameObject.transform.position;
+        float ang = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg / 2;
+
         // Shoot the bullet
         GameObject tempBullet = Instantiate(projectile,
         gameObject.transform.position,
-        Quaternion.identity,
+        Quaternion.Euler(new Vector3(0, 0, ang)),
         GameManager.Instance.bulletPool.transform);
 
         // Ignore collision

@@ -5,8 +5,6 @@ using UnityEngine;
 public class DefaultProjectile : Projectile
 {
     private Weapon weapon;
-    private Vector2 moveTowards;
-    private readonly float fixedSpeedDecrease = 0.9f;
 
     // Has a funny bug where if you switch weapon the same frame after shooting,
     // it gains the stats of the other weapon.
@@ -15,17 +13,15 @@ public class DefaultProjectile : Projectile
     {
         // Projectile info
         gameObject.name = "Default Projectile";
-        bulletSpeed = 1.15f;
+        bulletSpeed = 6.5f;
 
-        // Where to shoot, active weapon...
-        weapon = GameManager.Instance.player.inv.activeWeapon;
-        moveTowards = Camera.main.ScreenToWorldPoint(Input.mousePosition) - gameObject.transform.position;
-    }
+        // Active weapon...
+        weapon = GameManager.Instance.player.inv.activeWeapon;    }
 
-    public override void FixedUpdate() { Travel(); }
+    public override void LateUpdate() { Travel(); }
 
     // Makes the trojectile travel.
-    public override void Travel() { transform.Translate(moveTowards.normalized * (bulletSpeed - fixedSpeedDecrease), Space.World); }
+    public override void Travel() { transform.Translate(bulletSpeed * Time.deltaTime * transform.right); }
 
     // When the projectile hits something...
     public override void OnTriggerEnter2D(Collider2D hit)
