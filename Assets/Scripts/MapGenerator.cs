@@ -8,7 +8,7 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
     public TileBase tileToDraw; // La casilla que usarás para dibujar
     public TileBase door;
     public TileBase wall;
-    public int separation = 8; // Separación entre los cuadrados
+    private int separation = 8; // Separación entre los cuadrados
 
     void Start()
     {
@@ -39,6 +39,7 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
                         {
                             tilemap.SetTile(tilePosition, door);
                             corridorsPosition.Add(tilePosition);
+                            Debug.Log(tilePosition);
                         }
                         else
                         {
@@ -47,14 +48,14 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
                             {
                                 tilemap.SetTile(tilePosition, door);
                                 corridorsPosition.Add(tilePosition);
-                        
+                                Debug.Log(tilePosition);
+
                             } else tilemap.SetTile(tilePosition, wall);
                         }
                     }
                     else tilemap.SetTile(tilePosition, wall);
                 }
                 else tilemap.SetTile(tilePosition, tileToDraw);
-                
             }
         }
         DrawCorridors(corridorsPosition, squareSize);
@@ -64,21 +65,30 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
     {
         for (int i = 0; i < corridorsPosition.Count; i++)
         {
+            string direction = "";
             if (corridorsPosition[i].x == 0)
             {
-                DrawCorridor(corridorsPosition[i],"up");
+                if (corridorsPosition[i].y > 0)
+                {
+                    direction = "up";
+                }
+                else
+                {
+                    direction = "down";
+                }
             }
             else if (corridorsPosition[i].y == 0)
             {
-                DrawCorridor(corridorsPosition[i],"down");   
-            }else if (corridorsPosition[i].x == squareSize - 1)
-            {
-                DrawCorridor(corridorsPosition[i],"right");
+                if (corridorsPosition[i].x > 0)
+                {
+                    direction = "right";
+                }
+                else
+                {
+                    direction = "left";
+                }
             }
-            else if(corridorsPosition[i].y == squareSize -1)
-            {
-                DrawCorridor(corridorsPosition[i],"left");
-            }
+            DrawCorridor(corridorsPosition[i], direction);
         }   
     }
 
@@ -89,17 +99,17 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
             Vector3Int tilePosition = new Vector3Int();
             switch (direction)
             {
-                case "up":
-                    tilePosition = new Vector3Int(corridorPosition.x, corridorPosition.y + i, corridorPosition.z);
-                    break;
-                case "down":
-                    tilePosition = new Vector3Int(corridorPosition.x, corridorPosition.y - i, corridorPosition.z);
-                    break;
                 case "left":
-                    tilePosition = new Vector3Int(corridorPosition.x - i, corridorPosition.y, corridorPosition.z);
+                    tilePosition = new Vector3Int(corridorPosition.x -i, corridorPosition.y, corridorPosition.z);
                     break;
                 case "right":
                     tilePosition = new Vector3Int(corridorPosition.x +i, corridorPosition.y, corridorPosition.z);
+                    break;
+                case "up":
+                    tilePosition = new Vector3Int(corridorPosition.x, corridorPosition.y +i, corridorPosition.z);
+                    break;
+                case "down":
+                    tilePosition = new Vector3Int(corridorPosition.x, corridorPosition.y-i, corridorPosition.z);
                     break;
             }
             tilemap.SetTile(tilePosition, door);

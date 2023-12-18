@@ -170,9 +170,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemap: {fileID: 398050028}
-  tileToDraw: {fileID: 11400000, guid: b365c8e4bd2512c4c87c63a8bc42ab3e, type: 2}
-  minSquareSize: 3
-  maxSquareSize: 8
+  tileToDraw: {fileID: 11400000, guid: aa321cec840cc4640a137cd654186a5a, type: 2}
+  door: {fileID: 11400000, guid: 3d69a8f133d001cc691e03dd64534586, type: 2}
+  wall: {fileID: 11400000, guid: b365c8e4bd2512c4c87c63a8bc42ab3e, type: 2}
   separation: 2
 --- !u!483693784 &398050027
 TilemapRenderer:
