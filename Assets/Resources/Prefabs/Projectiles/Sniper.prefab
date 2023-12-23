@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 6996762994386474772}
   - component: {fileID: 4318672619937806581}
   - component: {fileID: 3156218281553433017}
-  - component: {fileID: -5771909674937476803}
+  - component: {fileID: -5298899444194827205}
   m_Layer: 3
-  m_Name: Grenade
+  m_Name: Sniper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.16981131, g: 0.039248843, b: 0.039248843, a: 1}
+  m_Color: {r: 0.45175815, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -95,14 +95,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1180622746647987742}
-  m_BodyType: 0
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -159,7 +159,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &-5771909674937476803
+--- !u!114 &-5298899444194827205
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,7 +168,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 1180622746647987742}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3651f87e4a8e274f9576b9ca9a41fc0, type: 3}
+  m_Script: {fileID: 11500000, guid: 05f06a45f9ed4f34ca6074453f625d23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bulletSpeed: 0
+  bulletPenetration: 0

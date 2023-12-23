@@ -6,6 +6,8 @@ public class Sniper : Weapon
 {
     public SniperScriptable ws;
 
+    private int bulletPenetration;
+
     public override void Shoot()
     {
         if (!CanShoot()) return;
@@ -19,6 +21,9 @@ public class Sniper : Weapon
         gameObject.transform.position,
         Quaternion.Euler(new Vector3(0, 0, ang)),
         GameManager.Instance.bulletPool.transform);
+
+        // Add penetration
+        tempBullet.GetComponent<SniperProjectile>().bulletPenetration = bulletPenetration;
 
         // Ignore collision
         Physics2D.IgnoreCollision(transform.root.GetComponent<Collider2D>(), tempBullet.GetComponent<Collider2D>());
@@ -35,6 +40,7 @@ public class Sniper : Weapon
         damage = ws.damage;
         firingSpeed = ws.firingSpeed;
         projectile = ws.projectile;
+        bulletPenetration = ws.bulletPenetration;
         
         SetWeaponSprite(weaponSprite);
     }

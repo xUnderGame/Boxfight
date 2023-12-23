@@ -4,8 +4,9 @@ using UnityEngine;
 public class SniperScriptable : ScriptableObject
 {
     public int energyCost;
-    public float damage;
+    public int damage;
     public float firingSpeed;
+    public int bulletPenetration;
     public Sprite weaponSprite;
     public GameObject projectile;
 }

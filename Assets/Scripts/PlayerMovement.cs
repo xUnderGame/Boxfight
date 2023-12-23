@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,12 +14,14 @@ public class PlayerMovement : MonoBehaviour
     private GameObject meleeAttack;
     private MovementBehaviour mov;
     private InventoryScriptable inv;
+    [HideInInspector] public CooldownBehaviour cd;
 
     void Awake() 
     {
         meleeAttack = gameObject.transform.Find("Melee Area").gameObject;
         mov = GetComponent<MovementBehaviour>();
         inv = GetComponent<Player>().inv;
+        cd = GetComponent<CooldownBehaviour>();
     }
 
     // Update is called once per frame
@@ -41,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Swaps the current weapon.
-    private void OnSwapWeapon() { inv.SwapWeapon(); }
+    private void OnSwapWeapon() { inv.SwapWeapon(this); }
 
     // Picks up the weapon on the floor and drops the current active weapon.
     private void OnPickupWeapon() { inv.PickupWeapon(); }

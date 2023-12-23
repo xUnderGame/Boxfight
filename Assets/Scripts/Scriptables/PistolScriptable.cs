@@ -4,7 +4,7 @@ using UnityEngine;
 public class PistolScriptable : ScriptableObject
 {
     public int energyCost;
-    public float damage;
+    public int damage;
     public float firingSpeed;
     public Sprite weaponSprite;
     public GameObject projectile;

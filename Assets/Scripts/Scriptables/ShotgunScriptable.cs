@@ -4,7 +4,7 @@ using UnityEngine;
 public class ShotgunScriptable : ScriptableObject
 {
     public int energyCost;
-    public float damage;
+    public int damage;
     public float firingSpeed;
     public int bulletsPerShot;
     public int bulletSpread;

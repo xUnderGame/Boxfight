@@ -10,6 +10,8 @@ public class InventoryScriptable : ScriptableObject
     public List<Weapon> weapons;
     public Weapon activeWeapon;
     [HideInInspector] public int weaponIndex;
+    [HideInInspector] public readonly float swapWeaponsCD = 0.22f;
+    [HideInInspector] public bool canSwapWeapons;
 
     // Reset the inventory scriptable every time the game is run
     public void OnEnable()
@@ -17,13 +19,15 @@ public class InventoryScriptable : ScriptableObject
         activePowerups = new();
         weapons = new(capacity: 2);
         activeWeapon = null;
+        canSwapWeapons = true;
         weaponIndex = 0;
     }
 
     // Swaps current weapon
-    public void SwapWeapon()
+    public void SwapWeapon(PlayerMovement caller)
     {
-        if (weapons.Count < 2 || !activeWeapon.canShoot) return;
+        if (weapons.Count < 2 || !canSwapWeapons) return;
+        caller.StartCoroutine(caller.cd.StartCooldown(swapWeaponsCD, result => canSwapWeapons = result, canSwapWeapons)); // Witchcraft.
         int oldIndex = weaponIndex;
         weaponIndex = MirrorWeaponIndex();
 
@@ -31,8 +35,10 @@ public class InventoryScriptable : ScriptableObject
         activeWeapon.gameObject.SetActive(false);
         activeWeapon = weapons[weaponIndex];
         activeWeapon.gameObject.SetActive(true);
-        Debug.Log($"Weapon swapped with {activeWeapon.name}");
+        weapons[weaponIndex].canShoot = true; // No matter what, re-allow shooting
+
         GameManager.Instance.gameUI.UpdateWeaponsUI(this, oldIndex);
+        Debug.Log($"Weapon swapped with {activeWeapon.name}");
     }
 
     // Picks up a weapon
