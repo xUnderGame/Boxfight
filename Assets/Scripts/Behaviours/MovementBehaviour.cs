@@ -9,6 +9,7 @@ public class MovementBehaviour : MonoBehaviour
     [HideInInspector] public Rigidbody2D rb;
     [HideInInspector] public Renderer rd;
     [HideInInspector] public CooldownBehaviour cd;
+    public bool canMove = true;
     public bool canDash = true;
 
     public void Awake()
@@ -19,7 +20,7 @@ public class MovementBehaviour : MonoBehaviour
     }
 
     // Moves the current character.
-    public void Move(float x, float y, float speed) { transform.Translate(speed * Time.deltaTime * new Vector2(x, y).normalized); }
+    public void Move(float x, float y, float speed) { if (canMove) transform.Translate(speed * Time.deltaTime * new Vector2(x, y).normalized); }
     
     // Makes the character "dash" forward.
     public void Dash(float x, float y, float force = 15f, bool doIframes = true) {

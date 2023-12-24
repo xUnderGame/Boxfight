@@ -14,14 +14,7 @@ public class InventoryScriptable : ScriptableObject
     [HideInInspector] public bool canSwapWeapons;
 
     // Reset the inventory scriptable every time the game is run
-    public void OnEnable()
-    {
-        activePowerups = new();
-        weapons = new(capacity: 2);
-        activeWeapon = null;
-        canSwapWeapons = true;
-        weaponIndex = 0;
-    }
+    public void OnEnable() { ResetInventory(); }
 
     // Swaps current weapon
     public void SwapWeapon(PlayerMovement caller)
@@ -43,7 +36,7 @@ public class InventoryScriptable : ScriptableObject
 
     // Picks up a weapon
     public void PickupWeapon() {
-        if (!GameManager.Instance.nearestInteractable || !GameManager.Instance.nearestInteractable.CompareTag("Weapon")) return;
+        // if (!GameManager.Instance.nearestInteractable || !GameManager.Instance.nearestInteractable.CompareTag("Weapon")) return;
 
         // Decides if it should pick up the weapon OR swap it with the currently equipped one
         if (weapons.Count >= weapons.Capacity) { ChangeWeapon(); return; }
@@ -81,13 +74,13 @@ public class InventoryScriptable : ScriptableObject
     // Changes weapon with the one on the floor.
     public void ChangeWeapon()
     {
-        if (!GameManager.Instance.nearestInteractable || !GameManager.Instance.nearestInteractable.CompareTag("Weapon") || !activeWeapon.canShoot || weapons.Count < 2) return;
+        if (!activeWeapon.canShoot || weapons.Count < 2) return;
         GameObject pickup = GameManager.Instance.nearestInteractable;
 
         // "Unequip"
         activeWeapon.transform.parent = GameManager.Instance.pickupPool.transform;
         activeWeapon.gameObject.GetComponent<Collider2D>().enabled = true;
-        activeWeapon.tag = "Untagged";
+        activeWeapon.tag = "Weapon";
 
         // Equip new weapon
         pickup.transform.parent = GameManager.Instance.playerObject.transform.Find("Weapons");
@@ -103,5 +96,15 @@ public class InventoryScriptable : ScriptableObject
 
     // Mirrors the weapon index (Only used for UI purposes rn)
     public int MirrorWeaponIndex() { return Convert.ToInt32(!Convert.ToBoolean(weaponIndex)); }
+
+    // Resets the inventory to its default values
+    private void ResetInventory()
+    {
+        activePowerups = new();
+        weapons = new(capacity: 2);
+        activeWeapon = null;
+        canSwapWeapons = true;
+        weaponIndex = 0;
+    }
 
 }

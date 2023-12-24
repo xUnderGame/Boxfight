@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Powerup : MonoBehaviour, IInteractable
 {
-    public void Interact() {
+    public void Interact(GameObject interactionSource) {
         
     }
 }

@@ -52,7 +52,7 @@ public class EnergyPickup : MonoBehaviour, IInteractable
     }
 
     // Player picks up the energy bit
-    public void Interact()
+    public void Interact(GameObject interactionSource)
     {
         // Updates energy
         GameManager.Instance.player.currentEnergy += recoveryAmount;

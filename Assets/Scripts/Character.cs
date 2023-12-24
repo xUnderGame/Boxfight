@@ -23,7 +23,7 @@ public abstract class Character : MonoBehaviour, IDamageable, ILoadScriptable
 
     // Hurt character
     public virtual void Hurt(float damage, GameObject damageSource) {
-        if (maxHP <= -1) return; // Invulnerable character
+        if (maxHP == -1) return; // Invulnerable character
         
         // Hurt the character
         Debug.Log($"Ow! {gameObject.name} took {damage} damage.");
@@ -61,7 +61,7 @@ public abstract class Character : MonoBehaviour, IDamageable, ILoadScriptable
     // Loads a scriptable
     public void LoadScriptable()
     {
-        maxHP = characterScriptable.baseHP;
+        maxHP = characterScriptable.maxHP;
         currentHP = characterScriptable.baseHP;
         currentSpeed = characterScriptable.baseSpeed;
         currentDmg = characterScriptable.baseDmg;

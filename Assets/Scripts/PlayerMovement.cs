@@ -9,10 +9,10 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     public float speed;
+    public MovementBehaviour mov;
     private Vector2 movement = new();
     private Coroutine meleeCoroutine;
     private GameObject meleeAttack;
-    private MovementBehaviour mov;
     private InventoryScriptable inv;
     [HideInInspector] public CooldownBehaviour cd;
 
@@ -49,12 +49,14 @@ public class PlayerMovement : MonoBehaviour
     // Picks up the weapon on the floor and drops the current active weapon.
     private void OnInteractNearest()
     {
+        if (!GameManager.Instance.nearestInteractable) return;
+
         // Pick up weapon
         if (GameManager.Instance.nearestInteractable.CompareTag("Weapon")) inv.PickupWeapon(); 
         
         // Interact with nearest
         else if (GameManager.Instance.nearestInteractable.TryGetComponent(out IInteractable interactable))
-        interactable?.Interact(); 
+        interactable?.Interact(gameObject); 
     }
 
     // Melee attacks
@@ -69,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
     // Interactables and damageables. (CHANGE .NAME CONDITION LATER, USED FOR TESTING RN)
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.name != "NPC" && other.TryGetComponent(out IInteractable interactable)) interactable?.Interact();
+        if (other.name != "NPC" && other.TryGetComponent(out IInteractable interactable)) interactable?.Interact(gameObject);
         // if (other.TryGetComponent(out IDamageable damageable)) damageable?.Hurt();
     }
 }
