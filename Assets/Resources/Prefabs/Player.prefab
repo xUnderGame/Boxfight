@@ -266,7 +266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4925d80201a21194e8d8b46a914d2f4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cs: {fileID: 11400000, guid: d4636e9ffa338d14ca84e3bef59b473e, type: 2}
+  characterScriptable: {fileID: 11400000, guid: d4636e9ffa338d14ca84e3bef59b473e, type: 2}
   anim: {fileID: 0}
   mov: {fileID: 0}
   maxHP: 0
@@ -289,6 +289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  cd: {fileID: 0}
 --- !u!114 &8920022207276242213
 MonoBehaviour:
   m_ObjectHideFlags: 0

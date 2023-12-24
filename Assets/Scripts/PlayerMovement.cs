@@ -47,8 +47,15 @@ public class PlayerMovement : MonoBehaviour
     private void OnSwapWeapon() { inv.SwapWeapon(this); }
 
     // Picks up the weapon on the floor and drops the current active weapon.
-    private void OnPickupWeapon() { inv.PickupWeapon(); }
-
+    private void OnInteractNearest()
+    {
+        // Pick up weapon
+        if (GameManager.Instance.nearestInteractable.CompareTag("Weapon")) inv.PickupWeapon(); 
+        
+        // Interact with nearest
+        else if (GameManager.Instance.nearestInteractable.TryGetComponent(out IInteractable interactable))
+        interactable?.Interact(); 
+    }
 
     // Melee attacks
     private IEnumerator MeleeAttack()
@@ -59,10 +66,10 @@ public class PlayerMovement : MonoBehaviour
         meleeAttack.SetActive(false);
     }
 
-    // Interactables and damageables.
+    // Interactables and damageables. (CHANGE .NAME CONDITION LATER, USED FOR TESTING RN)
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.TryGetComponent(out IInteractable interactable)) interactable?.Interact();
+        if (other.name != "NPC" && other.TryGetComponent(out IInteractable interactable)) interactable?.Interact();
         // if (other.TryGetComponent(out IDamageable damageable)) damageable?.Hurt();
     }
 }

@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public GameObject pickupPool;
     [HideInInspector] public GameObject bulletPool;
     [HideInInspector] public GameObject energyBitPrefab;
-    public GameObject nearestPickup;
+    public GameObject nearestInteractable;
 
     public void Awake()
     {
@@ -31,11 +31,17 @@ public class GameManager : MonoBehaviour
 
         // Setting GameUI stuff up!
         gameUI.main = GameObject.Find("Game UI");
+        gameUI.hpValue = gameUI.main.transform.Find("HP Bar").Find("Value").GetComponent<Text>();
+        gameUI.manaValue = gameUI.main.transform.Find("Mana Bar").Find("Value").GetComponent<Text>();
+
         gameUI.weapons = gameUI.main.transform.Find("Weapons").gameObject;
         gameUI.primaryWeapon = gameUI.weapons.transform.Find("Primary").gameObject;
         gameUI.secondaryWeapon = gameUI.weapons.transform.Find("Secondary").gameObject;
-        gameUI.hpValue = gameUI.main.transform.Find("HP Bar").Find("Value").GetComponent<Text>();
-        gameUI.manaValue = gameUI.main.transform.Find("Mana Bar").Find("Value").GetComponent<Text>();
+        gameUI.dialogbox = gameUI.main.transform.Find("Dialogbox").gameObject;
+
+        gameUI.dialogName = gameUI.dialogbox.transform.Find("Name").gameObject.GetComponent<Text>();
+        gameUI.dialogText = gameUI.dialogbox.transform.Find("Text").gameObject.GetComponent<Text>();
+
     }
 
     // Changes to a different scene.
@@ -54,6 +60,11 @@ public class GameManager : MonoBehaviour
         public GameObject weapons;
         public GameObject primaryWeapon;
         public GameObject secondaryWeapon;
+
+        // Dialog
+        public GameObject dialogbox;
+        public Text dialogName;
+        public Text dialogText;
 
         // Updates the energy UI
         public void UpdateEnergyUI() { manaValue.text = $"{Instance.player.currentEnergy}/{Instance.player.maxEnergy}"; }
@@ -81,5 +92,8 @@ public class GameManager : MonoBehaviour
             secondaryWeapon.transform.Find("Energy Cost").GetComponent<Text>().text =
             sc.weapons[oldIndex].energyCost.ToString();
         }
+
+        // Toggle ON/OFF dialog box UI
+        public void ToggleDialogBox() { dialogbox.SetActive(!dialogbox.activeSelf); }
     }
 }

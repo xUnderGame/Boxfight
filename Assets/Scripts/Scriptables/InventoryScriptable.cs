@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "InventoryScript", menuName = "InventoryScriptable")]
+[CreateAssetMenu(fileName = "Default Inventory", menuName = "Inventory Scriptable")]
 public class InventoryScriptable : ScriptableObject
 {
     public List<Powerup> activePowerups;
@@ -43,13 +43,13 @@ public class InventoryScriptable : ScriptableObject
 
     // Picks up a weapon
     public void PickupWeapon() {
-        if (!GameManager.Instance.nearestPickup) return;
+        if (!GameManager.Instance.nearestInteractable || !GameManager.Instance.nearestInteractable.CompareTag("Weapon")) return;
 
         // Decides if it should pick up the weapon OR swap it with the currently equipped one
         if (weapons.Count >= weapons.Capacity) { ChangeWeapon(); return; }
 
         // Disables the collider
-        GameObject pickup = GameManager.Instance.nearestPickup;
+        GameObject pickup = GameManager.Instance.nearestInteractable;
         pickup.GetComponent<BoxCollider2D>().enabled = false;
         
         // Adds the weapon
@@ -81,8 +81,8 @@ public class InventoryScriptable : ScriptableObject
     // Changes weapon with the one on the floor.
     public void ChangeWeapon()
     {
-        if (!GameManager.Instance.nearestPickup || !activeWeapon.canShoot || weapons.Count < 2) return;
-        GameObject pickup = GameManager.Instance.nearestPickup;
+        if (!GameManager.Instance.nearestInteractable || !GameManager.Instance.nearestInteractable.CompareTag("Weapon") || !activeWeapon.canShoot || weapons.Count < 2) return;
+        GameObject pickup = GameManager.Instance.nearestInteractable;
 
         // "Unequip"
         activeWeapon.transform.parent = GameManager.Instance.pickupPool.transform;
@@ -97,7 +97,7 @@ public class InventoryScriptable : ScriptableObject
         activeWeapon.tag = "Equipped";
 
         Debug.Log($"Swapped active weapon with {pickup.name}");
-        GameManager.Instance.nearestPickup = null;
+        GameManager.Instance.nearestInteractable = null;
         GameManager.Instance.gameUI.UpdateWeaponsUI(this, MirrorWeaponIndex());
     }
 

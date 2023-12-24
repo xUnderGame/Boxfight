@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "CharScript", menuName = "CharacterScriptable")]
+[CreateAssetMenu(fileName = "Default Character", menuName = "Character Scriptable")]
 public class CharacterScriptable : ScriptableObject
 {
     public int maxHP;

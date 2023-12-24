@@ -522,7 +522,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4914977504732083170, guid: 626a1fc5819a0b84cafb6580666b2834, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Weapon
       objectReference: {fileID: 0}
     - target: {fileID: 7128401339639811228, guid: 626a1fc5819a0b84cafb6580666b2834, type: 3}
       propertyPath: m_Color.b
@@ -603,7 +603,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4914977504732083170, guid: 626a1fc5819a0b84cafb6580666b2834, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Weapon
       objectReference: {fileID: 0}
     - target: {fileID: 7128401339639811228, guid: 626a1fc5819a0b84cafb6580666b2834, type: 3}
       propertyPath: m_Color.b
@@ -773,7 +773,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4914977504732083170, guid: 626a1fc5819a0b84cafb6580666b2834, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Weapon
       objectReference: {fileID: 0}
     - target: {fileID: 7128401339639811228, guid: 626a1fc5819a0b84cafb6580666b2834, type: 3}
       propertyPath: m_Color.b
@@ -858,6 +858,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5168093596821022767, guid: 5eef00d89ce1cc24d8f7f150dc46ef98, type: 3}
   m_PrefabInstance: {fileID: 2275220962190945992}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2638250205946834267
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 408820672884911335, guid: 19be16faaecec364bba279ec1799b911, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 408820672884911335, guid: 19be16faaecec364bba279ec1799b911, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.91
+      objectReference: {fileID: 0}
+    - target: {fileID: 408820672884911335, guid: 19be16faaecec364bba279ec1799b911, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 408820672884911335, guid: 19be16faaecec364bba279ec1799b911, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 408820672884911335, guid: 19be16faaecec364bba279ec1799b911, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 408820672884911335, guid: 19be16faaecec364bba279ec1799b911, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 408820672884911335, guid: 19be16faaecec364bba279ec1799b911, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 408820672884911335, guid: 19be16faaecec364bba279ec1799b911, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 408820672884911335, guid: 19be16faaecec364bba279ec1799b911, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 408820672884911335, guid: 19be16faaecec364bba279ec1799b911, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2236366691701831231, guid: 19be16faaecec364bba279ec1799b911, type: 3}
+      propertyPath: m_Name
+      value: NPC
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 19be16faaecec364bba279ec1799b911, type: 3}
 --- !u!1001 &3459009336435930404
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1242,3 +1299,4 @@ SceneRoots:
   - {fileID: 569763193}
   - {fileID: 8093364301325845818}
   - {fileID: 1180076077}
+  - {fileID: 2638250205946834267}

@@ -70,6 +70,6 @@ public abstract class Weapon : MonoBehaviour, ILoadScriptable
     }
 
     // Checking if the player is near the swappable weapon
-    void OnTriggerStay2D(Collider2D other) { if (other.gameObject.name == "Pickup Area" && GameManager.Instance.nearestPickup == null && !gameObject.CompareTag("Equipped")) GameManager.Instance.nearestPickup = gameObject; }
-    void OnTriggerExit2D(Collider2D other) { if (other.gameObject.name == "Pickup Area" && GameManager.Instance.nearestPickup == gameObject && !gameObject.CompareTag("Equipped")) GameManager.Instance.nearestPickup = null; }
+    void OnTriggerStay2D(Collider2D other) { if (other.gameObject.name == "Pickup Area" && GameManager.Instance.nearestInteractable == null && !gameObject.CompareTag("Equipped")) GameManager.Instance.nearestInteractable = gameObject; }
+    void OnTriggerExit2D(Collider2D other) { if (other.gameObject.name == "Pickup Area" && GameManager.Instance.nearestInteractable == gameObject && !gameObject.CompareTag("Equipped")) GameManager.Instance.nearestInteractable = null; }
 }

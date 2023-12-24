@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D), typeof(SpriteRenderer))]
 public abstract class Character : MonoBehaviour, IDamageable, ILoadScriptable
 {
-    public CharacterScriptable cs;
+    public CharacterScriptable characterScriptable;
     [HideInInspector] public AnimationBehaviour anim;
     [HideInInspector] public MovementBehaviour mov;
 
@@ -23,6 +23,8 @@ public abstract class Character : MonoBehaviour, IDamageable, ILoadScriptable
 
     // Hurt character
     public virtual void Hurt(float damage, GameObject damageSource) {
+        if (maxHP <= -1) return; // Invulnerable character
+        
         // Hurt the character
         Debug.Log($"Ow! {gameObject.name} took {damage} damage.");
 
@@ -59,9 +61,9 @@ public abstract class Character : MonoBehaviour, IDamageable, ILoadScriptable
     // Loads a scriptable
     public void LoadScriptable()
     {
-        maxHP = cs.baseHP;
-        currentHP = cs.baseHP;
-        currentSpeed = cs.baseSpeed;
-        currentDmg = cs.baseDmg;
+        maxHP = characterScriptable.baseHP;
+        currentHP = characterScriptable.baseHP;
+        currentSpeed = characterScriptable.baseSpeed;
+        currentDmg = characterScriptable.baseDmg;
     }
 }
