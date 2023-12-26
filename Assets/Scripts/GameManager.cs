@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -41,7 +40,12 @@ public class GameManager : MonoBehaviour
 
         gameUI.dialogName = gameUI.dialogbox.transform.Find("Name").gameObject.GetComponent<Text>();
         gameUI.dialogText = gameUI.dialogbox.transform.Find("Text").gameObject.GetComponent<Text>();
-
+        
+        gameUI.choicesSubUI = gameUI.dialogbox.transform.Find("ChoicesSubUI").gameObject;
+        gameUI.choice1 = gameUI.choicesSubUI.transform.Find("Choice1").gameObject.GetComponent<Text>();
+        gameUI.choice2 = gameUI.choicesSubUI.transform.Find("Choice2").gameObject.GetComponent<Text>();
+        gameUI.choice3 = gameUI.choicesSubUI.transform.Find("Choice3").gameObject.GetComponent<Text>();
+        gameUI.choice4 = gameUI.choicesSubUI.transform.Find("Choice4").gameObject.GetComponent<Text>();
     }
 
     // Changes to a different scene.
@@ -61,10 +65,17 @@ public class GameManager : MonoBehaviour
         public GameObject primaryWeapon;
         public GameObject secondaryWeapon;
 
-        // Dialog
+        // Main dialog
         public GameObject dialogbox;
         public Text dialogName;
         public Text dialogText;
+
+        // Dialog choices
+        public GameObject choicesSubUI;
+        public Text choice1;
+        public Text choice2;
+        public Text choice3;
+        public Text choice4;
 
         // Updates the energy UI
         public void UpdateEnergyUI() { manaValue.text = $"{Instance.player.currentEnergy}/{Instance.player.maxEnergy}"; }
@@ -95,5 +106,8 @@ public class GameManager : MonoBehaviour
 
         // Toggle ON/OFF dialog box UI
         public void ToggleDialogBox() { dialogbox.SetActive(!dialogbox.activeSelf); }
+
+        // Toggle with a bool the choices dialog sub-ui
+        public void ToggleChoicesSubUI(bool status) { choicesSubUI.SetActive(status); }
     }
 }

@@ -19,16 +19,10 @@ MonoBehaviour:
   - Hello, world.
   events:
   - userDialog:
-      enabled: 1
-      options:
-      - It is real.
-      - What?
-      - You aren't real!
-      responses:
-      - {fileID: 11400000, guid: b61ea4c943a28634dab759fb180747db, type: 2}
-      - {fileID: 11400000}
-      - {fileID: 11400000, guid: c2989d1dd5532394181a5e3b540c4989, type: 2}
-    executeAtIndex: 2
+      enabled: 0
+      options: []
+      responses: []
+    executeAtIndex: 0
   npcName: NPC
   textSpeed: 0.05
   canBeSkipped: 1

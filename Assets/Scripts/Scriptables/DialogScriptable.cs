@@ -15,11 +15,12 @@ public class DialogScriptable : ScriptableObject
     public bool canBeSkipped = true;
     public bool stopCharacterMovement = true;
 
+    private static DialogScriptable Instance; // Used for events, using "this" does not work while inside a class to reference the scriptable
     private MovementBehaviour charMovement;
     private bool hasDialogStarted;
     private int dialogIndex;
 
-    public void OnEnable() { ResetScriptablePrivatesToDefaultState(); }
+    public void OnEnable() { Instance = this; ResetScriptablePrivatesToDefaultState(); }
 
     // Starts the dialog with the NPC
     public void StartDialog(Character caller)
@@ -36,7 +37,7 @@ public class DialogScriptable : ScriptableObject
         hasDialogStarted = true;
 
         // Stops player movement
-        if (stopCharacterMovement) { charMovement.canMove = false; charMovement.canDash = false; }
+        if (stopCharacterMovement) DisallowPlayerControl();
 
         // Reads a line
         NextLine(caller);
@@ -67,7 +68,7 @@ public class DialogScriptable : ScriptableObject
         }
 
         // Ends dialog and gives back movement to the player
-        if (stopCharacterMovement) { charMovement.canMove = true; charMovement.canDash = true; }
+        if (stopCharacterMovement) AllowCharacterControl();
         GameManager.Instance.gameUI.ToggleDialogBox();
         hasDialogStarted = false;
         dialogIndex = 0;
@@ -96,13 +97,17 @@ public class DialogScriptable : ScriptableObject
         textSpeed = newDialog.textSpeed;
         canBeSkipped = newDialog.canBeSkipped;
         stopCharacterMovement = newDialog.stopCharacterMovement;
-        dialogIndex = 0;
+        if (!stopCharacterMovement) AllowCharacterControl();
+        dialogIndex = 0; // We change the index to 0 but DONT end chat.
     }
 
-    // Toggles the choices sub-ui.
-    public void ToggleChoicesSubUI() { }
+    // Removes the movement from the character
+    private void DisallowPlayerControl() { charMovement.canMove = false; charMovement.canDash = false; }
 
-    // Resets the private scriptable variables to its default state (false, 0)
+    // Gives back movement to the character
+    private void AllowCharacterControl() { charMovement.canMove = true; charMovement.canDash = true; }
+
+    // Resets the private scriptable variables to its default state
     private void ResetScriptablePrivatesToDefaultState()
     {
         hasDialogStarted = false;
@@ -121,10 +126,10 @@ public class DialogScriptable : ScriptableObject
         // Dialog user option event
         [Serializable] public class DialogOptions : EventAction
         {
-            [SerializeField] public string[] options; // Yes, no, exit
+            [SerializeField] public string[] options; // Yes, no, exit, etc. Max 4
             [SerializeField] public DialogScriptable[] responses; // Uses a new dialog scriptable (forking paths! (this is horrible), use the SAME scriptable (this) to ignore choices)
             public override void Run() {
-                // ToggleChoicesSubUI();
+                GameManager.Instance.gameUI.ToggleChoicesSubUI(true);
             }
         }
 
