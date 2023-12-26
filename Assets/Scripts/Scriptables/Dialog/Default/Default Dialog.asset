@@ -12,11 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17c71b6299802fb4aacda9e497631065, type: 3}
   m_Name: Default Dialog
   m_EditorClassIdentifier: 
-  baseDialog:
+  dialog:
   - Hello, world.
   - Programmed to work and not to feel.
   - Not even sure that this is real.
   - Hello, world.
+  events:
+  - userDialog:
+      enabled: 1
+      options:
+      - It is real.
+      - What?
+      - You aren't real!
+      responses:
+      - {fileID: 11400000, guid: b61ea4c943a28634dab759fb180747db, type: 2}
+      - {fileID: 11400000}
+      - {fileID: 11400000, guid: c2989d1dd5532394181a5e3b540c4989, type: 2}
+    executeAtIndex: 2
+    executeAfterText: 1
   npcName: NPC
   textSpeed: 0.05
   canBeSkipped: 1
+  stopCharacterMovement: 1

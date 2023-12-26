@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class DialogScriptable : ScriptableObject
 {
     public string[] dialog = { "Hello, world.", "Programmed to work and not to feel.", "Not even sure that this is real.", "Hello, world." };
+    public DialogEvent[] events = { new() };
     public string npcName = "NPC";
     public float textSpeed = 0.05f;
     public bool canBeSkipped = true;
@@ -18,16 +19,12 @@ public class DialogScriptable : ScriptableObject
     private bool hasDialogStarted;
     private int dialogIndex;
 
-    public void OnEnable()
-    {
-        hasDialogStarted = false;
-        dialogIndex = 0;
-    }
+    public void OnEnable() { ResetScriptablePrivatesToDefaultState(); }
 
     // Starts the dialog with the NPC
     public void StartDialog(Character caller)
     {
-        if (hasDialogStarted) { UserActions(caller); return; }
+        if (hasDialogStarted) { ProceedChat(caller); return; }
 
         // Toggles the dialog box on
         GameManager.Instance.gameUI.ToggleDialogBox();
@@ -45,10 +42,10 @@ public class DialogScriptable : ScriptableObject
         NextLine(caller);
     }
 
-    private void UserActions(Character caller)
+    private void ProceedChat(Character caller)
     {
         // Go to the next line of dialog
-        if (GameManager.Instance.gameUI.dialogText.text == dialog[dialogIndex]) { NextLine(caller); return; }
+        if (GameManager.Instance.gameUI.dialogText.text == dialog[dialogIndex]) { dialogIndex++; NextLine(caller); return; }
 
         // Stop showing text and show it all instantly
         if (!canBeSkipped) return;
@@ -60,9 +57,11 @@ public class DialogScriptable : ScriptableObject
     private void NextLine(Character caller)
     {
         // Goes to the next line of dialog
-        if (dialogIndex + 1 < dialog.Length)
+        if (dialogIndex < dialog.Length)
         {
-            dialogIndex++;
+            // Executes a dialog event
+            foreach (DialogEvent ev in events) { if (ev.executeAtIndex == dialogIndex) ev.userDialog.Run(); }
+
             caller.StartCoroutine(ReadLine());
             return;
         }
@@ -84,7 +83,55 @@ public class DialogScriptable : ScriptableObject
         foreach (char c in dialog[dialogIndex])
         {
             GameManager.Instance.gameUI.dialogText.text += c;
-            yield return new WaitForSecondsRealtime(textSpeed);
+            if (c.ToString() != "." && c.ToString() != ",") yield return new WaitForSecondsRealtime(textSpeed);
+            else yield return new WaitForSecondsRealtime(textSpeed + 0.1f);
+        }
+    }
+
+    // Change dialog scriptable (delegate or fucking whatever its called idk man)
+    public void DelegateScriptable(DialogScriptable newDialog) {
+        dialog = newDialog.dialog;
+        events = newDialog.events;
+        npcName = newDialog.npcName;
+        textSpeed = newDialog.textSpeed;
+        canBeSkipped = newDialog.canBeSkipped;
+        stopCharacterMovement = newDialog.stopCharacterMovement;
+        dialogIndex = 0;
+    }
+
+    // Toggles the choices sub-ui.
+    public void ToggleChoicesSubUI() { }
+
+    // Resets the private scriptable variables to its default state (false, 0)
+    private void ResetScriptablePrivatesToDefaultState()
+    {
+        hasDialogStarted = false;
+        dialogIndex = 0;
+    }
+
+    // Dialog events
+    [Serializable] public class DialogEvent {
+        public DialogOptions userDialog = new();
+        public int executeAtIndex = 0;
+        // public bool executeAfterText = false;
+
+        // Executes event
+        public void Execute() { userDialog.Run(); }
+
+        // Dialog user option event
+        [Serializable] public class DialogOptions : EventAction
+        {
+            [SerializeField] public string[] options; // Yes, no, exit
+            [SerializeField] public DialogScriptable[] responses; // Uses a new dialog scriptable (forking paths! (this is horrible), use the SAME scriptable (this) to ignore choices)
+            public override void Run() {
+                // ToggleChoicesSubUI();
+            }
+        }
+
+        // Required to have Run() or something idk
+        [Serializable] public class EventAction {
+            public bool enabled = false;
+            public virtual void Run() { }
         }
     }
 }
