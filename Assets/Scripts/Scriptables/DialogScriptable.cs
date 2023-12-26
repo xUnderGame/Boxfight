@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,7 @@ using UnityEngine.UI;
 [CreateAssetMenu(fileName = "Default Dialog", menuName = "Dialog Scriptable")]
 public class DialogScriptable : ScriptableObject
 {
+    // Scriptable settings
     public string[] dialog = { "Hello, world.", "Programmed to work and not to feel.", "Not even sure that this is real.", "Hello, world." };
     public DialogEvent[] events = { new() };
     public string npcName = "NPC";
@@ -15,9 +17,11 @@ public class DialogScriptable : ScriptableObject
     public bool canBeSkipped = true;
     public bool stopCharacterMovement = true;
 
+    // Actual REAL settings (bear with me, this isnt optimal, but its WAYY practical.)
     private static DialogScriptable Instance; // Used for events, using "this" does not work while inside a class to reference the scriptable
     private MovementBehaviour charMovement;
     private bool hasDialogStarted;
+    private bool canInteract;
     private int dialogIndex;
 
     public void OnEnable() { Instance = this; ResetScriptablePrivatesToDefaultState(); }
@@ -25,10 +29,18 @@ public class DialogScriptable : ScriptableObject
     // Starts the dialog with the NPC
     public void StartDialog(Character caller)
     {
+        CreateInstance<DialogScriptable>();
+        Debug.Log($"{dialog[dialogIndex]}\n{npcName}\n{dialogIndex}\n{hasDialogStarted}\n{name}");
+        if (!canInteract) return;
+
+        // Turns off the choices UI
+        GameManager.Instance.gameUI.dialogChoices.ForEach(choice => choice.gameObject.SetActive(false));
+
+        // Not the first time?
         if (hasDialogStarted) { ProceedChat(caller); return; }
 
         // Toggles the dialog box on
-        GameManager.Instance.gameUI.ToggleDialogBox();
+        GameManager.Instance.gameUI.ToggleDialogBox(true);
     
         // Resets the dialog box
         GameManager.Instance.gameUI.dialogName.text = npcName;
@@ -36,8 +48,8 @@ public class DialogScriptable : ScriptableObject
         charMovement = caller.mov;
         hasDialogStarted = true;
 
-        // Stops player movement
-        if (stopCharacterMovement) DisallowPlayerControl();
+        // Stops character movement
+        if (stopCharacterMovement) DisallowCharacterControl();
 
         // Reads a line
         NextLine(caller);
@@ -62,14 +74,15 @@ public class DialogScriptable : ScriptableObject
         {
             // Executes a dialog event
             foreach (DialogEvent ev in events) { if (ev.executeAtIndex == dialogIndex) ev.userDialog.Run(); }
-
+            
+            // Reads the line
             caller.StartCoroutine(ReadLine());
             return;
         }
 
         // Ends dialog and gives back movement to the player
         if (stopCharacterMovement) AllowCharacterControl();
-        GameManager.Instance.gameUI.ToggleDialogBox();
+        GameManager.Instance.gameUI.ToggleDialogBox(false);
         hasDialogStarted = false;
         dialogIndex = 0;
     }
@@ -97,12 +110,12 @@ public class DialogScriptable : ScriptableObject
         textSpeed = newDialog.textSpeed;
         canBeSkipped = newDialog.canBeSkipped;
         stopCharacterMovement = newDialog.stopCharacterMovement;
+        ResetScriptablePrivatesToDefaultState();
         if (!stopCharacterMovement) AllowCharacterControl();
-        dialogIndex = 0; // We change the index to 0 but DONT end chat.
     }
 
     // Removes the movement from the character
-    private void DisallowPlayerControl() { charMovement.canMove = false; charMovement.canDash = false; }
+    private void DisallowCharacterControl() { charMovement.canMove = false; charMovement.canDash = false; }
 
     // Gives back movement to the character
     private void AllowCharacterControl() { charMovement.canMove = true; charMovement.canDash = true; }
@@ -111,6 +124,7 @@ public class DialogScriptable : ScriptableObject
     private void ResetScriptablePrivatesToDefaultState()
     {
         hasDialogStarted = false;
+        canInteract = true;
         dialogIndex = 0;
     }
 
@@ -120,16 +134,51 @@ public class DialogScriptable : ScriptableObject
         public int executeAtIndex = 0;
         // public bool executeAfterText = false;
 
-        // Executes event
-        public void Execute() { userDialog.Run(); }
-
         // Dialog user option event
         [Serializable] public class DialogOptions : EventAction
         {
             [SerializeField] public string[] options; // Yes, no, exit, etc. Max 4
             [SerializeField] public DialogScriptable[] responses; // Uses a new dialog scriptable (forking paths! (this is horrible), use the SAME scriptable (this) to ignore choices)
             public override void Run() {
+                // Remove player interaction (except buttons)
+                Instance.canInteract = false;
+                
+                // Disables all options
+                foreach (GameManager.GameUI.Choice choice in GameManager.Instance.gameUI.dialogChoices)
+                { choice.gameObject.SetActive(false); }
+
+                // Sets the new options
+                for (int i = 0; i < options.Length; i++)
+                {
+                    // Set the choices responses on/off
+                    GameManager.Instance.gameUI.dialogChoices[i].gameObject.SetActive(true);
+
+                    // Remove ALL listeners
+                    GameManager.Instance.gameUI.dialogChoices[i].gameObject.GetComponent<Button>().onClick.RemoveAllListeners();
+
+                    // Set the onclick attributes
+                    // it gets the reference "i", we must pass it as a number.
+                    // ok fuck it fuck pointers fuck everything just let me test
+                    if (i == 0) GameManager.Instance.gameUI.dialogChoices[i].gameObject.GetComponent<Button>().onClick.AddListener(() => Choice(0));
+                    else if (i == 1) GameManager.Instance.gameUI.dialogChoices[i].gameObject.GetComponent<Button>().onClick.AddListener(() => Choice(1));
+                    else if (i == 2) GameManager.Instance.gameUI.dialogChoices[i].gameObject.GetComponent<Button>().onClick.AddListener(() => Choice(2));
+                    else if (i == 3) GameManager.Instance.gameUI.dialogChoices[i].gameObject.GetComponent<Button>().onClick.AddListener(() => Choice(3));
+                    
+                    // Set the text
+                    GameManager.Instance.gameUI.dialogChoices[i].text.text = options[i];
+                }
+
+                // Enable the UI
                 GameManager.Instance.gameUI.ToggleChoicesSubUI(true);
+            }
+
+            // User selects a choice, runs the scriptable response
+            public void Choice(int choiceNum)
+            {
+                // Using player for now until i figure out a better caller
+                Instance.canInteract = true;
+                if (responses[choiceNum] == Instance) Instance.ProceedChat(GameManager.Instance.player);
+                else { Instance.DelegateScriptable(responses[choiceNum]); Instance.StartDialog(GameManager.Instance.player); }
             }
         }
 

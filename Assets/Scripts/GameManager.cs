@@ -42,10 +42,15 @@ public class GameManager : MonoBehaviour
         gameUI.dialogText = gameUI.dialogbox.transform.Find("Text").gameObject.GetComponent<Text>();
         
         gameUI.choicesSubUI = gameUI.dialogbox.transform.Find("ChoicesSubUI").gameObject;
-        gameUI.choice1 = gameUI.choicesSubUI.transform.Find("Choice1").gameObject.GetComponent<Text>();
-        gameUI.choice2 = gameUI.choicesSubUI.transform.Find("Choice2").gameObject.GetComponent<Text>();
-        gameUI.choice3 = gameUI.choicesSubUI.transform.Find("Choice3").gameObject.GetComponent<Text>();
-        gameUI.choice4 = gameUI.choicesSubUI.transform.Find("Choice4").gameObject.GetComponent<Text>();
+
+        gameUI.dialogChoices.Add(new GameUI.Choice(gameUI.choicesSubUI.transform.Find("Choice1").gameObject,
+            gameUI.choicesSubUI.transform.Find("Choice1").Find("Text").gameObject.GetComponent<Text>()));
+        gameUI.dialogChoices.Add(new GameUI.Choice(gameUI.choicesSubUI.transform.Find("Choice2").gameObject,
+            gameUI.choicesSubUI.transform.Find("Choice2").Find("Text").gameObject.GetComponent<Text>()));
+        gameUI.dialogChoices.Add(new GameUI.Choice(gameUI.choicesSubUI.transform.Find("Choice3").gameObject,
+            gameUI.choicesSubUI.transform.Find("Choice3").Find("Text").gameObject.GetComponent<Text>()));
+        gameUI.dialogChoices.Add(new GameUI.Choice(gameUI.choicesSubUI.transform.Find("Choice4").gameObject,
+            gameUI.choicesSubUI.transform.Find("Choice4").Find("Text").gameObject.GetComponent<Text>()));
     }
 
     // Changes to a different scene.
@@ -72,10 +77,20 @@ public class GameManager : MonoBehaviour
 
         // Dialog choices
         public GameObject choicesSubUI;
-        public Text choice1;
-        public Text choice2;
-        public Text choice3;
-        public Text choice4;
+        public List<Choice> dialogChoices = new(capacity: 4);
+
+        // Choice object
+        public class Choice
+        {
+            public GameObject gameObject;
+            public Text text;
+
+            public Choice(GameObject gameObject, Text text)
+            {
+                this.gameObject = gameObject;
+                this.text = text;
+            }
+        }
 
         // Updates the energy UI
         public void UpdateEnergyUI() { manaValue.text = $"{Instance.player.currentEnergy}/{Instance.player.maxEnergy}"; }
@@ -104,8 +119,8 @@ public class GameManager : MonoBehaviour
             sc.weapons[oldIndex].energyCost.ToString();
         }
 
-        // Toggle ON/OFF dialog box UI
-        public void ToggleDialogBox() { dialogbox.SetActive(!dialogbox.activeSelf); }
+        // Toggle with a bool the dialog box UI
+        public void ToggleDialogBox(bool status) { dialogbox.SetActive(status); }
 
         // Toggle with a bool the choices dialog sub-ui
         public void ToggleChoicesSubUI(bool status) { choicesSubUI.SetActive(status); }
