@@ -913,7 +913,7 @@ PrefabInstance:
     - target: {fileID: 6677992240884782106, guid: 19be16faaecec364bba279ec1799b911, type: 3}
       propertyPath: dialogScriptable
       value: 
-      objectReference: {fileID: 11400000, guid: 33c34c07fe7f31c4f97156d031fcbb35, type: 2}
+      objectReference: {fileID: 11400000, guid: 3d5e763f8cc31ae4f911ae83d7271650, type: 2}
     - target: {fileID: 6677992240884782106, guid: 19be16faaecec364bba279ec1799b911, type: 3}
       propertyPath: characterScriptable
       value: 

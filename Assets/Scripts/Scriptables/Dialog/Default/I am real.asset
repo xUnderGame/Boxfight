@@ -17,7 +17,16 @@ MonoBehaviour:
   - I was beginning to think I wasn't.
   - Or that nothing mattered, yknow.
   - Thank you!
-  events: []
+  events:
+  - userDialog:
+      enabled: 1
+      options:
+      - You're welcome!
+      - Could you repeat that?
+      responses:
+      - {fileID: 11400000}
+      - {fileID: 11400000, guid: 3d5e763f8cc31ae4f911ae83d7271650, type: 2}
+    executeAtIndex: 3
   npcName: NPC - Real
   textSpeed: 0.05
   canBeSkipped: 1
