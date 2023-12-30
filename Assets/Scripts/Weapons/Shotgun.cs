@@ -9,7 +9,7 @@ public class Shotgun : Weapon
     private float bulletSpread;
     private float bulletsPerShot;
 
-    public override void Shoot()
+    public override void Shoot(Vector2 direction)
     {
         if (!CanShoot()) return;
 
@@ -19,8 +19,7 @@ public class Shotgun : Weapon
         for (int i = 0; i < bulletsPerShot; i++)
         {
             // Defines the angle
-            var dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - gameObject.transform.position;
-            float ang = (Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg / 2) + offset;
+            float ang = (Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg / 2) + offset;
             offset += addition;
 
             // Instantiates
@@ -35,7 +34,7 @@ public class Shotgun : Weapon
 
         // Discount the player mana and start cooldown coroutine
         StartCoroutine(cd.StartCooldown(firingSpeed, result => canShoot = result, canShoot));
-        DiscountMana();
+        if (transform.root.CompareTag("Player")) DiscountMana();
     }
 
     public override void LoadScriptable()

@@ -34,7 +34,13 @@ public class PlayerMovement : MonoBehaviour
     private void OnDash() { mov.Dash(movement.x, movement.y); }
 
     // Fires current weapon.
-    private void OnFire() { if (inv.activeWeapon) inv.activeWeapon.Shoot(); }
+    private void OnFire()
+    {
+        if (inv.activeWeapon && inv.globalCanShoot) { 
+            Vector2 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - inv.activeWeapon.transform.position;
+            inv.activeWeapon.Shoot(dir);
+        }
+    }
 
     // Melee attack event
     private void OnMelee()

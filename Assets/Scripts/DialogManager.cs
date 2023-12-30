@@ -124,10 +124,20 @@ public class DialogManager : MonoBehaviour
     }
 
     // Removes the movement from the character
-    private void DisallowCharacterControl() { charMovement.canMove = false; charMovement.canDash = false; }
+    private void DisallowCharacterControl()
+    {
+        GameManager.Instance.player.inv.globalCanShoot = false; // Using player instead of caller!!
+        charMovement.canMove = false;
+        charMovement.canDash = false;
+    }
 
     // Gives back movement to the character
-    private void AllowCharacterControl() { charMovement.canMove = true; charMovement.canDash = true; }
+    private void AllowCharacterControl()
+    {
+        GameManager.Instance.player.inv.globalCanShoot = true; // Using player instead of caller!!
+        charMovement.canMove = true;
+        charMovement.canDash = true;
+    }
 
     // Resets the private scriptable variables to its default state
     private void ResetPrivatesToDefaultState()

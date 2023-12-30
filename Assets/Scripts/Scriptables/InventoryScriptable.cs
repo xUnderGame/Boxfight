@@ -12,6 +12,7 @@ public class InventoryScriptable : ScriptableObject
     [HideInInspector] public int weaponIndex;
     [HideInInspector] public readonly float swapWeaponsCD = 0.22f;
     [HideInInspector] public bool canSwapWeapons;
+    [HideInInspector] public bool globalCanShoot;
 
     // Reset the inventory scriptable every time the game is run
     public void OnEnable() { ResetInventory(); }
@@ -104,6 +105,7 @@ public class InventoryScriptable : ScriptableObject
         weapons = new(capacity: 2);
         activeWeapon = null;
         canSwapWeapons = true;
+        globalCanShoot = true;
         weaponIndex = 0;
     }
 

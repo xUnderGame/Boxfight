@@ -8,13 +8,12 @@ public class Sniper : Weapon
 
     private int bulletPenetration;
 
-    public override void Shoot()
+    public override void Shoot(Vector2 direction)
     {
         if (!CanShoot()) return;
 
         // Defines the angle
-        var dir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - gameObject.transform.position;
-        float ang = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg / 2;
+        float ang = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg / 2;
 
         // Shoot the bullet
         GameObject tempBullet = Instantiate(projectile,
@@ -30,7 +29,7 @@ public class Sniper : Weapon
 
         // Discount the player mana and start cooldown coroutine
         StartCoroutine(cd.StartCooldown(firingSpeed, result => canShoot = result, canShoot));
-        DiscountMana();
+        if (transform.root.CompareTag("Player")) DiscountMana();
     }
 
     public override void LoadScriptable()
