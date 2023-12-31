@@ -9,7 +9,7 @@ public class Enemy : Character
 
     public void OnEnable()
     {
-        if (currentDmg < 0) return;
+        if (currentDmg <= 0) return;
         equippedWeapon = transform.Find("Weapons").GetChild(0).GetComponent<Weapon>();
     }
 

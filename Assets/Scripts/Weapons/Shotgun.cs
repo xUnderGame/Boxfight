@@ -28,6 +28,9 @@ public class Shotgun : Weapon
             Quaternion.Euler(new Vector3(0, 0, ang)),
             GameManager.Instance.bulletPool.transform);
 
+            // Set projectile damage
+            tempBullet.GetComponent<Projectile>().bulletDamage = damage;
+
             // Ignores collision
             Physics2D.IgnoreCollision(transform.root.GetComponent<Collider2D>(), tempBullet.GetComponent<Collider2D>());
         }

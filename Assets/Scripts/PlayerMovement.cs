@@ -45,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
     // Melee attack event
     private void OnMelee()
     {
+        if (!inv.globalCanMelee) return;
         if (meleeCoroutine != null) { StopCoroutine(meleeCoroutine); meleeAttack.SetActive(false); }
         meleeCoroutine = StartCoroutine(MeleeAttack());
     }
@@ -70,6 +71,8 @@ public class PlayerMovement : MonoBehaviour
     {
         meleeAttack.SetActive(true);
         meleeAttack.GetComponent<Collider2D>().enabled = true;
+        yield return new WaitForSeconds(0.2f);
+        
         yield return new WaitForSeconds(0.2f);
         meleeAttack.SetActive(false);
     }

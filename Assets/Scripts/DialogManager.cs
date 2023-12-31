@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -36,7 +35,7 @@ public class DialogManager : MonoBehaviour
         if (!canInteract) return;
 
         // Turns off the choices UI
-        GameManager.Instance.gameUI.dialogChoices.ForEach(choice => choice.gameObject.SetActive(false));
+        TurnOffDialogChoices();
 
         // Should we change/load the new scriptable?
         if (!loadedDial || chat != loadedDial && !ignoreNewChatSource) DelegateScriptable(chat);
@@ -67,8 +66,7 @@ public class DialogManager : MonoBehaviour
 
         // Stop showing text and show it all instantly
         if (!canBeSkipped) return;
-        GameManager.Instance.gameUI.dialogText.text = dialog[dialogIndex];
-        StopAllCoroutines();
+        ShowEntireLine();
     }
 
     // Changes dialog line to a next one or ends the conversation
@@ -127,6 +125,7 @@ public class DialogManager : MonoBehaviour
     private void DisallowCharacterControl()
     {
         GameManager.Instance.player.inv.globalCanShoot = false; // Using player instead of caller!!
+        GameManager.Instance.player.inv.globalCanMelee = false; // Using player instead of caller!!
         charMovement.canMove = false;
         charMovement.canDash = false;
     }
@@ -135,6 +134,7 @@ public class DialogManager : MonoBehaviour
     private void AllowCharacterControl()
     {
         GameManager.Instance.player.inv.globalCanShoot = true; // Using player instead of caller!!
+        GameManager.Instance.player.inv.globalCanMelee = true; // Using player instead of caller!!
         charMovement.canMove = true;
         charMovement.canDash = true;
     }
@@ -147,6 +147,20 @@ public class DialogManager : MonoBehaviour
         dialogIndex = 0;
         ignoreNewChatSource = false;
     }
+
+    // Instantly shows the entire line
+    private void ShowEntireLine()
+    {
+        GameManager.Instance.gameUI.dialogText.text = dialog[dialogIndex];
+        StopAllCoroutines();
+    }
+
+    // Disables all dialog choices
+    private void TurnOffDialogChoices()
+    {
+        GameManager.Instance.gameUI.dialogChoices.ForEach(choice => choice.gameObject.SetActive(false));
+    }
+
 
     // Dialog events
     [Serializable] public class DialogEvent {
@@ -199,10 +213,16 @@ public class DialogManager : MonoBehaviour
                 Instance.canInteract = true;
 
                 // Shows the next line of dialog
-                if (responses[choiceNum] == Instance.loadedDial) Instance.ProceedChat(true);
-                
+                if (responses[choiceNum] == Instance.loadedDial)
+                {
+                    Instance.TurnOffDialogChoices();
+                    Instance.ShowEntireLine();
+                    Instance.ProceedChat(true);
+                }
+
                 // Using player as caller for now, changes scriptable to a new one
-                else {
+                else
+                {
                     Instance.DelegateScriptable(responses[choiceNum], true);
                     Instance.StartDialog(responses[choiceNum], GameManager.Instance.player);
                 }

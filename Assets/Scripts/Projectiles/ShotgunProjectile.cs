@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ShotgunProjectile : Projectile
 {
-    private Weapon weapon;
 
     // Has a funny bug where if you switch weapon the same frame after shooting,
     // it gains the stats of the other weapon.
@@ -14,9 +13,6 @@ public class ShotgunProjectile : Projectile
         // Projectile info
         gameObject.name = "Shotgun Pellet";
         bulletSpeed = 5;
-
-        // Active weapon...
-        weapon = GameManager.Instance.player.inv.activeWeapon;
     }
 
     public override void LateUpdate() { Travel(); }
@@ -27,7 +23,7 @@ public class ShotgunProjectile : Projectile
     // When the projectile hits something...
     public override void OnTriggerEnter2D(Collider2D hit)
     {
-        if (hit.TryGetComponent(out IDamageable damageable)) damageable?.Hurt(weapon.damage, gameObject);
+        if (hit.TryGetComponent(out IDamageable damageable)) damageable?.Hurt(bulletDamage, gameObject);
         Destroy(gameObject);
     }
 }

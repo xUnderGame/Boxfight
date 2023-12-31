@@ -21,8 +21,10 @@ public class Sniper : Weapon
         Quaternion.Euler(new Vector3(0, 0, ang)),
         GameManager.Instance.bulletPool.transform);
 
-        // Add penetration
-        tempBullet.GetComponent<SniperProjectile>().bulletPenetration = bulletPenetration;
+        // Set projectile damage & add penetration
+        SniperProjectile sniperProj = tempBullet.GetComponent<SniperProjectile>();
+        sniperProj.bulletPenetration = bulletPenetration;
+        sniperProj.bulletDamage = damage;
 
         // Ignore collision
         Physics2D.IgnoreCollision(transform.root.GetComponent<Collider2D>(), tempBullet.GetComponent<Collider2D>());
