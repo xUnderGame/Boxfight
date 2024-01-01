@@ -223,6 +223,7 @@ public class DialogManager : MonoBehaviour
                 // Using player as caller for now, changes scriptable to a new one
                 else
                 {
+                    Instance.ShowEntireLine();
                     Instance.DelegateScriptable(responses[choiceNum], true);
                     Instance.StartDialog(responses[choiceNum], GameManager.Instance.player);
                 }

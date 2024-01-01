@@ -59,11 +59,13 @@ public class PlayerMovement : MonoBehaviour
         if (!GameManager.Instance.nearestInteractable) return;
 
         // Pick up weapon
-        if (GameManager.Instance.nearestInteractable.CompareTag("Weapon")) inv.PickupWeapon(); 
-        
+        if (GameManager.Instance.nearestInteractable.CompareTag("Weapon")) {
+            if (GameManager.Instance.nearestInteractable.transform.root != GameManager.Instance.pickupPool.transform) return;
+            inv.PickupWeapon();
+        }
         // Interact with nearest
         else if (GameManager.Instance.nearestInteractable.TryGetComponent(out IInteractable interactable))
-        interactable?.Interact(gameObject); 
+            interactable?.Interact(gameObject); 
     }
 
     // Melee attacks
