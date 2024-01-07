@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Melee : MonoBehaviour
 {
-    private readonly float shoveForce = -18; // Keep it negative, it SHOVES, not attracts.
+    private readonly float shoveForce = -28; // Keep it negative, it SHOVES, not attracts.
 
     public void Awake() { gameObject.SetActive(false); }
 
