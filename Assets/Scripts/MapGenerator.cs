@@ -11,7 +11,7 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
     public TileBase door;
     public TileBase wall;
     private int separation = 10; // Separación entre los cuadrados
-    private int iterationSizeMap = 3;
+    private int iterationSizeMap = 50;
 
     void Start()
     {
@@ -77,7 +77,7 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
                             if (iterationSizeMapTimes < iterationSizeMap && actualdirection != "")
                             {
                                 System.Random rnd = new System.Random();      
-                                int corridorSize = rnd.Next(10, 30);
+                                int corridorSize = rnd.Next(10, 50);
                                 if (DrawCorridorPosible(tilePosition, corridorSize, actualdirection)) 
                                 {
                                     tilemap.SetTile(tilePosition, door);
