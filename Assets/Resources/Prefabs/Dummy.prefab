@@ -161,7 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b248689ca393a1143993aaae4f43a1b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cs: {fileID: 11400000, guid: 670cda920b05a1c41aa405e5377c14c2, type: 2}
+  characterScriptable: {fileID: 11400000, guid: 670cda920b05a1c41aa405e5377c14c2, type: 2}
   anim: {fileID: 0}
   mov: {fileID: 0}
   maxHP: 0

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 10680516811659306}
   - component: {fileID: 7772507630489616506}
+  - component: {fileID: 2136601648995322744}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -45,3 +46,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerObject: {fileID: 0}
+  player: {fileID: 0}
+  pickupPool: {fileID: 0}
+  bulletPool: {fileID: 0}
+  energyBitPrefab: {fileID: 0}
+  nearestInteractable: {fileID: 0}
+--- !u!114 &2136601648995322744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 247216602639408167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 379c20f3dec38bf40bd74c34b69f28ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

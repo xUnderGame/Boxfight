@@ -5,14 +5,15 @@ TagManager:
   serializedVersion: 2
   tags:
   - Equipped
+  - Weapon
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Projectiles
   - Water
   - UI
-  - 
+  - Pickups
   - 
   - 
   - 

@@ -5,8 +5,10 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D))]
 public abstract class Projectile : MonoBehaviour
 {
-    [HideInInspector] public float bulletSpeed;
-    public abstract void FixedUpdate();
+    [HideInInspector] public float bulletSpeed = 0f;
+    [HideInInspector] public int bulletDamage = 1;
+    public abstract void LateUpdate();
     public abstract void Travel();
     public abstract void OnTriggerEnter2D(Collider2D hit);
+    public void OnBecameInvisible() { Destroy(gameObject); } // Destroy itself upon leaving the screen space
 }

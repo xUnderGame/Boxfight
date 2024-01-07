@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17c71b6299802fb4aacda9e497631065, type: 3}
+  m_Name: I am real
+  m_EditorClassIdentifier: 
+  dialog:
+  - Oh, thank GOD!
+  - I was beginning to think I wasn't.
+  - Or that nothing mattered, yknow.
+  - Thank you!
+  events:
+  - userDialog:
+      enabled: 1
+      options:
+      - You're welcome!
+      - Could you repeat that?
+      responses:
+      - {fileID: 11400000}
+      - {fileID: 11400000, guid: 3d5e763f8cc31ae4f911ae83d7271650, type: 2}
+    executeAtIndex: 3
+  npcName: NPC - Real
+  textSpeed: 0.05
+  canBeSkipped: 1
+  stopCharacterMovement: 1

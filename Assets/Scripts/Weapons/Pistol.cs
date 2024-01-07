@@ -6,22 +6,28 @@ public class Pistol : Weapon
 {
     public PistolScriptable ws;
 
-    public override void Shoot()
+    public override void Shoot(Vector2 direction)
     {
         if (!CanShoot()) return;
+
+        // Defines the angle
+        float ang = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg / 2;
 
         // Shoot the bullet
         GameObject tempBullet = Instantiate(projectile,
         gameObject.transform.position,
-        Quaternion.identity,
-        gameObject.transform);
+        Quaternion.Euler(new Vector3(0, 0, ang)),
+        GameManager.Instance.bulletPool.transform);
+
+        // Ignore collision
         Physics2D.IgnoreCollision(transform.root.GetComponent<Collider2D>(), tempBullet.GetComponent<Collider2D>());
-        tempBullet.transform.parent = GameObject.Find("Bullet Pool").transform;
-        tempBullet.GetComponent<Projectile>().bulletSpeed = projectileSpeed;
+
+        // Set projectile damage
+        tempBullet.GetComponent<Projectile>().bulletDamage = damage;
 
         // Discount the player mana and start cooldown coroutine
         StartCoroutine(cd.StartCooldown(firingSpeed, result => canShoot = result, canShoot));
-        DiscountMana();
+        if (transform.root.CompareTag("Player")) DiscountMana();
     }
 
     public override void LoadScriptable()
@@ -30,7 +36,7 @@ public class Pistol : Weapon
         energyCost = ws.energyCost;
         damage = ws.damage;
         firingSpeed = ws.firingSpeed;
-        projectileSpeed = ws.projectileSpeed;
+        projectile = ws.projectile;
         
         SetWeaponSprite(weaponSprite);
     }

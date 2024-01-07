@@ -1,5 +1,7 @@
+using UnityEngine;
+
 public interface IDamageable
 {
-    public void Hurt(float damage);
+    public void Hurt(int damage, GameObject damageSource);
     public void Kill();
 }

@@ -6,9 +6,8 @@ using UnityEngine;
 public abstract class Weapon : MonoBehaviour, ILoadScriptable
 {
     [HideInInspector] public int energyCost;
-    [HideInInspector] public float damage;
+    [HideInInspector] public int damage;
     [HideInInspector] public float firingSpeed;
-    [HideInInspector] public float projectileSpeed;
     [HideInInspector] public Sprite weaponSprite;
     [HideInInspector] public GameObject projectile;
     [HideInInspector] public bool canShoot;
@@ -28,13 +27,13 @@ public abstract class Weapon : MonoBehaviour, ILoadScriptable
     public void Start() { LoadScriptable(); }
 
     // Point weapon at cursor position
-    public void FixedUpdate() { if (gameObject.CompareTag("Equipped")) PointWeaponAtCursor(); }
+    public void Update() { if (gameObject.CompareTag("Equipped")) PointWeaponAtCursor(); }
 
     // Checks if you can shoot
     public bool CanShoot() { return GameManager.Instance.player.currentEnergy >= energyCost && canShoot; }
 
     // Shoots the weapon
-    public abstract void Shoot();
+    public abstract void Shoot(Vector2 direction);
 
     // Loads a scriptable
     public abstract void LoadScriptable();
@@ -55,13 +54,27 @@ public abstract class Weapon : MonoBehaviour, ILoadScriptable
         Vector3 lookDir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - gameObject.transform.position;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
         gameObject.transform.rotation = Quaternion.Euler(0, 0, angle);
+        FlipSprite();
     }
 
     // Points weapon at player
     public void PointWeaponAtPlayer()
     {
-        Vector3 lookDir = Camera.main.ScreenToWorldPoint(GameManager.Instance.playerObject.transform.position) - gameObject.transform.position;
+        Vector3 lookDir = GameManager.Instance.playerObject.transform.position - transform.position;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
         gameObject.transform.rotation = Quaternion.Euler(0, 0, angle);
+        FlipSprite();
     }
+
+    public void FlipSprite()
+    {
+        // Flip sprite
+        SpriteRenderer flip = gameObject.GetComponent<SpriteRenderer>();
+        if (transform.localEulerAngles.z > 90f && transform.localEulerAngles.z < 270f) flip.flipY = true;
+        else flip.flipY = false;
+    }
+
+    // Checking if the player is near the swappable weapon
+    void OnTriggerStay2D(Collider2D other) { if (other.gameObject.name == "Pickup Area" && GameManager.Instance.nearestInteractable == null && !gameObject.CompareTag("Equipped")) GameManager.Instance.nearestInteractable = gameObject; }
+    void OnTriggerExit2D(Collider2D other) { if (other.gameObject.name == "Pickup Area" && GameManager.Instance.nearestInteractable == gameObject && !gameObject.CompareTag("Equipped")) GameManager.Instance.nearestInteractable = null; }
 }
