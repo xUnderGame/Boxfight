@@ -11,6 +11,7 @@ public class Enemy : Character
     {
         if (currentDmg <= 0) return;
         equippedWeapon = transform.Find("Weapons").GetChild(0).GetComponent<Weapon>();
+        
     }
 
     public void FixedUpdate()

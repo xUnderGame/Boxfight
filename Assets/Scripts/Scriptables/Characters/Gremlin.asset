@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 10
   baseHP: 10
-  baseSpeed: 1
+  baseSpeed: 0.2
   baseDmg: 1
