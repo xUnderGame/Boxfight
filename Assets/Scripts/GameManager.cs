@@ -31,7 +31,9 @@ public class GameManager : MonoBehaviour
         // Setting GameUI stuff up!
         gameUI.main = GameObject.Find("Game UI");
         gameUI.hpValue = gameUI.main.transform.Find("HP Bar").Find("Value").GetComponent<Text>();
+        gameUI.hpBar = gameUI.main.transform.Find("HP Bar").GetComponent<Image>();
         gameUI.manaValue = gameUI.main.transform.Find("Mana Bar").Find("Value").GetComponent<Text>();
+        gameUI.manaBar = gameUI.main.transform.Find("Mana Bar").GetComponent<Image>();
 
         gameUI.weapons = gameUI.main.transform.Find("Weapons").gameObject;
         gameUI.primaryWeapon = gameUI.weapons.transform.Find("Primary").gameObject;
@@ -63,7 +65,9 @@ public class GameManager : MonoBehaviour
         // Main references
         public GameObject main;
         public Text hpValue;
+        public Image hpBar;
         public Text manaValue;
+        public Image manaBar;
 
         // Weapons
         public GameObject weapons;
@@ -93,10 +97,18 @@ public class GameManager : MonoBehaviour
         }
 
         // Updates the energy UI
-        public void UpdateEnergyUI() { manaValue.text = $"{Instance.player.currentEnergy}/{Instance.player.maxEnergy}"; }
+        public void UpdateEnergyUI()
+        {
+            manaValue.text = $"{Instance.player.currentEnergy}/{Instance.player.maxEnergy}";
+            manaBar.fillAmount = Instance.player.currentEnergy / Instance.player.maxEnergy;
+        }
 
         // Updates the HP UI
-        public void UpdateHealthUI() { hpValue.text = $"{Instance.player.currentHP}/{Instance.player.maxHP}"; }
+        public void UpdateHealthUI()
+        {
+            hpValue.text = $"{Instance.player.currentHP}/{Instance.player.maxHP}";
+            hpBar.fillAmount = (float)(Instance.player.currentHP / (float)Instance.player.maxHP);
+        }
 
         // Updates the weapons UI
         public void UpdateWeaponsUI(InventoryScriptable sc, int oldIndex = 1)
