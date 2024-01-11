@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1839735485 &184188572 stripped
+Tilemap:
+  m_CorrespondingSourceObject: {fileID: 6890706929222343048, guid: a2f3a1e5b06374746acbefe51cc68d1d, type: 3}
+  m_PrefabInstance: {fileID: 1798961455}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &563175156
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -212,7 +217,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &569763193
 Transform:
   m_ObjectHideFlags: 0
@@ -429,6 +434,10 @@ PrefabInstance:
     - target: {fileID: 3110007966437741744, guid: 6daa82a1ea4810d4c92121384d6f5ec3, type: 3}
       propertyPath: m_Name
       value: Dummy 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3110007966437741744, guid: 6daa82a1ea4810d4c92121384d6f5ec3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7151037507583536369, guid: 6daa82a1ea4810d4c92121384d6f5ec3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -747,8 +756,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4161122858095011038, guid: a2f3a1e5b06374746acbefe51cc68d1d, type: 3}
+      propertyPath: tilemapWall
+      value: 
+      objectReference: {fileID: 184188572}
     m_RemovedComponents:
     - {fileID: 3367359701310003790, guid: a2f3a1e5b06374746acbefe51cc68d1d, type: 3}
+    - {fileID: 7963176045025764525, guid: a2f3a1e5b06374746acbefe51cc68d1d, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -768,7 +782,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1973221295
 Transform:
   m_ObjectHideFlags: 0
@@ -880,6 +894,10 @@ PrefabInstance:
     - target: {fileID: 674445030166269682, guid: ce6c1b62535c37b41a3d3d7ffad1ae12, type: 3}
       propertyPath: m_Name
       value: Gremlin
+      objectReference: {fileID: 0}
+    - target: {fileID: 674445030166269682, guid: ce6c1b62535c37b41a3d3d7ffad1ae12, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4122836159231996758, guid: ce6c1b62535c37b41a3d3d7ffad1ae12, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1044,6 +1062,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPC
       objectReference: {fileID: 0}
+    - target: {fileID: 2236366691701831231, guid: 19be16faaecec364bba279ec1799b911, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6677992240884782106, guid: 19be16faaecec364bba279ec1799b911, type: 3}
       propertyPath: dialogScriptable
       value: 
@@ -1190,6 +1212,10 @@ PrefabInstance:
     - target: {fileID: 3110007966437741744, guid: 6daa82a1ea4810d4c92121384d6f5ec3, type: 3}
       propertyPath: m_Name
       value: Dummy
+      objectReference: {fileID: 0}
+    - target: {fileID: 3110007966437741744, guid: 6daa82a1ea4810d4c92121384d6f5ec3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7151037507583536369, guid: 6daa82a1ea4810d4c92121384d6f5ec3, type: 3}
       propertyPath: m_LocalPosition.x
