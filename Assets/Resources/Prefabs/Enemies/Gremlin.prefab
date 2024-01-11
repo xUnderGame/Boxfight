@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 104291946667587888}
   m_Layer: 0
   m_Name: Gremlin
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -262,6 +262,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pistol
       objectReference: {fileID: 0}
+    - target: {fileID: 7253208939561392380, guid: 626a1fc5819a0b84cafb6580666b2834, type: 3}
+      propertyPath: ws
+      value: 
+      objectReference: {fileID: 11400000, guid: 15353c345b3e9d642a61119186555d48, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

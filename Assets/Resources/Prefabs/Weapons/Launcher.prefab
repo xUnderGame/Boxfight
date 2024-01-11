@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 6666559604290766747}
   - component: {fileID: 3132437244574625973}
   - component: {fileID: 1394498745388921038}
-  - component: {fileID: 7253208939561392380}
+  - component: {fileID: -8785104411827295114}
   m_Layer: 6
-  m_Name: Pistol
+  m_Name: Launcher
   m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b8350710f698b84d8f81e11693711d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7253208939561392380
+--- !u!114 &-8785104411827295114
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -181,7 +181,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4914977504732083170}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2fd5c4fc371a744f95d545df6c3df74, type: 3}
+  m_Script: {fileID: 11500000, guid: 6993027b6af490642885f05187c46f90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   energyCost: 0
@@ -190,4 +190,4 @@ MonoBehaviour:
   weaponSprite: {fileID: 0}
   projectile: {fileID: 0}
   canShoot: 0
-  ws: {fileID: 11400000, guid: 28918a20b9f363e4fa95bced1f7b9752, type: 2}
+  ws: {fileID: 11400000, guid: 8db34df6e7ab845469a8538f3664512c, type: 2}

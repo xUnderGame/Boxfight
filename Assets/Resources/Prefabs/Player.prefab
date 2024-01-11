@@ -292,6 +292,7 @@ MonoBehaviour:
   speed: 5
   mov: {fileID: 0}
   cd: {fileID: 0}
+  canMeleeCD: 0
 --- !u!114 &8920022207276242213
 MonoBehaviour:
   m_ObjectHideFlags: 0

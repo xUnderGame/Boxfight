@@ -9,7 +9,7 @@ public class Melee : MonoBehaviour
 
     public void Awake() { gameObject.SetActive(false); }
 
-    // public void FixedUpdate() { RotateAttackArea(); }
+    public void FixedUpdate() { RotateAttackArea(); }
 
     // Rotates the melee area around the player using the mouse position (this doesn't work but it looks so funny LMAO)
     private void RotateAttackArea()
@@ -18,7 +18,7 @@ public class Melee : MonoBehaviour
         player = Input.mousePosition - player;
         float angle = Mathf.Atan2(player.y, player.x) * Mathf.Rad2Deg;
 
-        transform.Rotate(GameManager.Instance.playerObject.transform.position, angle);
+        transform.Rotate(Vector3.forward * angle);
     }
 
     // When Melee hits something...
