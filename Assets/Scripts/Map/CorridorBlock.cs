@@ -11,6 +11,10 @@ public class CorridorBlock : MonoBehaviour
 
     public TileBase corridor;
     public TileBase wall;
+
+    private Vector3Int firstPoint;
+
+    private List<Vector3Int> posWalled = new List<Vector3Int>();
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -20,9 +24,10 @@ public class CorridorBlock : MonoBehaviour
             Vector3 posPlayer = other.transform.position;
             Vector3Int tilePlayerPosition = tilemapCorridor.WorldToCell(posPlayer);
 
-            Vector3Int corridorPrincipal = GetAproxCorridor(tilePlayerPosition);
-            tilemapCorridor.SetTile(corridorPrincipal, wall);
-            PrintAllCorridors(corridorPrincipal, "",0);
+            Vector3Int firstPoint = GetAproxCorridor(tilePlayerPosition);
+            posWalled.Add(firstPoint);
+            tilemapCorridor.SetTile(firstPoint, wall);
+            PrintAllCorridors(firstPoint, "");
         }
     }
 
@@ -56,88 +61,92 @@ public class CorridorBlock : MonoBehaviour
     }
 
 
-    private void PrintAllCorridors(Vector3Int posCorridor, string direction, int corridorsPrinted)
+    private void PrintAllCorridors(Vector3Int posCorridor, string direction)
     {
-       
-        if (direction == "")
+        if (posCorridor != firstPoint)
         {
-            direction = SetDirectionBlockCorridor(posCorridor, "");
+
+            if (direction == "")
+            {
+                direction = SetDirectionBlockCorridor(posCorridor, "");
+            }
+
+            if (direction == "right")
+            {
+                if (TileIn(posCorridor.x + 1, posCorridor.y, 0, "wall"))
+                {
+                    PrintAllCorridors(new Vector3Int(posCorridor.x + 1, posCorridor.y, 0), "right");
+                }
+                else if (TileIn(posCorridor.x + 1, posCorridor.y, 0, "corridor"))
+                {
+                    tilemapCorridor.SetTile(new Vector3Int(posCorridor.x + 1, posCorridor.y, 0), wall);
+                    posWalled.Add(new Vector3Int(posCorridor.x + 1, posCorridor.y, 0));
+                    PrintAllCorridors(new Vector3Int(posCorridor.x + 1, posCorridor.y, 0), "right");
+                }
+                else
+                {
+                    direction = SetDirectionBlockCorridor(posCorridor, "right");
+                    PrintAllCorridors(new Vector3Int(posCorridor.x, posCorridor.y, 0), direction);
+                }
+            }
+            else if (direction == "left")
+            {
+                if (TileIn(posCorridor.x - 1, posCorridor.y, 0, "wall"))
+                {
+                    PrintAllCorridors(new Vector3Int(posCorridor.x - 1, posCorridor.y, 0), "left");
+                }
+                else if (TileIn(posCorridor.x - 1, posCorridor.y, 0, "corridor"))
+                {
+                    tilemapCorridor.SetTile(new Vector3Int(posCorridor.x - 1, posCorridor.y, 0), wall);
+                    posWalled.Add(new Vector3Int(posCorridor.x - 1, posCorridor.y, 0));
+                    PrintAllCorridors(new Vector3Int(posCorridor.x - 1, posCorridor.y, 0), "left");
+                }
+                else
+                {
+                    direction = SetDirectionBlockCorridor(posCorridor, "left");
+                    PrintAllCorridors(new Vector3Int(posCorridor.x, posCorridor.y, 0), direction);
+                }
+            }
+            else if (direction == "up")
+            {
+                if (TileIn(posCorridor.x, posCorridor.y + 1, 0, "wall"))
+                {
+                    PrintAllCorridors(new Vector3Int(posCorridor.x, posCorridor.y + 1, 0), "up");
+                }
+                else if (TileIn(posCorridor.x, posCorridor.y + 1, 0, "corridor"))
+                {
+                    tilemapCorridor.SetTile(new Vector3Int(posCorridor.x, posCorridor.y + 1, 0), wall);
+                    posWalled.Add(new Vector3Int(posCorridor.x, posCorridor.y + 1, 0));
+                    PrintAllCorridors(new Vector3Int(posCorridor.x, posCorridor.y + 1, 0), "up");
+
+                }
+                else
+                {
+                    direction = SetDirectionBlockCorridor(posCorridor, "up");
+                    PrintAllCorridors(new Vector3Int(posCorridor.x, posCorridor.y, 0), direction);
+                }
+            }
+            else if (direction == "down")
+            {
+                if (TileIn(posCorridor.x, posCorridor.y - 1, 0, "wall"))
+                {
+                    PrintAllCorridors(new Vector3Int(posCorridor.x, posCorridor.y - 1, 0), "down");
+                }
+                else if (TileIn(posCorridor.x, posCorridor.y - 1, 0, "corridor"))
+                {
+                    tilemapCorridor.SetTile(new Vector3Int(posCorridor.x, posCorridor.y - 1, 0), wall);
+                    posWalled.Add(new Vector3Int(posCorridor.x - 1, posCorridor.y, 0));
+                    PrintAllCorridors(new Vector3Int(posCorridor.x, posCorridor.y - 1, 0), "down");
+
+                }
+                else
+                {
+                    direction = SetDirectionBlockCorridor(posCorridor, "down");
+                    PrintAllCorridors(new Vector3Int(posCorridor.x, posCorridor.y, 0), direction);
+                }
+            }
         }
-        
-        if(direction == "right")
-        {
-            if (TileIn(posCorridor.x + 1, posCorridor.y, 0, "wall"))
-            {
-                PrintAllCorridors(new Vector3Int(posCorridor.x + 1, posCorridor.y, 0), "right", corridorsPrinted);
-            }
-            else if (TileIn(posCorridor.x + 1, posCorridor.y, 0, "corridor"))
-            {
-                tilemapCorridor.SetTile(new Vector3Int(posCorridor.x + 1, posCorridor.y, 0), wall);
-                corridorsPrinted = corridorsPrinted + 1;
-                if (corridorsPrinted != 3) PrintAllCorridors(new Vector3Int(posCorridor.x + 1, posCorridor.y, 0), "right", corridorsPrinted);
-            }
-            else
-            {
-                direction = SetDirectionBlockCorridor(posCorridor, "right");
-                PrintAllCorridors(new Vector3Int(posCorridor.x, posCorridor.y, 0), direction, corridorsPrinted);
-            }
-        }
-        else if (direction == "left")
-        {
-            if (TileIn(posCorridor.x - 1, posCorridor.y, 0, "wall"))
-            {
-                PrintAllCorridors(new Vector3Int(posCorridor.x - 1, posCorridor.y, 0), "left", corridorsPrinted);
-            }
-            else if (TileIn(posCorridor.x - 1, posCorridor.y, 0, "corridor"))
-            {
-                tilemapCorridor.SetTile(new Vector3Int(posCorridor.x -1, posCorridor.y, 0), wall);
-                corridorsPrinted = corridorsPrinted + 1;
-                if (corridorsPrinted != 3) PrintAllCorridors(new Vector3Int(posCorridor.x - 1, posCorridor.y, 0), "left", corridorsPrinted);
-            }
-            else
-            {
-                direction = SetDirectionBlockCorridor(posCorridor, "left");
-                PrintAllCorridors(new Vector3Int(posCorridor.x, posCorridor.y, 0), direction, corridorsPrinted);
-            }
-        }
-        else if(direction == "up")
-        {
-            if (TileIn(posCorridor.x, posCorridor.y + 1, 0, "wall"))
-            {
-                PrintAllCorridors(new Vector3Int(posCorridor.x, posCorridor.y + 1, 0), "up", corridorsPrinted);
-            }
-            else if (TileIn(posCorridor.x, posCorridor.y + 1, 0, "corridor"))
-            {
-                tilemapCorridor.SetTile(new Vector3Int(posCorridor.x, posCorridor.y + 1, 0), wall);
-                corridorsPrinted = corridorsPrinted + 1;
-                if (corridorsPrinted != 3) PrintAllCorridors(new Vector3Int(posCorridor.x, posCorridor.y + 1, 0), "up", corridorsPrinted);
-                else return;
-            }
-            else
-            {
-                direction = SetDirectionBlockCorridor(posCorridor, "up");
-                PrintAllCorridors(new Vector3Int(posCorridor.x, posCorridor.y, 0), direction, corridorsPrinted);
-            }
-        }
-        else if(direction == "down")
-        {
-            if (TileIn(posCorridor.x, posCorridor.y - 1, 0, "wall"))
-            {
-                PrintAllCorridors(new Vector3Int(posCorridor.x, posCorridor.y -1, 0), "down", corridorsPrinted);
-            }
-            else if (TileIn(posCorridor.x, posCorridor.y - 1, 0, "corridor"))
-            {
-                tilemapCorridor.SetTile(new Vector3Int(posCorridor.x, posCorridor.y -1, 0), wall);
-                corridorsPrinted = corridorsPrinted + 1;
-                if (corridorsPrinted != 3) PrintAllCorridors(new Vector3Int(posCorridor.x, posCorridor.y - 1, 0), "down", corridorsPrinted);
-                else return;
-            }
-            else
-            {
-                direction = SetDirectionBlockCorridor(posCorridor, "down");
-                PrintAllCorridors(new Vector3Int(posCorridor.x, posCorridor.y, 0), direction, corridorsPrinted);
-            }
-        }
+        else return;
 
     }
 
@@ -174,7 +183,7 @@ public class CorridorBlock : MonoBehaviour
             if (isComing != "down") return "up";
             else
             {
-                if(TileIn(posCorridor.x + i, posCorridor.y, 0, "wall"))
+                if (TileIn(posCorridor.x + i, posCorridor.y, 0, "wall"))
                 {
                     return "right";
                 }
@@ -194,5 +203,13 @@ public class CorridorBlock : MonoBehaviour
             }
         }
         else return "";
+    }
+
+    public void SetPointsWalledOnCorridor()
+    {
+        for (int i = 0; i < posWalled.Count; i++)
+        {
+            tilemapCorridor.SetTile(posWalled[i],corridor);
+        }
     }
 }

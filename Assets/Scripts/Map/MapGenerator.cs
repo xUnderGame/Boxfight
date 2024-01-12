@@ -111,8 +111,8 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
                         //if (rnd.Next(0, 50) == 1)
                         //{
                         //    Vector3 instPos = tilemapWall.CellToWorld(tilePosition);
-                        //   // Instantiate(enemies[rnd.Next(0, enemies.Length)]);
-                        //   Instantiate(enemies[0], instPos, Quaternion.identity);
+                        //    //Instantiate(enemies[rnd.Next(0, enemies.Length)]);
+                        //    Instantiate(enemies[0], instPos, Quaternion.identity);
                         //}
                     }
                 }
@@ -158,7 +158,7 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
         }
         if(direction == "left") tilePosition = new Vector3Int(tilePosition.x + 1, tilePosition.y, tilePosition.z);
         else if(direction == "down") tilePosition = new Vector3Int(tilePosition.x, tilePosition.y + 1, tilePosition.z);
-        DrawSquare(tilePosition, rnd.Next(10,30), iterationSizeMapTimes, direction);
+        DrawSquare(tilePosition, rnd.Next(10,15), iterationSizeMapTimes, direction);
     }
 
     Vector3Int SetSquareInLine(Vector3Int v3, string direction, int squareSize)
@@ -217,5 +217,13 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
             if (!IsCellEmpty(tilePosition)) return false;
         }
         return true;
+    }
+
+    
+    Vector3 GetCenterSquareToWorld(Vector3Int startPosition, int squareSize)
+    {
+        Vector3Int centerOfSquare = new Vector3Int(startPosition.x + squareSize/2,startPosition.y + squareSize/2, 0);
+        Vector3 pointOnTheWorld = tilemapWall.CellToWorld(centerOfSquare);
+        return pointOnTheWorld;
     }
 }
