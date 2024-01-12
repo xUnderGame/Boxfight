@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class Melee : MonoBehaviour
 {
-    private readonly float shoveForce = -28; // Keep it negative, it SHOVES, not attracts.
+    private readonly float shoveForce = -48; // Keep it negative, it SHOVES, not attracts.
     private Transform rotationReference;
 
-    public void Awake()
+    public void Start()
     {
         rotationReference = GameManager.Instance.playerObject.transform.Find("Melee Rotation");
         gameObject.SetActive(false);

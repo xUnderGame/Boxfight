@@ -22,9 +22,10 @@ public class Sniper : Weapon
         GameManager.Instance.bulletPool.transform);
 
         // Set projectile damage & add penetration
-        SniperProjectile sniperProj = tempBullet.GetComponent<SniperProjectile>();
-        sniperProj.bulletPenetration = bulletPenetration;
-        sniperProj.bulletDamage = damage;
+        SniperProjectile gunProjectile = tempBullet.GetComponent<SniperProjectile>();
+        gunProjectile.bulletPenetration = bulletPenetration;
+        gunProjectile.bulletDamage = damage;
+        gunProjectile.ttl = ws.timeToLive;
 
         // Ignore collision
         Physics2D.IgnoreCollision(transform.root.GetComponent<Collider2D>(), tempBullet.GetComponent<Collider2D>());

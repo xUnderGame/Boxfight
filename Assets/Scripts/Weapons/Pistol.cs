@@ -23,7 +23,9 @@ public class Pistol : Weapon
         Physics2D.IgnoreCollision(transform.root.GetComponent<Collider2D>(), tempBullet.GetComponent<Collider2D>());
 
         // Set projectile damage
-        tempBullet.GetComponent<Projectile>().bulletDamage = damage;
+        DefaultProjectile gunProjectile = tempBullet.GetComponent<DefaultProjectile>();
+        gunProjectile.bulletDamage = damage;
+        gunProjectile.ttl = ws.timeToLive;
 
         // Discount the player mana and start cooldown coroutine
         StartCoroutine(cd.StartCooldown(firingSpeed, result => canShoot = result, canShoot));

@@ -24,10 +24,11 @@ public class Launcher : Weapon
         Physics2D.IgnoreCollision(transform.root.GetComponent<Collider2D>(), tempBullet.GetComponent<Collider2D>());
 
         // Set projectile vars
-        GrenadeProjectile grenadeProj = tempBullet.GetComponent<GrenadeProjectile>();
-        grenadeProj.bulletDamage = damage;
-        grenadeProj.shoveForce = shoveForce;
-        grenadeProj.shotByPlayer = true;
+        GrenadeProjectile gunProjectile = tempBullet.GetComponent<GrenadeProjectile>();
+        gunProjectile.bulletDamage = damage;
+        gunProjectile.shoveForce = shoveForce;
+        gunProjectile.ttl = ws.timeToLive;
+        if (transform.root.CompareTag("Player")) gunProjectile.shotByPlayer = true;
 
         // Discount the player mana and start cooldown coroutine
         StartCoroutine(cd.StartCooldown(firingSpeed, result => canShoot = result, canShoot));

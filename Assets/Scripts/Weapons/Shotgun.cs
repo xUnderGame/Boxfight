@@ -29,7 +29,9 @@ public class Shotgun : Weapon
             GameManager.Instance.bulletPool.transform);
 
             // Set projectile damage
-            tempBullet.GetComponent<Projectile>().bulletDamage = damage;
+            ShotgunProjectile gunProjectile = tempBullet.GetComponent<ShotgunProjectile>();
+            gunProjectile.bulletDamage = damage;
+            gunProjectile.ttl = ws.timeToLive;
 
             // Ignores collision
             Physics2D.IgnoreCollision(transform.root.GetComponent<Collider2D>(), tempBullet.GetComponent<Collider2D>());

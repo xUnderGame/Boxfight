@@ -15,6 +15,7 @@ MonoBehaviour:
   energyCost: 16
   damage: 7
   firingSpeed: 3.2
+  timeToLive: 3
   weaponSprite: {fileID: 21300000, guid: f03726ac0f57d2e4398df522ebcd9cec, type: 3}
   projectile: {fileID: 1180622746647987742, guid: d6b61b5da75b0a545a537348d536e8dd, type: 3}
   shoveForce: -100

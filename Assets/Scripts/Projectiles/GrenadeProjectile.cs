@@ -6,13 +6,12 @@ public class GrenadeProjectile : Projectile
 {
     [HideInInspector] public float shoveForce;
     [HideInInspector] public bool shotByPlayer;
-    private readonly float bulletTimer = 2.5f;
     private Coroutine tick;
 
     // Has a funny bug where if you switch weapon the same frame after shooting,
     // it gains the stats of the other weapon.
     // I'm leaving it in as a "mechanic" now.
-    void Awake()
+    void Start()
     {
         tick = StartCoroutine(BulletTimer());
 
@@ -29,7 +28,7 @@ public class GrenadeProjectile : Projectile
     // Starts the timer for the bullet to explode
     public IEnumerator BulletTimer()
     {
-        yield return new WaitForSeconds(bulletTimer);
+        yield return new WaitForSeconds(ttl - 0.25f);
         StartCoroutine(Explode());
     }
 
@@ -58,11 +57,7 @@ public class GrenadeProjectile : Projectile
         if (hit.TryGetComponent(out Rigidbody2D shove)) Shove(shove, hit);
 
         // Custom hit handler for player's melee attack (very fun)
-        Debug.Log("hit!");
-        if (hit.transform.root.CompareTag("Player") && !hit.CompareTag("Player")) {
-            Debug.Log("hi");
-            StartCoroutine(Explode());
-        }
+        if (hit.transform.root.CompareTag("Player") && !hit.CompareTag("Player")) { StartCoroutine(Explode()); }
     }
 
     public void Shove(Rigidbody2D rb, Collider2D hit) {
