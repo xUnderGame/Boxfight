@@ -55,9 +55,9 @@ public abstract class Weapon : MonoBehaviour, ILoadScriptable
     // Points weapon to cursor
     public void PointWeaponAtCursor()
     {
-        Vector3 lookDir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - gameObject.transform.position;
+        Vector3 lookDir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
-        gameObject.transform.rotation = Quaternion.Euler(0, 0, angle);
+        transform.rotation = Quaternion.Euler(0, 0, angle);
         FlipSprite();
     }
 
@@ -66,7 +66,7 @@ public abstract class Weapon : MonoBehaviour, ILoadScriptable
     {
         Vector3 lookDir = GameManager.Instance.playerObject.transform.position - transform.position;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
-        gameObject.transform.rotation = Quaternion.Euler(0, 0, angle);
+        transform.rotation = Quaternion.Euler(0, 0, angle);
         FlipSprite();
     }
 

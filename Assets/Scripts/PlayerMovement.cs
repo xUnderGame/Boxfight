@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Awake() 
     {
-        meleeAttack = gameObject.transform.Find("Melee Area").gameObject;
+        meleeAttack = gameObject.transform.Find("Melee Rotation").Find("Melee Area").gameObject;
         mov = GetComponent<MovementBehaviour>();
         inv = GetComponent<Player>().inv;
         cd = GetComponent<CooldownBehaviour>();

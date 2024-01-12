@@ -96,7 +96,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1180622746647987742}
-  m_BodyType: 2
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -175,6 +175,7 @@ MonoBehaviour:
   bulletSpeed: 0
   bulletDamage: 1
   shoveForce: 0
+  shotByPlayer: 0
 --- !u!1 &7847699978925272823
 GameObject:
   m_ObjectHideFlags: 0

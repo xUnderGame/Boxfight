@@ -55,8 +55,17 @@ public class GrenadeProjectile : Projectile
         if (hit.TryGetComponent(out IDamageable damageable) && !(shotByPlayer && hit.transform.root.CompareTag("Player"))) damageable?.Hurt(bulletDamage, gameObject);
 
         // Shove enemy
-        if (hit.TryGetComponent(out Rigidbody2D shove)) {
-            shove.AddForce((transform.position - hit.transform.position).normalized * shoveForce, ForceMode2D.Impulse);
+        if (hit.TryGetComponent(out Rigidbody2D shove)) Shove(shove, hit);
+
+        // Custom hit handler for player's melee attack (very fun)
+        Debug.Log("hit!");
+        if (hit.transform.root.CompareTag("Player") && !hit.CompareTag("Player")) {
+            Debug.Log("hi");
+            StartCoroutine(Explode());
         }
+    }
+
+    public void Shove(Rigidbody2D rb, Collider2D hit) {
+        rb.AddForce((transform.position - hit.transform.position).normalized * shoveForce, ForceMode2D.Impulse);
     }
 }
