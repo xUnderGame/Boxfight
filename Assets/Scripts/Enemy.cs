@@ -19,4 +19,16 @@ public class Enemy : Character
         equippedWeapon.PointWeaponAtPlayer();
         equippedWeapon.Shoot(GameManager.Instance.playerObject.transform.position - equippedWeapon.transform.position);
     }
+
+    // Hurt enemy
+    public override void Hurt(int damage, GameObject damageSource)
+    {
+        base.Hurt(damage, damageSource);
+        // Spawn energy bits
+        int droplets = Random.Range(0, 4); // 20% base chance to drop energy on hit
+        if (droplets == 0 || damageSource.name == "Melee Area") DropEnergyBit(Random.Range(1, 4));
+    
+        // Is HP below 0?
+        if (currentHP <= 0) Kill();
+    }
 }

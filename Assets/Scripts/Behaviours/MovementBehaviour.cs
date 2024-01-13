@@ -8,9 +8,9 @@ public class MovementBehaviour : MonoBehaviour
     [HideInInspector] public Rigidbody2D rb;
     [HideInInspector] public Renderer rd;
     [HideInInspector] public CooldownBehaviour cd;
-    public bool canMove = true;
-    public bool canDash = true;
-    public bool chainDash = true;
+    [HideInInspector] public bool canMove;
+    [HideInInspector] public bool canDash;
+    [HideInInspector] public bool chainDash;
     private Coroutine dashCoroutine = null;
     private Coroutine chainCoroutine = null;
     private readonly float dashCD = 0.6f;
@@ -22,6 +22,9 @@ public class MovementBehaviour : MonoBehaviour
         cd = GetComponent<CooldownBehaviour>();
         rb = GetComponent<Rigidbody2D>();
         rd = GetComponent<Renderer>();
+        canMove = true;
+        chainDash = true;
+        canDash = true;
     }
 
     // Moves the current character.
