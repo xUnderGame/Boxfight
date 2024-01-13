@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
         // Setting GameUI stuff up!
         gameUI.main = GameObject.Find("Game UI");
         gameUI.gameOver = gameUI.main.transform.Find("GameOver").gameObject;
+        gameUI.goText = gameUI.gameOver.transform.Find("Mock").GetComponent<Text>();
         
         // User HP/Energy
         gameUI.hpValue = gameUI.main.transform.Find("HP Bar").Find("Value").GetComponent<Text>();
@@ -62,9 +63,24 @@ public class GameManager : MonoBehaviour
 
     // GameUI class for better navigation and structure.
     public class GameUI {
-        // Main references
         public GameObject main;
+
+        // Game over
         public GameObject gameOver;
+        public Text goText;
+        public readonly string[] goMessages = {
+            "Try, try again.",
+            "Go get 'em! Oh.",
+            "Care to try again?",
+            "Oh, come on.",
+            "\"That didn't even hit me!\"",
+            "Sweet, sweet death.",
+            "If you keep dying, try, try again.",
+            "Oof.",
+            "Did that hurt? Surely it did.",
+            "Now do it again!",
+            "Man that was painful to watch.",
+        };
 
         // User hp/energy
         public Text hpValue;

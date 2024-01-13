@@ -27,6 +27,7 @@ public class Player : Character
     // Kill player
     public override void Kill()
     {
+        GameManager.Instance.gameUI.goText.text = GameManager.Instance.gameUI.goMessages[Random.Range(0, GameManager.Instance.gameUI.goMessages.Length)];
         GameManager.Instance.gameUI.ToggleGameOverUI(true);
         GameManager.Instance.playerObject.GetComponent<Collider2D>().enabled = false;
         GameManager.Instance.player.inv.globalCanShoot = false;
