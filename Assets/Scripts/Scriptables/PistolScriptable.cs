@@ -6,6 +6,7 @@ public class PistolScriptable : ScriptableObject
     public int energyCost;
     public int damage;
     public float firingSpeed;
+    public float timeToLive;
     public Sprite weaponSprite;
     public GameObject projectile;
 }

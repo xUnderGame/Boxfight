@@ -15,7 +15,8 @@ MonoBehaviour:
   energyCost: 3
   damage: 3
   firingSpeed: 0.5
-  bulletsPerShot: 5
-  bulletSpread: 20
+  timeToLive: 3
   weaponSprite: {fileID: 21300000, guid: eef8aa12af2bbdd4ea6954b213159c0a, type: 3}
   projectile: {fileID: 1180622746647987742, guid: 8647b756ed1957548b9b66158ba06863, type: 3}
+  bulletsPerShot: 5
+  bulletSpread: 20

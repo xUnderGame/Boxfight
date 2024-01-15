@@ -6,8 +6,9 @@ public class ShotgunScriptable : ScriptableObject
     public int energyCost;
     public int damage;
     public float firingSpeed;
-    public int bulletsPerShot;
-    public int bulletSpread;
+    public float timeToLive;
     public Sprite weaponSprite;
     public GameObject projectile;
+    public int bulletsPerShot;
+    public int bulletSpread;
 }

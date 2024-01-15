@@ -187,9 +187,7 @@ MonoBehaviour:
   energyCost: 0
   damage: 0
   firingSpeed: 0
-  projectileSpeed: 0
   weaponSprite: {fileID: 0}
   projectile: {fileID: 0}
   canShoot: 0
-  isSwapable: 0
   ws: {fileID: 11400000, guid: b860b6f98b8c3fc44a0d3fc09ca55694, type: 2}

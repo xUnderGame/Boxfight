@@ -6,7 +6,8 @@ public class SniperScriptable : ScriptableObject
     public int energyCost;
     public int damage;
     public float firingSpeed;
-    public int bulletPenetration;
+    public float timeToLive;
     public Sprite weaponSprite;
     public GameObject projectile;
+    public int bulletPenetration;
 }

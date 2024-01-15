@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -27,22 +26,31 @@ public class GameManager : MonoBehaviour
         bulletPool = GameObject.Find("Bullet Pool");
         playerObject = GameObject.Find("Player");
         player = playerObject.GetComponent<Player>();
+        player.inv.ResetInventory(); // Reset the inventory scriptable every time the game is run
 
         // Setting GameUI stuff up!
         gameUI.main = GameObject.Find("Game UI");
+        gameUI.gameOver = gameUI.main.transform.Find("GameOver").gameObject;
+        gameUI.goText = gameUI.gameOver.transform.Find("Mock").GetComponent<Text>();
+        
+        // User HP/Energy
         gameUI.hpValue = gameUI.main.transform.Find("HP Bar").Find("Value").GetComponent<Text>();
+        gameUI.hpBar = gameUI.main.transform.Find("HP Bar").GetComponent<Image>();
         gameUI.manaValue = gameUI.main.transform.Find("Mana Bar").Find("Value").GetComponent<Text>();
+        gameUI.manaBar = gameUI.main.transform.Find("Mana Bar").GetComponent<Image>();
 
+        // Weapons
         gameUI.weapons = gameUI.main.transform.Find("Weapons").gameObject;
         gameUI.primaryWeapon = gameUI.weapons.transform.Find("Primary").gameObject;
         gameUI.secondaryWeapon = gameUI.weapons.transform.Find("Secondary").gameObject;
-        gameUI.dialogbox = gameUI.main.transform.Find("Dialogbox").gameObject;
 
+        // Dialog
+        gameUI.dialogbox = gameUI.main.transform.Find("Dialogbox").gameObject;
         gameUI.dialogName = gameUI.dialogbox.transform.Find("Name").gameObject.GetComponent<Text>();
         gameUI.dialogText = gameUI.dialogbox.transform.Find("Text").gameObject.GetComponent<Text>();
         
+        // Dialog choices
         gameUI.choicesSubUI = gameUI.dialogbox.transform.Find("ChoicesSubUI").gameObject;
-
         gameUI.dialogChoices.Add(new GameUI.Choice(gameUI.choicesSubUI.transform.Find("Choice1").gameObject,
             gameUI.choicesSubUI.transform.Find("Choice1").Find("Text").gameObject.GetComponent<Text>()));
         gameUI.dialogChoices.Add(new GameUI.Choice(gameUI.choicesSubUI.transform.Find("Choice2").gameObject,
@@ -53,17 +61,32 @@ public class GameManager : MonoBehaviour
             gameUI.choicesSubUI.transform.Find("Choice4").Find("Text").gameObject.GetComponent<Text>()));
     }
 
-    // Changes to a different scene.
-    public void ChangeScene(string sceneName) {
-        SceneManager.LoadScene(sceneName);
-    }
-
     // GameUI class for better navigation and structure.
     public class GameUI {
-        // Main references
         public GameObject main;
+
+        // Game over
+        public GameObject gameOver;
+        public Text goText;
+        public readonly string[] goMessages = {
+            "Try, try again.",
+            "Go get 'em! Oh.",
+            "Care to try again?",
+            "Oh, come on.",
+            "\"That didn't even hit me!\"",
+            "Sweet, sweet death.",
+            "If you keep dying, try, try again.",
+            "Oof.",
+            "Did that hurt? Surely it did.",
+            "Now do it again!",
+            "Man that was painful to watch.",
+        };
+
+        // User hp/energy
         public Text hpValue;
+        public Image hpBar;
         public Text manaValue;
+        public Image manaBar;
 
         // Weapons
         public GameObject weapons;
@@ -93,10 +116,18 @@ public class GameManager : MonoBehaviour
         }
 
         // Updates the energy UI
-        public void UpdateEnergyUI() { manaValue.text = $"{Instance.player.currentEnergy}/{Instance.player.maxEnergy}"; }
+        public void UpdateEnergyUI()
+        {
+            manaValue.text = $"{Instance.player.currentEnergy}/{Instance.player.maxEnergy}";
+            manaBar.fillAmount = Instance.player.currentEnergy / Instance.player.maxEnergy;
+        }
 
         // Updates the HP UI
-        public void UpdateHealthUI() { hpValue.text = $"{Instance.player.currentHP}/{Instance.player.maxHP}"; }
+        public void UpdateHealthUI()
+        {
+            hpValue.text = $"{Instance.player.currentHP}/{Instance.player.maxHP}";
+            hpBar.fillAmount = (float)(Instance.player.currentHP / (float)Instance.player.maxHP);
+        }
 
         // Updates the weapons UI
         public void UpdateWeaponsUI(InventoryScriptable sc, int oldIndex = 1)
@@ -122,7 +153,10 @@ public class GameManager : MonoBehaviour
         // Toggle with a bool the dialog box UI
         public void ToggleDialogBox(bool status) { dialogbox.SetActive(status); }
 
-        // Toggle with a bool the choices dialog sub-ui
+        // Toggle with a bool the choices dialog sub-UI
         public void ToggleChoicesSubUI(bool status) { choicesSubUI.SetActive(status); }
+
+        // Toggle gameover UI
+        public void ToggleGameOverUI(bool status) { gameOver.SetActive(status); }
     }
 }

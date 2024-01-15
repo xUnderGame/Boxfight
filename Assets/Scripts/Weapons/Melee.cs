@@ -5,20 +5,23 @@ using UnityEngine;
 
 public class Melee : MonoBehaviour
 {
-    private readonly float shoveForce = -18; // Keep it negative, it SHOVES, not attracts.
+    private readonly float shoveForce = -48; // Keep it negative, it SHOVES, not attracts.
+    private Transform rotationReference;
 
-    public void Awake() { gameObject.SetActive(false); }
+    public void Start()
+    {
+        rotationReference = GameManager.Instance.playerObject.transform.Find("Melee Rotation");
+        gameObject.SetActive(false);
+    }
 
-    // public void FixedUpdate() { RotateAttackArea(); }
+    public void FixedUpdate() { RotateAttackArea(); }
 
-    // Rotates the melee area around the player using the mouse position (this doesn't work but it looks so funny LMAO)
+    // Rotates the melee area around the player using the mouse position (this doesn't work but it looks so funny LMAO (nvm fixed it :<))
     private void RotateAttackArea()
     {
-        Vector3 player = Camera.main.WorldToScreenPoint(GameManager.Instance.playerObject.transform.position);
-        player = Input.mousePosition - player;
-        float angle = Mathf.Atan2(player.y, player.x) * Mathf.Rad2Deg;
-
-        transform.Rotate(GameManager.Instance.playerObject.transform.position, angle);
+        Vector3 lookDir = Camera.main.ScreenToWorldPoint(Input.mousePosition) - GameManager.Instance.playerObject.transform.position;
+        float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
+        rotationReference.rotation = Quaternion.Euler(0, 0, angle - 90);
     }
 
     // When Melee hits something...

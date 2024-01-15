@@ -15,8 +15,7 @@ public class InventoryScriptable : ScriptableObject
     [HideInInspector] public bool globalCanShoot;
     [HideInInspector] public bool globalCanMelee;
 
-    // Reset the inventory scriptable every time the game is run
-    public void OnEnable() { ResetInventory(); }
+    // public void OnEnable() { ResetInventory(); }
 
     // Swaps current weapon
     public void SwapWeapon(PlayerMovement caller)
@@ -100,7 +99,7 @@ public class InventoryScriptable : ScriptableObject
     public int MirrorWeaponIndex() { return Convert.ToInt32(!Convert.ToBoolean(weaponIndex)); }
 
     // Resets the inventory to its default values
-    private void ResetInventory()
+    public void ResetInventory()
     {
         activePowerups = new();
         weapons = new(capacity: 2);

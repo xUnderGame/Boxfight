@@ -15,6 +15,7 @@ MonoBehaviour:
   energyCost: 3
   damage: 12
   firingSpeed: 1.5
-  bulletPenetration: 1
+  timeToLive: 2
   weaponSprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   projectile: {fileID: 1180622746647987742, guid: 44761aab9d87084418b270efde41ce19, type: 3}
+  bulletPenetration: 1

@@ -11,17 +11,18 @@ public class PlayerMovement : MonoBehaviour
     public float speed;
     public MovementBehaviour mov;
     private Vector2 movement = new();
-    private Coroutine meleeCoroutine;
     private GameObject meleeAttack;
     private InventoryScriptable inv;
     [HideInInspector] public CooldownBehaviour cd;
+    [HideInInspector] public bool canMeleeCD;
 
     void Awake() 
     {
-        meleeAttack = gameObject.transform.Find("Melee Area").gameObject;
+        meleeAttack = gameObject.transform.Find("Melee Rotation").Find("Melee Area").gameObject;
         mov = GetComponent<MovementBehaviour>();
         inv = GetComponent<Player>().inv;
         cd = GetComponent<CooldownBehaviour>();
+        canMeleeCD = true;
     }
 
     // Update is called once per frame
@@ -45,9 +46,9 @@ public class PlayerMovement : MonoBehaviour
     // Melee attack event
     private void OnMelee()
     {
-        if (!inv.globalCanMelee) return;
-        if (meleeCoroutine != null) { StopCoroutine(meleeCoroutine); meleeAttack.SetActive(false); }
-        meleeCoroutine = StartCoroutine(MeleeAttack());
+        if (!inv.globalCanMelee || !canMeleeCD) return;
+        StartCoroutine(cd.StartCooldown(0.4f, result => canMeleeCD = result, canMeleeCD));
+        StartCoroutine(MeleeAttack());
     }
 
     // Swaps the current weapon.
@@ -73,9 +74,8 @@ public class PlayerMovement : MonoBehaviour
     {
         meleeAttack.SetActive(true);
         meleeAttack.GetComponent<Collider2D>().enabled = true;
-        yield return new WaitForSeconds(0.2f);
-        
-        yield return new WaitForSeconds(0.2f);
+
+        yield return new WaitForSeconds(0.1f);
         meleeAttack.SetActive(false);
     }
 

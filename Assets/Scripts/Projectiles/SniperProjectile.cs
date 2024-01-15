@@ -9,7 +9,7 @@ public class SniperProjectile : Projectile
     // Has a funny bug where if you switch weapon the same frame after shooting,
     // it gains the stats of the other weapon.
     // I'm leaving it in as a "mechanic" now.
-    void Awake()
+    void Start()
     {
         // Projectile info
         gameObject.name = "Sniper Bullet";
