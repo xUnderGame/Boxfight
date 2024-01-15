@@ -17,11 +17,14 @@ public class Room : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(enemyList.Count);
-
-        for (int i = 0; i < enemyList.Count; i++)
+        if (enemyList.Count != 0)
         {
-            enemyList[i].gameObject.SetActive(true);
+            for (int i = 0; i < enemyList.Count; i++)
+            {
+                enemyList[i].gameObject.SetActive(true);
+            }
         }
+        else corridorScript.SetPointsWalledOnCorridor();
+
     }
 }
