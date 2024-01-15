@@ -12,9 +12,8 @@ public class CorridorBlock : MonoBehaviour
     public TileBase corridor;
     public TileBase wall;
 
-    private Vector3Int firstPoint;
+    public List<Vector3Int> posWalled = new List<Vector3Int>();
 
-    private List<Vector3Int> posWalled = new List<Vector3Int>();
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -63,9 +62,8 @@ public class CorridorBlock : MonoBehaviour
 
     private void PrintAllCorridors(Vector3Int posCorridor, string direction)
     {
-        if (posCorridor != firstPoint)
+        if (posCorridor.magnitude != posWalled[0].magnitude)
         {
-
             if (direction == "")
             {
                 direction = SetDirectionBlockCorridor(posCorridor, "");
@@ -146,14 +144,15 @@ public class CorridorBlock : MonoBehaviour
                 }
             }
         }
-        else return;
+        else {
+            return; 
+        }
 
     }
 
     private string SetDirectionBlockCorridor(Vector3Int posCorridor, string isComing)
     {
         int i = 1;
-        Debug.Log("Change direction");
         if (TileIn(posCorridor.x + i, posCorridor.y, 0, "wall"))
         {
             if (isComing != "left") return "right";

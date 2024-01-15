@@ -60,6 +60,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b4eaf21374da3549a0bc330c27c091a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  triggerPrefab: {fileID: 3162488803905353262, guid: 65d726c7874b7ab4a8ead5f97705ac02, type: 3}
   tilemapGround: {fileID: 3337714254762592390}
   tilemapWall: {fileID: 6890706929222343048}
   tilemapDoor: {fileID: 8583643826659358313}

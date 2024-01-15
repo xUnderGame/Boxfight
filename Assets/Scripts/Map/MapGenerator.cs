@@ -3,9 +3,14 @@ using UnityEngine.Tilemaps;
 using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEditor.Rendering;
+using Unity.VisualScripting;
+using System.Runtime.CompilerServices;
+using UnityEditor.Experimental.GraphView;
 
 public class TilemapConnectedSquaresDrawer : MonoBehaviour
 {
+    public GameObject triggerPrefab;
+
     public Tilemap tilemapGround;
     public Tilemap tilemapWall;
     public Tilemap tilemapDoor;
@@ -18,7 +23,7 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
     public TileBase wall;
 
     //Apartir de 7 da errores
-    private int iterationSizeMap = 3;
+    private int iterationSizeMap = 2;
 
 
     private void Awake()
@@ -32,12 +37,19 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
         System.Random rnd = new System.Random();
         int squareSize = rnd.Next(10, 20);
 
-        //enemies = Resources.LoadAll<GameObject>("Resources/Prefabs/Enemies");
+        if (squareSize % 2 != 0)
+        {
+            squareSize = squareSize + 1;
+        }
+
 
         DrawSquare(new Vector3Int(0, 0, 0), squareSize, 0, "center");
     }
     void DrawSquare(Vector3Int startPosition, int squareSize, int iterationSizeMapTimes, string direction)
     {
+        GameObject room = CreateTriggerForRoom(startPosition, squareSize, direction);
+        Room roomScript = room.GetComponent<Room>();
+
         if (iterationSizeMapTimes < iterationSizeMap)
         {
             iterationSizeMapTimes++;
@@ -88,7 +100,7 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
                             if (iterationSizeMapTimes < iterationSizeMap && actualdirection != "")
                             {
                                 System.Random rnd = new System.Random();
-                                int corridorSize = rnd.Next(10, 50);
+                                int corridorSize = rnd.Next(10, 20);
                                 if (DrawCorridorPosible(tilePosition, corridorSize, actualdirection))
                                 {
                                     tilemapDoor.SetTile(tilePosition, door);
@@ -107,13 +119,17 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
                     {
                         tilemapWall.SetTile(tilePosition, null);
                         tilemapGround.SetTile(tilePosition, ground);
-                        //System.Random rnd = new System.Random();
-                        //if (rnd.Next(0, 50) == 1)
-                        //{
-                        //    Vector3 instPos = tilemapWall.CellToWorld(tilePosition);
-                        //    //Instantiate(enemies[rnd.Next(0, enemies.Length)]);
-                        //    Instantiate(enemies[0], instPos, Quaternion.identity);
-                        //}
+
+
+                        
+                        System.Random rnd = new System.Random();
+                        if (rnd.Next(0, 50) == 1)
+                        {
+                            Vector3 instPos = tilemapWall.CellToWorld(tilePosition);
+                            GameObject enemy = Instantiate(enemies[0], instPos, Quaternion.identity);
+                            enemy.SetActive(false);
+                            roomScript.enemyList.Add(enemy);
+                        }
                     }
                 }
             }
@@ -158,7 +174,15 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
         }
         if(direction == "left") tilePosition = new Vector3Int(tilePosition.x + 1, tilePosition.y, tilePosition.z);
         else if(direction == "down") tilePosition = new Vector3Int(tilePosition.x, tilePosition.y + 1, tilePosition.z);
-        DrawSquare(tilePosition, rnd.Next(10,15), iterationSizeMapTimes, direction);
+
+
+        int squareSize = rnd.Next(10, 15);
+        if (squareSize % 2 != 0)
+        {
+            squareSize = squareSize + 1;
+        }
+
+        DrawSquare(tilePosition, squareSize, iterationSizeMapTimes, direction);
     }
 
     Vector3Int SetSquareInLine(Vector3Int v3, string direction, int squareSize)
@@ -220,10 +244,45 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
     }
 
     
-    Vector3 GetCenterSquareToWorld(Vector3Int startPosition, int squareSize)
+    Vector3 GetCenterSquareToWorld(Vector3Int startPosition, int squareSize, string direction)
     {
-        Vector3Int centerOfSquare = new Vector3Int(startPosition.x + squareSize/2,startPosition.y + squareSize/2, 0);
+        Vector3Int centerOfSquare = new Vector3Int();
+
+        if (direction == "left")
+        {
+            centerOfSquare = new Vector3Int(startPosition.x - squareSize / 2, startPosition.y, 0);
+        }
+        else if (direction == "right")
+        {
+            centerOfSquare = new Vector3Int(startPosition.x + squareSize / 2, startPosition.y, 0);
+        }
+        else if (direction == "up")
+        {
+            centerOfSquare = new Vector3Int(startPosition.x, startPosition.y + squareSize / 2, 0);
+        }
+        else if (direction == "down")
+        {
+            centerOfSquare = new Vector3Int(startPosition.x, startPosition.y - squareSize / 2, 0);
+        }
+        else
+        {
+            centerOfSquare = new Vector3Int(startPosition.x, startPosition.y, 0);
+        }
+        
+
         Vector3 pointOnTheWorld = tilemapWall.CellToWorld(centerOfSquare);
         return pointOnTheWorld;
+    }
+
+    public GameObject CreateTriggerForRoom(Vector3Int startPosition, int squareSize, string direction)
+    {
+        int TileSize = 2;
+        Vector3 spawnPosition = GetCenterSquareToWorld(startPosition, squareSize, direction);
+
+        GameObject trigger = Instantiate(triggerPrefab, spawnPosition, Quaternion.identity);
+        trigger.transform.localScale = new Vector3(TileSize * squareSize, TileSize * squareSize, 0);
+        trigger.transform.parent = GameObject.Find("TriggerSquares").transform;
+        return trigger;
+
     }
 }
