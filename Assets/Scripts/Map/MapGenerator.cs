@@ -36,7 +36,7 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
         System.Random rnd = new System.Random();
         int squareSize = rnd.Next(10, 20);
 
-        if (squareSize % 2 != 0)
+        if (squareSize % 2 == 0)
         {
             squareSize = squareSize + 1;
         }
@@ -127,6 +127,7 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
                             {
                                 Vector3 instPos = tilemapWall.CellToWorld(tilePosition);
                                 GameObject enemy = Instantiate(enemies[1], instPos, Quaternion.identity);
+                                enemy.transform.parent = room.transform;
                                 enemy.SetActive(false);
                                 roomScript.enemyList.Add(enemy);
                             }
@@ -177,13 +178,13 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
         else if (direction == "down") tilePosition = new Vector3Int(tilePosition.x, tilePosition.y + 1, tilePosition.z);
 
 
-        int squareSize = rnd.Next(10, 15);
-        if (squareSize % 2 != 0)
+        int NewSquareSize = rnd.Next(10, 15);
+        if (NewSquareSize % 2 == 0)
         {
-            squareSize = squareSize + 1;
+            NewSquareSize = NewSquareSize + 1;
         }
 
-        DrawSquare(tilePosition, squareSize, iterationSizeMapTimes, direction);
+        DrawSquare(tilePosition, NewSquareSize, iterationSizeMapTimes, direction);
     }
 
     Vector3Int SetSquareInLine(Vector3Int v3, string direction, int squareSize)
@@ -248,6 +249,7 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
     Vector3 GetCenterSquareToWorld(Vector3Int startPosition, int squareSize, string direction)
     {
         Vector3Int centerOfSquare = new Vector3Int();
+        float squareSizeReal = squareSize /2;
 
         if (direction == "left")
         {
@@ -279,9 +281,30 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
     {
         int TileSize = 2;
         Vector3 spawnPosition = GetCenterSquareToWorld(startPosition, squareSize, direction);
-
         GameObject trigger = Instantiate(triggerPrefab, spawnPosition, Quaternion.identity);
-        trigger.transform.localScale = new Vector3(TileSize * squareSize, TileSize * squareSize, 0);
+
+        if (direction == "right")
+        {
+            trigger.transform.position = new Vector3(trigger.transform.position.x + 1, trigger.transform.position.y + 1, trigger.transform.position.z);
+        }
+        else if (direction == "left")
+        {
+            trigger.transform.position = new Vector3(trigger.transform.position.x - 1, trigger.transform.position.y +1, trigger.transform.position.z);
+        }
+        else if(direction == "up")
+        {
+            trigger.transform.position = new Vector3(trigger.transform.position.x + 1, trigger.transform.position.y + 1, trigger.transform.position.z);
+        }
+        else if(direction == "down")
+        {
+            trigger.transform.position = new Vector3(trigger.transform.position.x + 1, trigger.transform.position.y - 1 , trigger.transform.position.z);
+        }
+        else
+        {
+            trigger.transform.position = new Vector3(trigger.transform.position.x + 1, trigger.transform.position.y + 1, trigger.transform.position.z);
+        }
+
+        trigger.transform.localScale = new Vector3(TileSize * squareSize - 6.25f, TileSize * squareSize - 6.25f, 0);
         trigger.transform.parent = GameObject.Find("TriggerSquares").transform;
         return trigger;
 

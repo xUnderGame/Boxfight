@@ -514,6 +514,7 @@ MonoBehaviour:
   tilemapWall: {fileID: 6890706929222343048}
   corridor: {fileID: 11400000, guid: 3d69a8f133d001cc691e03dd64534586, type: 2}
   wall: {fileID: 11400000, guid: b365c8e4bd2512c4c87c63a8bc42ab3e, type: 2}
+  floor: {fileID: 11400000, guid: aa321cec840cc4640a137cd654186a5a, type: 2}
   posWalled: []
 --- !u!19719996 &6218205347603756927
 TilemapCollider2D:

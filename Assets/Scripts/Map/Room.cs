@@ -9,7 +9,7 @@ public class Room : MonoBehaviour
     CorridorBlock corridorScript;
 
 
-    private void Start()
+    private void Awake()
     {
         corridorObject = GameObject.Find("Puente");
         corridorScript = corridorObject.GetComponent<CorridorBlock>();
@@ -17,14 +17,23 @@ public class Room : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (enemyList.Count != 0)
+        Debug.Log(enemyList.Count);
+        if (collision.CompareTag("Player"))
         {
-            for (int i = 0; i < enemyList.Count; i++)
+            if (enemyList.Count != 0)
             {
-                enemyList[i].gameObject.SetActive(true);
+                for (int i = 0; i < enemyList.Count; i++)
+                {
+                    enemyList[i].SetActive(true);
+                }
             }
+            else corridorScript.SetPointsWalledOnCorridor();
         }
-        else corridorScript.SetPointsWalledOnCorridor();
+    }
+
+    public void CheckEnemiesFromRoom()
+    {
+        if (enemyList.Count == 0) corridorScript.SetPointsWalledOnCorridor();
 
     }
 }

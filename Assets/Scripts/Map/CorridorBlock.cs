@@ -8,11 +8,15 @@ public class CorridorBlock : MonoBehaviour
 {
     public Tilemap tilemapCorridor;
     public Tilemap tilemapWall;
+   
 
     public TileBase corridor;
     public TileBase wall;
+    public TileBase floor;
 
     public List<Vector3Int> posWalled = new List<Vector3Int>();
+
+    private bool cantBeFirstStep = true;
 
     private void OnTriggerExit2D(Collider2D other)
     {
@@ -62,8 +66,10 @@ public class CorridorBlock : MonoBehaviour
 
     private void PrintAllCorridors(Vector3Int posCorridor, string direction)
     {
-        if (posCorridor.magnitude != posWalled[0].magnitude)
+       
+        if (posCorridor != posWalled[0] || cantBeFirstStep == true)
         {
+            cantBeFirstStep = false;
             if (direction == "")
             {
                 direction = SetDirectionBlockCorridor(posCorridor, "");
@@ -89,7 +95,7 @@ public class CorridorBlock : MonoBehaviour
             }
             else if (direction == "left")
             {
-                if (TileIn(posCorridor.x - 1, posCorridor.y, 0, "wall"))
+               if (TileIn(posCorridor.x - 1, posCorridor.y, 0, "wall"))
                 {
                     PrintAllCorridors(new Vector3Int(posCorridor.x - 1, posCorridor.y, 0), "left");
                 }
@@ -133,7 +139,7 @@ public class CorridorBlock : MonoBehaviour
                 else if (TileIn(posCorridor.x, posCorridor.y - 1, 0, "corridor"))
                 {
                     tilemapCorridor.SetTile(new Vector3Int(posCorridor.x, posCorridor.y - 1, 0), wall);
-                    posWalled.Add(new Vector3Int(posCorridor.x - 1, posCorridor.y, 0));
+                    posWalled.Add(new Vector3Int(posCorridor.x, posCorridor.y - 1, 0));
                     PrintAllCorridors(new Vector3Int(posCorridor.x, posCorridor.y - 1, 0), "down");
 
                 }
@@ -143,13 +149,12 @@ public class CorridorBlock : MonoBehaviour
                     PrintAllCorridors(new Vector3Int(posCorridor.x, posCorridor.y, 0), direction);
                 }
             }
-        }
-        else {
-            return; 
-        }
+        } else return; 
+        
 
     }
 
+    //Aqui hay fallos en las entradas
     private string SetDirectionBlockCorridor(Vector3Int posCorridor, string isComing)
     {
         int i = 1;
@@ -208,7 +213,9 @@ public class CorridorBlock : MonoBehaviour
     {
         for (int i = 0; i < posWalled.Count; i++)
         {
-            tilemapCorridor.SetTile(posWalled[i],corridor);
+            TilemapCollider2D collider = GetComponent<TilemapCollider2D>();
+            collider.isTrigger = true;
+            tilemapCorridor.SetTile(posWalled[i], corridor);
         }
     }
 }
