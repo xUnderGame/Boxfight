@@ -25,6 +25,8 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
     //Apartir de 7 da errores
     private int iterationSizeMap = 2;
 
+    private int numSquares = 0;
+
 
     private void Awake()
     {
@@ -42,12 +44,15 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
         }
 
 
-        DrawSquare(new Vector3Int(0, 0, 0), squareSize, 0, "center");
+        DrawSquare(new Vector3Int(0, 0, 0), squareSize, 0, "center", numSquares);
     }
-    void DrawSquare(Vector3Int startPosition, int squareSize, int iterationSizeMapTimes, string direction)
+    void DrawSquare(Vector3Int startPosition, int squareSize, int iterationSizeMapTimes, string direction, int id)
     {
+        id += 1;
         GameObject room = CreateTriggerForRoom(startPosition, squareSize, direction);
         Room roomScript = room.GetComponent<Room>();
+        roomScript.corridorPosition.Add(startPosition);
+        roomScript.id = id;
 
         if (iterationSizeMapTimes < iterationSizeMap)
         {
@@ -99,11 +104,12 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
                             if (iterationSizeMapTimes < iterationSizeMap && actualdirection != "")
                             {
                                 System.Random rnd = new System.Random();
-                                int corridorSize = rnd.Next(10, 20);
+                                int corridorSize = rnd.Next(6, 12);
                                 if (DrawCorridorPosible(tilePosition, corridorSize, actualdirection))
                                 {
                                     tilemapDoor.SetTile(tilePosition, door);
-                                    DrawCorridor(tilePosition, corridorSize, actualdirection, iterationSizeMapTimes);
+                                    roomScript.corridorPosition.Add(tilePosition);
+                                    DrawCorridor(tilePosition, corridorSize, actualdirection, iterationSizeMapTimes, id);
                                 }
                                 else
                                 {
@@ -138,7 +144,7 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
         }
         else return;
     }
-    void DrawCorridor(Vector3Int corridorPosition, int corridorSize, string direction, int iterationSizeMapTimes)
+    void DrawCorridor(Vector3Int corridorPosition, int corridorSize, string direction, int iterationSizeMapTimes, int id)
     {
         Vector3Int tilePosition = new Vector3Int();
         Vector3Int[] walls = new Vector3Int[2];
@@ -184,7 +190,7 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
             NewSquareSize = NewSquareSize + 1;
         }
 
-        DrawSquare(tilePosition, NewSquareSize, iterationSizeMapTimes, direction);
+        DrawSquare(tilePosition, NewSquareSize, iterationSizeMapTimes, direction, id);
     }
 
     Vector3Int SetSquareInLine(Vector3Int v3, string direction, int squareSize)

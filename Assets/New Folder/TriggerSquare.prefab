@@ -90,3 +90,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f58dd6a8bbd2eb14c82807c61aa4c3db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyList: []
+  corridorPosition: []
+  tilemapCorridor: {fileID: 0}
+  tilemapWall: {fileID: 0}
+  corridor: {fileID: 11400000, guid: 3d69a8f133d001cc691e03dd64534586, type: 2}
+  wall: {fileID: 11400000, guid: b365c8e4bd2512c4c87c63a8bc42ab3e, type: 2}
+  floor: {fileID: 11400000, guid: aa321cec840cc4640a137cd654186a5a, type: 2}

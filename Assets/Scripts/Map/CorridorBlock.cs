@@ -8,7 +8,7 @@ public class CorridorBlock : MonoBehaviour
 {
     public Tilemap tilemapCorridor;
     public Tilemap tilemapWall;
-   
+
 
     public TileBase corridor;
     public TileBase wall;
@@ -20,18 +20,18 @@ public class CorridorBlock : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
-        {
-            TilemapCollider2D collider = GetComponent<TilemapCollider2D>();
-            collider.isTrigger = false;
-            Vector3 posPlayer = other.transform.position;
-            Vector3Int tilePlayerPosition = tilemapCorridor.WorldToCell(posPlayer);
+        //if (other.CompareTag("Player"))
+        //{
+        //    TilemapCollider2D collider = GetComponent<TilemapCollider2D>();
+        //    collider.isTrigger = false;
+        //    Vector3 posPlayer = other.transform.position;
+        //    Vector3Int tilePlayerPosition = tilemapCorridor.WorldToCell(posPlayer);
 
-            Vector3Int firstPoint = GetAproxCorridor(tilePlayerPosition);
-            posWalled.Add(firstPoint);
-            tilemapCorridor.SetTile(firstPoint, wall);
-            PrintAllCorridors(firstPoint, "");
-        }
+        //    Vector3Int firstPoint = GetAproxCorridor(tilePlayerPosition);
+        //    posWalled.Add(firstPoint);
+        //    tilemapCorridor.SetTile(firstPoint, wall);
+        //    PrintAllCorridors(firstPoint, "");
+        //}
     }
 
     private Vector3Int GetAproxCorridor(Vector3Int tilePlayerPosition)
@@ -66,7 +66,7 @@ public class CorridorBlock : MonoBehaviour
 
     private void PrintAllCorridors(Vector3Int posCorridor, string direction)
     {
-       
+
         if (posCorridor != posWalled[0] || cantBeFirstStep == true)
         {
             cantBeFirstStep = false;
@@ -95,7 +95,7 @@ public class CorridorBlock : MonoBehaviour
             }
             else if (direction == "left")
             {
-               if (TileIn(posCorridor.x - 1, posCorridor.y, 0, "wall"))
+                if (TileIn(posCorridor.x - 1, posCorridor.y, 0, "wall"))
                 {
                     PrintAllCorridors(new Vector3Int(posCorridor.x - 1, posCorridor.y, 0), "left");
                 }
@@ -149,8 +149,9 @@ public class CorridorBlock : MonoBehaviour
                     PrintAllCorridors(new Vector3Int(posCorridor.x, posCorridor.y, 0), direction);
                 }
             }
-        } else return; 
-        
+        }
+        else return;
+
 
     }
 
@@ -216,6 +217,22 @@ public class CorridorBlock : MonoBehaviour
             TilemapCollider2D collider = GetComponent<TilemapCollider2D>();
             collider.isTrigger = true;
             tilemapCorridor.SetTile(posWalled[i], corridor);
+        }
+    }
+
+
+    public void PrintCorridors(List<Vector3Int> posCorridor, string type)
+    {
+        for (int i = 0; i < posCorridor.Count; i++)
+        {
+            if (type == "block")
+            {
+                tilemapCorridor.SetTile(posCorridor[i], wall);
+            }
+            else if (type == "unblock")
+            {
+                tilemapCorridor.SetTile(posCorridor[i], corridor);
+            }
         }
     }
 }

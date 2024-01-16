@@ -8,6 +8,8 @@ public class Player : Character
     public float currentEnergy;
     public float maxEnergy;
 
+    public List<int> idRoomsVisited = new List<int>();
+
     public void Start()
     {
         GameManager.Instance.gameUI.UpdateEnergyUI();
