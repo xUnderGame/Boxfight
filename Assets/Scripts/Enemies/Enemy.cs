@@ -38,4 +38,14 @@ public class Enemy : Character
         // Is HP below 0?
         if (currentHP <= 0) Kill();
     }
+
+    // Kill enemy
+    public override void Kill()
+    {
+        // How many coins to give the player
+        JsonManager.Instance.userData.coins += Random.Range(1, 20);
+        GameManager.Instance.gameUI.UpdateCoinsUI();
+
+        base.Kill();
+    }
 }
