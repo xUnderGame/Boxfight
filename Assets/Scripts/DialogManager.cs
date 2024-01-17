@@ -128,6 +128,7 @@ public class DialogManager : MonoBehaviour
         GameManager.Instance.player.inv.globalCanMelee = false; // Using player instead of caller!!
         charMovement.canMove = false;
         charMovement.canDash = false;
+        charMovement.chainDash = false;
     }
 
     // Gives back movement to the character
@@ -137,6 +138,7 @@ public class DialogManager : MonoBehaviour
         GameManager.Instance.player.inv.globalCanMelee = true; // Using player instead of caller!!
         charMovement.canMove = true;
         charMovement.canDash = true;
+        charMovement.chainDash = true;
     }
 
     // Resets the private scriptable variables to its default state
