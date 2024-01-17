@@ -20,7 +20,7 @@ public class Pistol : Weapon
         GameManager.Instance.bulletPool.transform);
 
         // Ignore collision
-        Physics2D.IgnoreCollision(transform.root.GetComponent<Collider2D>(), tempBullet.GetComponent<Collider2D>());
+        Physics2D.IgnoreCollision(transform.parent.parent.GetComponent<Collider2D>(), tempBullet.GetComponent<Collider2D>());
 
         // Set projectile damage
         DefaultProjectile gunProjectile = tempBullet.GetComponent<DefaultProjectile>();

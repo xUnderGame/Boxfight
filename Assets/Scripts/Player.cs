@@ -7,8 +7,7 @@ public class Player : Character
     public InventoryScriptable inv;
     public float currentEnergy;
     public float maxEnergy;
-
-    public List<int> idRoomsVisited = new List<int>();
+    public List<int> idRoomsVisited = new();
 
     public void Start()
     {

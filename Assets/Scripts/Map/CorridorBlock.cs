@@ -227,10 +227,12 @@ public class CorridorBlock : MonoBehaviour
         {
             if (type == "block")
             {
+                GetComponent<TilemapCollider2D>().isTrigger = false;
                 tilemapCorridor.SetTile(posCorridor[i], wall);
             }
             else if (type == "unblock")
             {
+                GetComponent<TilemapCollider2D>().isTrigger = true;
                 tilemapCorridor.SetTile(posCorridor[i], corridor);
             }
         }

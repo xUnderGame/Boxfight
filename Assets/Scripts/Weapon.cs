@@ -32,7 +32,7 @@ public abstract class Weapon : MonoBehaviour, ILoadScriptable
     // Checks if you can shoot
     public bool CanShoot()
     {
-        if (!transform.root.CompareTag("Player")) return canShoot;
+        if (!transform.parent.parent.CompareTag("Player")) return canShoot;
         return GameManager.Instance.player.currentEnergy >= energyCost && canShoot;
     }
 

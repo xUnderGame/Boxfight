@@ -6,7 +6,6 @@ using UnityEngine.Tilemaps;
 public class Room : MonoBehaviour
 {
     public int id;
-
     public List<GameObject> enemyList = new List<GameObject>();
     public List<Vector3Int> corridorPosition = new List<Vector3Int>();
 
@@ -27,7 +26,6 @@ public class Room : MonoBehaviour
             Player playerScript = collision.GetComponent<Player>();
             if (enemyList.Count != 0 && !playerScript.idRoomsVisited.Contains(id))
             {
-                Debug.Log(corridorPosition);
                 corridorScript.PrintCorridors(corridorPosition, "block");
                 playerScript.idRoomsVisited.Add(id);
                 for (int i = 0; i < enemyList.Count; i++)

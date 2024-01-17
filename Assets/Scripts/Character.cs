@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(Collider2D), typeof(SpriteRenderer))]
@@ -37,8 +38,10 @@ public abstract class Character : MonoBehaviour, IDamageable, ILoadScriptable
     {
         Debug.Log($"{gameObject.name} died!");
         Room room = GetComponentInParent<Room>();
+        room.enemyList.Remove(gameObject);
         room.CheckEnemiesFromRoom();
-        gameObject.SetActive(false);
+        Destroy(gameObject);
+        //gameObject.SetActive(false);
     }
 
     // Drops an energy bit near a character

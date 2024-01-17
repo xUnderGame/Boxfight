@@ -1,11 +1,5 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime;
-using UnityEditor.Rendering;
-using Unity.VisualScripting;
-using System.Runtime.CompilerServices;
-using UnityEditor.Experimental.GraphView;
 
 public class TilemapConnectedSquaresDrawer : MonoBehaviour
 {
@@ -23,7 +17,7 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
     public TileBase wall;
 
     //Apartir de 7 da errores
-    private int iterationSizeMap = 2;
+    private int iterationSizeMap = 3;
 
     private int numSquares = 0;
 
@@ -44,15 +38,16 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
         }
 
 
-        DrawSquare(new Vector3Int(0, 0, 0), squareSize, 0, "center", numSquares);
+        DrawSquare(new Vector3Int(0, 0, 0), squareSize, 0, "center");
     }
-    void DrawSquare(Vector3Int startPosition, int squareSize, int iterationSizeMapTimes, string direction, int id)
+    void DrawSquare(Vector3Int startPosition, int squareSize, int iterationSizeMapTimes, string direction)
     {
-        id += 1;
+        numSquares++;
         GameObject room = CreateTriggerForRoom(startPosition, squareSize, direction);
         Room roomScript = room.GetComponent<Room>();
-        roomScript.corridorPosition.Add(AdjustCorridorToList(startPosition,direction));
-        roomScript.id = id;
+        Vector3Int positionAdjusted = AdjustCorridorToList(startPosition, direction);
+        roomScript.corridorPosition.Add(positionAdjusted);
+        roomScript.id = numSquares;
 
         if (iterationSizeMapTimes < iterationSizeMap)
         {
@@ -110,7 +105,7 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
                                 {
                                     tilemapDoor.SetTile(tilePosition, door);
                                     roomScript.corridorPosition.Add(tilePosition);
-                                    DrawCorridor(tilePosition, corridorSize, actualdirection, iterationSizeMapTimes, id);
+                                    DrawCorridor(tilePosition, corridorSize, actualdirection, iterationSizeMapTimes);
                                 }
                                 else
                                 {
@@ -145,7 +140,7 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
         }
         else return;
     }
-    void DrawCorridor(Vector3Int corridorPosition, int corridorSize, string direction, int iterationSizeMapTimes, int id)
+    void DrawCorridor(Vector3Int corridorPosition, int corridorSize, string direction, int iterationSizeMapTimes)
     {
         Vector3Int tilePosition = new Vector3Int();
         Vector3Int[] walls = new Vector3Int[2];
@@ -191,7 +186,7 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
             NewSquareSize = NewSquareSize + 1;
         }
 
-        DrawSquare(tilePosition, NewSquareSize, iterationSizeMapTimes, direction, id);
+        DrawSquare(tilePosition, NewSquareSize, iterationSizeMapTimes, direction);
     }
 
     Vector3Int SetSquareInLine(Vector3Int v3, string direction, int squareSize)
@@ -322,12 +317,13 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
         Vector3Int newPosition = new Vector3Int();
         if (direction == "left")
         {
-            newPosition = new Vector3Int(startPosition.x -1 , startPosition.y, startPosition.z);
+            newPosition = new Vector3Int(startPosition.x - 1, startPosition.y, startPosition.z);
         }
-        else if (direction == "down") 
+        else if (direction == "down")
         {
-            newPosition = new Vector3Int(startPosition.x, startPosition.y -1, startPosition.z);
+            newPosition = new Vector3Int(startPosition.x, startPosition.y - 1, startPosition.z);
         }
+        else newPosition = startPosition;
         return newPosition;
     }
 }

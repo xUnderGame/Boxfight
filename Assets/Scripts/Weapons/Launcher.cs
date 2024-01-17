@@ -21,7 +21,7 @@ public class Launcher : Weapon
         GameManager.Instance.bulletPool.transform);
 
         // Ignore collisions
-        Physics2D.IgnoreCollision(transform.root.GetComponent<Collider2D>(), tempBullet.GetComponent<Collider2D>());
+        Physics2D.IgnoreCollision(transform.parent.parent.GetComponent<Collider2D>(), tempBullet.GetComponent<Collider2D>());
 
         // Set projectile vars
         GrenadeProjectile gunProjectile = tempBullet.GetComponent<GrenadeProjectile>();

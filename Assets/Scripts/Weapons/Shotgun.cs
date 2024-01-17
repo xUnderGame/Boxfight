@@ -34,7 +34,7 @@ public class Shotgun : Weapon
             gunProjectile.ttl = ws.timeToLive;
 
             // Ignores collision
-            Physics2D.IgnoreCollision(transform.root.GetComponent<Collider2D>(), tempBullet.GetComponent<Collider2D>());
+            Physics2D.IgnoreCollision(transform.parent.parent.GetComponent<Collider2D>(), tempBullet.GetComponent<Collider2D>());
         }
 
         // Discount the player mana and start cooldown coroutine
