@@ -168,3 +168,4 @@ MonoBehaviour:
   currentHP: 0
   currentSpeed: 0
   currentDmg: 0
+  equippedWeapon: {fileID: 0}

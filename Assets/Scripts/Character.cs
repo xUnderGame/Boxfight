@@ -37,11 +37,7 @@ public abstract class Character : MonoBehaviour, IDamageable, ILoadScriptable
     public virtual void Kill()
     {
         Debug.Log($"{gameObject.name} died!");
-        Room room = GetComponentInParent<Room>();
-        room.enemyList.Remove(gameObject);
-        room.CheckEnemiesFromRoom();
         Destroy(gameObject);
-        //gameObject.SetActive(false);
     }
 
     // Drops an energy bit near a character

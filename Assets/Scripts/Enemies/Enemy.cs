@@ -46,6 +46,9 @@ public class Enemy : Character
         JsonManager.Instance.userData.coins += Random.Range(1, 20);
         GameManager.Instance.gameUI.UpdateCoinsUI();
 
+        Room room = GetComponentInParent<Room>();
+        room.enemyList.Remove(gameObject);
+        room.CheckEnemiesFromRoom();
         base.Kill();
     }
 }
