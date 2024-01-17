@@ -41,12 +41,10 @@ public class Enemy : Character
     // Kill enemy
     public override void Kill()
     {
-        Debug.Log($"{gameObject.name} died!");
-
         // How many coins to give the player
         JsonManager.Instance.userData.coins += Random.Range(1, 20);
         GameManager.Instance.gameUI.UpdateCoinsUI();
 
-        Destroy(gameObject);
+        base.Kill();
     }
 }
