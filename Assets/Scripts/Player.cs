@@ -12,6 +12,7 @@ public class Player : Character
     {
         GameManager.Instance.gameUI.UpdateEnergyUI();
         GameManager.Instance.gameUI.UpdateHealthUI();
+        GameManager.Instance.gameUI.UpdateCoinsUI();
     }
 
     // Hurt player

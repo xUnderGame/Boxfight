@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 10680516811659306}
   - component: {fileID: 7772507630489616506}
   - component: {fileID: 2136601648995322744}
+  - component: {fileID: 8328407209577790183}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -63,3 +64,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 379c20f3dec38bf40bd74c34b69f28ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadedDial: {fileID: 0}
+  dialog: []
+  events:
+  - userDialog:
+      enabled: 0
+      options: []
+      responses: []
+    executeAtIndex: 0
+  npcName: NPC
+  textSpeed: 0.05
+  canBeSkipped: 1
+  stopCharacterMovement: 1
+--- !u!114 &8328407209577790183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 247216602639408167}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 480b08bc29fec8140acac481efb98362, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  userData:
+    coins: 0
