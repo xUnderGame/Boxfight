@@ -12,15 +12,15 @@ public class Enemy : Character
     {
         if (currentDmg <= 0) return;
         hpBar = gameObject.transform.Find("Healthbar").Find("Amount").GetComponent<Image>();
-        equippedWeapon = transform.Find("Weapons").GetChild(0).GetComponent<Weapon>();
+        //equippedWeapon = transform.Find("Weapons").GetChild(0).GetComponent<Weapon>();
         
     }
 
     public void FixedUpdate()
     {
-        if (!equippedWeapon) return;
-        equippedWeapon.PointWeaponAtPlayer();
-        equippedWeapon.Shoot(GameManager.Instance.playerObject.transform.position - equippedWeapon.transform.position);
+        //if (!equippedWeapon) return;
+        //equippedWeapon.PointWeaponAtPlayer();
+        //equippedWeapon.Shoot(GameManager.Instance.playerObject.transform.position - equippedWeapon.transform.position);
     }
 
     // Hurt enemy

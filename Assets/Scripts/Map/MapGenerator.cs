@@ -51,13 +51,14 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
         id += 1;
         GameObject room = CreateTriggerForRoom(startPosition, squareSize, direction);
         Room roomScript = room.GetComponent<Room>();
-        roomScript.corridorPosition.Add(startPosition);
+        roomScript.corridorPosition.Add(AdjustCorridorToList(startPosition,direction));
         roomScript.id = id;
 
         if (iterationSizeMapTimes < iterationSizeMap)
         {
             iterationSizeMapTimes++;
             startPosition = SetSquareInLine(startPosition, direction, squareSize);
+
 
             for (int x = 0; x < squareSize; x++)
             {
@@ -314,5 +315,19 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
         trigger.transform.parent = GameObject.Find("TriggerSquares").transform;
         return trigger;
 
+    }
+
+    public Vector3Int AdjustCorridorToList(Vector3Int startPosition, string direction)
+    {
+        Vector3Int newPosition = new Vector3Int();
+        if (direction == "left")
+        {
+            newPosition = new Vector3Int(startPosition.x -1 , startPosition.y, startPosition.z);
+        }
+        else if (direction == "down") 
+        {
+            newPosition = new Vector3Int(startPosition.x, startPosition.y -1, startPosition.z);
+        }
+        return newPosition;
     }
 }
