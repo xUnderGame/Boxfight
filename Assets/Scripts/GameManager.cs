@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -154,10 +152,7 @@ public class GameManager : MonoBehaviour
         }
 
         // Updates coins UI
-        public void UpdateCoinsUI()
-        {
-            coins.text = JsonManager.Instance.userData.coins.ToString();
-        }
+        public void UpdateCoinsUI() { coins.text = JsonManager.Instance.userData.coins.ToString(); }
 
         // Toggle with a bool the dialog box UI
         public void ToggleDialogBox(bool status) { dialogbox.SetActive(status); }

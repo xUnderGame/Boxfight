@@ -27,7 +27,7 @@ public abstract class Character : MonoBehaviour, IDamageable, ILoadScriptable
         if (maxHP == -1) return; // Invulnerable character
 
         // Hurt the character
-        Debug.Log($"Ow! {gameObject.name} took {damage} damage.");
+        // Debug.Log($"Ow! {gameObject.name} took {damage} damage.");
         if (currentHP - damage < 0) currentHP = 0;
         else currentHP -= damage;
     }
