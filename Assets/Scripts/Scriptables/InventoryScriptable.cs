@@ -1,7 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "Default Inventory", menuName = "Inventory Scriptable")]
 public class InventoryScriptable : ScriptableObject
@@ -38,12 +38,28 @@ public class InventoryScriptable : ScriptableObject
     // Picks up a weapon
     public void PickupWeapon() {
         // if (!GameManager.Instance.nearestInteractable || !GameManager.Instance.nearestInteractable.CompareTag("Weapon")) return;
+        GameObject pickup = GameManager.Instance.nearestInteractable;
+
+        // Buy weapon? No? Yes? Seems like a scam.
+        if (pickup.transform.childCount > 0) {
+            var thePriceIsRight = pickup.transform.Find("InteractBuy").Find("Price").gameObject;
+
+            // Do you have enough money?
+            int price = int.Parse(thePriceIsRight.GetComponent<Text>().text);
+            if (price >= JsonManager.Instance.userData.coins) return;
+
+            // Deducts user coins (haha gd reference) and updates coins UI
+            JsonManager.Instance.userData.coins -= price;
+            GameManager.Instance.gameUI.UpdateCoinsUI();
+
+            // Destroy "InteractBuy" object
+            Destroy(thePriceIsRight.transform.parent.gameObject);
+        }
 
         // Decides if it should pick up the weapon OR swap it with the currently equipped one
         if (weapons.Count >= weapons.Capacity) { ChangeWeapon(); return; }
 
         // Disables the collider
-        GameObject pickup = GameManager.Instance.nearestInteractable;
         pickup.GetComponent<BoxCollider2D>().enabled = false;
         
         // Adds the weapon

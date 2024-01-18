@@ -19,7 +19,6 @@ public class JsonManager : MonoBehaviour
 
         // Default status
         jsonpath = $"{Application.persistentDataPath}/userdata.json";
-        Debug.Log(jsonpath);
         UserData defaultData = JsonUtility.FromJson<UserData>(Resources.Load<TextAsset>("MainData").text);
 
         // Create user json if the file doesnt exist
@@ -27,6 +26,7 @@ public class JsonManager : MonoBehaviour
 
         // Load the user's json file
         userData = JsonUtility.FromJson<UserData>(File.ReadAllText(jsonpath));
+        GameManager.Instance.gameUI.UpdateCoinsUI();
     }
 
     // Saves before disabling

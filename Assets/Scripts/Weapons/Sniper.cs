@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Sniper : Weapon
@@ -26,6 +24,7 @@ public class Sniper : Weapon
         gunProjectile.bulletPenetration = bulletPenetration;
         gunProjectile.bulletDamage = damage;
         gunProjectile.ttl = ws.timeToLive;
+        if (transform.root.CompareTag("Player")) gunProjectile.shotByPlayer = true;
 
         // Ignore collision
         Physics2D.IgnoreCollision(transform.parent.parent.GetComponent<Collider2D>(), tempBullet.GetComponent<Collider2D>());

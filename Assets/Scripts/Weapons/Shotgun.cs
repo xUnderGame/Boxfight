@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Shotgun : Weapon
@@ -32,6 +29,7 @@ public class Shotgun : Weapon
             ShotgunProjectile gunProjectile = tempBullet.GetComponent<ShotgunProjectile>();
             gunProjectile.bulletDamage = damage;
             gunProjectile.ttl = ws.timeToLive;
+            if (transform.root.CompareTag("Player")) gunProjectile.shotByPlayer = true;
 
             // Ignores collision
             Physics2D.IgnoreCollision(transform.parent.parent.GetComponent<Collider2D>(), tempBullet.GetComponent<Collider2D>());

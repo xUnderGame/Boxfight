@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ShotgunProjectile : Projectile
 {
+    [HideInInspector] public bool shotByPlayer;
 
     // Has a funny bug where if you switch weapon the same frame after shooting,
     // it gains the stats of the other weapon.
@@ -23,6 +22,7 @@ public class ShotgunProjectile : Projectile
     // When the projectile hits something...
     public override void OnTriggerEnter2D(Collider2D hit)
     {
+        if (hit.CompareTag("Enemy") && !shotByPlayer) return;
         if (hit.TryGetComponent(out IDamageable damageable)) damageable?.Hurt(bulletDamage, gameObject);
         Destroy(gameObject);
     }
