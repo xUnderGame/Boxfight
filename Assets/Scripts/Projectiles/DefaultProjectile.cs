@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class DefaultProjectile : Projectile
 {
+    [HideInInspector] public bool shotByPlayer;
 
     // Has a funny bug where if you switch weapon the same frame after shooting,
     // it gains the stats of the other weapon.
@@ -21,6 +22,7 @@ public class DefaultProjectile : Projectile
     // When the projectile hits something...
     public override void OnTriggerEnter2D(Collider2D hit)
     {
+        if (hit.CompareTag("Enemy") && !shotByPlayer) return;
         if (hit.TryGetComponent(out IDamageable damageable)) damageable?.Hurt(bulletDamage, gameObject);
         Destroy(gameObject);
     }

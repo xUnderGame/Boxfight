@@ -24,6 +24,7 @@ public class Pistol : Weapon
         DefaultProjectile gunProjectile = tempBullet.GetComponent<DefaultProjectile>();
         gunProjectile.bulletDamage = damage;
         gunProjectile.ttl = ws.timeToLive;
+        if (transform.root.CompareTag("Player")) gunProjectile.shotByPlayer = true;
 
         // Discount the player mana and start cooldown coroutine
         StartCoroutine(cd.StartCooldown(firingSpeed, result => canShoot = result, canShoot));

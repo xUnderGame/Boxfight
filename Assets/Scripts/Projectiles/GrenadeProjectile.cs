@@ -50,15 +50,18 @@ public class GrenadeProjectile : Projectile
     // When the projectile hits something...
     public override void OnTriggerEnter2D(Collider2D hit)
     {
-        if (hit.TryGetComponent(out IDamageable damageable) && !(shotByPlayer && hit.transform.root.CompareTag("Player"))) damageable?.Hurt(bulletDamage, gameObject);
-
         // Shove enemy
         if (hit.TryGetComponent(out Rigidbody2D shove)) Shove(shove, hit);
+
+        // Hurt enemy
+        if (hit.CompareTag("Enemy") && !shotByPlayer) return;
+        if (hit.TryGetComponent(out IDamageable damageable) && !(shotByPlayer && hit.transform.root.CompareTag("Player"))) damageable?.Hurt(bulletDamage, gameObject);
 
         // Custom hit handler for player's melee attack (very fun)
         if (hit.transform.root.CompareTag("Player") && !hit.CompareTag("Player")) { StartCoroutine(Explode()); }
     }
 
+    // Shove character away from a reference point
     public void Shove(Rigidbody2D rb, Collider2D hit) {
         rb.AddForce((transform.position - hit.transform.position).normalized * shoveForce, ForceMode2D.Impulse);
     }
