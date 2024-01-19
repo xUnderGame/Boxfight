@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -21,14 +22,16 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
 
     private int numSquares = 0;
 
+    private List<GameObject> roomsCreated = new();
 
-    private void Awake()
+
+    //private void Awake()
+    //{
+    //    enemies = Resources.LoadAll<GameObject>("Prefabs/Enemies");
+    //}
+    void Awake()
     {
         enemies = Resources.LoadAll<GameObject>("Prefabs/Enemies");
-    }
-    void Start()
-    {
-
         System.Random rnd = new System.Random();
         int squareSize = rnd.Next(10, 20);
 
@@ -39,6 +42,7 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
 
 
         DrawSquare(new Vector3Int(0, 0, 0), squareSize, 0, "center");
+        SetRoomsShared(roomsCreated);
     }
     void DrawSquare(Vector3Int startPosition, int squareSize, int iterationSizeMapTimes, string direction)
     {
@@ -48,6 +52,8 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
         Vector3Int positionAdjusted = AdjustCorridorToList(startPosition, direction);
         roomScript.corridorPosition.Add(positionAdjusted);
         roomScript.id = numSquares;
+        roomScript.size = squareSize;
+        roomsCreated.Add(room);
 
         if (iterationSizeMapTimes < iterationSizeMap)
         {
@@ -118,6 +124,7 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
                     }
                     else
                     {
+                        tilemapDoor.SetTile(tilePosition, null);
                         tilemapWall.SetTile(tilePosition, null);
                         tilemapGround.SetTile(tilePosition, ground);
 
@@ -128,7 +135,7 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
                             if (rnd.Next(0, 50) == 1)
                             {
                                 Vector3 instPos = tilemapWall.CellToWorld(tilePosition);
-                                GameObject enemy = Instantiate(enemies[1], instPos, Quaternion.identity);
+                                GameObject enemy = Instantiate(enemies[rnd.Next(0,2)], instPos, Quaternion.identity);
                                 enemy.transform.parent = room.transform;
                                 enemy.SetActive(false);
                                 roomScript.enemyList.Add(enemy);
@@ -325,5 +332,26 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
         }
         else newPosition = startPosition;
         return newPosition;
+    }
+
+    public void SetRoomsShared(List<GameObject> rooms)
+    {
+        List<Transform> roomsTransform = new List<Transform>();
+        foreach (var room in rooms)
+        {
+            roomsTransform.Add(room.transform);
+        }
+
+        foreach (GameObject room in rooms)
+        {
+            Collider2D[] hitColliders = Physics2D.OverlapBoxAll(room.transform.position, room.transform.localScale, 0f);
+            foreach (var hitCollider in hitColliders)
+            {
+                if(hitCollider.transform != room.transform && roomsTransform.Contains(hitCollider.transform))
+                {
+                    room.GetComponent<Room>().roomsShared.Add(hitCollider.gameObject);
+                }
+            }
+        }
     }
 }

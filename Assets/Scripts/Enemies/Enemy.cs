@@ -3,23 +3,14 @@ using UnityEngine.UI;
 
 public class Enemy : Character
 {
-    [HideInInspector] public Weapon equippedWeapon;
     private Image hpBar = null;
 
     public void OnEnable()
     {
         if (currentDmg <= 0) return;
-        hpBar = gameObject.transform.Find("Healthbar").Find("Amount").GetComponent<Image>();
-        equippedWeapon = transform.Find("Weapons").GetChild(0).GetComponent<Weapon>();
-        
+        hpBar = gameObject.transform.Find("Healthbar").Find("Amount").GetComponent<Image>();      
     }
 
-    public void FixedUpdate()
-    {
-        if (!equippedWeapon) return;
-        equippedWeapon.PointWeaponAtPlayer();
-        equippedWeapon.Shoot(GameManager.Instance.playerObject.transform.position - equippedWeapon.transform.position);
-    }
 
     // Hurt enemy
     public override void Hurt(int damage, GameObject damageSource)
@@ -46,7 +37,7 @@ public class Enemy : Character
 
         Room room = GetComponentInParent<Room>();
         room.enemyList.Remove(gameObject);
-        room.CheckEnemiesFromRoom();
+        if(room.CheckIfAllEnemiesDead()) room.TrapIsOff();
         base.Kill();
     }
 }

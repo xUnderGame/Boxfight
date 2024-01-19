@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8aba8be05845b2844a41782c303c1c2a, type: 3}
   m_Name: Dummy
   m_EditorClassIdentifier: 
-  maxHP: 1000
-  baseHP: 1000
+  maxHP: 100
+  baseHP: 100
   baseSpeed: 0
-  baseDmg: 0
+  baseDmg: 5
