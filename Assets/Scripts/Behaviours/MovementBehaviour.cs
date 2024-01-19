@@ -27,7 +27,18 @@ public class MovementBehaviour : MonoBehaviour
     }
 
     // Moves the current character.
-    public void Move(float x, float y, float speed) { if (canMove) transform.Translate(speed * Time.deltaTime * new Vector2(x, y).normalized); }
+    public void Move(float x, float y, float speed,string action) 
+    {
+        if (action == "free")
+        {
+            if (canMove) transform.Translate(speed * Time.deltaTime * new Vector2(x, y).normalized);
+        }
+        else if(action == "follower")
+        {
+            Vector2 newPosition = Vector2.MoveTowards(new Vector2(x, y), GameManager.Instance.playerObject.transform.position,speed * Time.deltaTime);
+            transform.position = newPosition;  
+        }
+    }
     
     // Makes the character "dash" forward.
     public void Dash(float x, float y, float force = 15f, bool doIframes = true) {

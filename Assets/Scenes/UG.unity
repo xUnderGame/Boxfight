@@ -139,6 +139,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gremlin 2
       objectReference: {fileID: 0}
+    - target: {fileID: 674445030166269682, guid: ce6c1b62535c37b41a3d3d7ffad1ae12, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4122836159231996758, guid: ce6c1b62535c37b41a3d3d7ffad1ae12, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.42
@@ -1402,6 +1406,10 @@ PrefabInstance:
     - target: {fileID: 674445030166269682, guid: ce6c1b62535c37b41a3d3d7ffad1ae12, type: 3}
       propertyPath: m_Name
       value: Gremlin
+      objectReference: {fileID: 0}
+    - target: {fileID: 674445030166269682, guid: ce6c1b62535c37b41a3d3d7ffad1ae12, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4122836159231996758, guid: ce6c1b62535c37b41a3d3d7ffad1ae12, type: 3}
       propertyPath: m_LocalPosition.x

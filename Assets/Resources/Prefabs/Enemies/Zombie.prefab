@@ -12,6 +12,9 @@ GameObject:
   - component: {fileID: 5439352542441144530}
   - component: {fileID: 570773656733383221}
   - component: {fileID: 5249040530777316180}
+  - component: {fileID: 7762691188932683788}
+  - component: {fileID: 1912014839119199164}
+  - component: {fileID: 6781991270546620970}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Enemy
@@ -149,6 +152,55 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
+--- !u!114 &7762691188932683788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 674445030166269682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f141194ab22642479b95373ff306631, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterScriptable: {fileID: 11400000, guid: 73ab4d3c2684717499606df58e0dc8e7, type: 2}
+  anim: {fileID: 0}
+  mov: {fileID: 0}
+  maxHP: 0
+  currentHP: 0
+  currentSpeed: 0
+  currentDmg: 0
+--- !u!114 &1912014839119199164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 674445030166269682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bec7941d6ca0a954fa0a2928a719a174, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 0}
+  rd: {fileID: 0}
+  cd: {fileID: 0}
+  canMove: 0
+  canDash: 0
+  chainDash: 0
+--- !u!114 &6781991270546620970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 674445030166269682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b8350710f698b84d8f81e11693711d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1832861134004222528
 PrefabInstance:
   m_ObjectHideFlags: 0

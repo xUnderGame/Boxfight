@@ -135,10 +135,10 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
                             if (rnd.Next(0, 50) == 1)
                             {
                                 Vector3 instPos = tilemapWall.CellToWorld(tilePosition);
-                                GameObject enemy = Instantiate(enemies[rnd.Next(0,2)], instPos, Quaternion.identity);
+                                GameObject enemy = Instantiate(enemies[rnd.Next(0,3)], instPos, Quaternion.identity);
                                 enemy.transform.parent = room.transform;
                                 enemy.SetActive(false);
-                                roomScript.enemyList.Add(enemy);
+                                if(enemy.CompareTag("Enemy")) roomScript.enemyList.Add(enemy);
                             }
                         }
                     }
