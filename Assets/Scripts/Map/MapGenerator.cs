@@ -24,13 +24,12 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
 
     private List<GameObject> roomsCreated = new();
 
+    private CorridorBlock corridorScript;
 
-    //private void Awake()
-    //{
-    //    enemies = Resources.LoadAll<GameObject>("Prefabs/Enemies");
-    //}
     void Awake()
     {
+        corridorScript = GameObject.Find("Puente").GetComponent<CorridorBlock>();
+
         enemies = Resources.LoadAll<GameObject>("Prefabs/Enemies");
         System.Random rnd = new System.Random();
         int squareSize = rnd.Next(10, 20);
@@ -42,7 +41,6 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
 
 
         DrawSquare(new Vector3Int(0, 0, 0), squareSize, 0, "center");
-        SetRoomsShared(roomsCreated);
     }
     void DrawSquare(Vector3Int startPosition, int squareSize, int iterationSizeMapTimes, string direction)
     {
@@ -59,7 +57,6 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
         {
             iterationSizeMapTimes++;
             startPosition = SetSquareInLine(startPosition, direction, squareSize);
-
 
             for (int x = 0; x < squareSize; x++)
             {
@@ -124,6 +121,11 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
                     }
                     else
                     {
+                        if (corridorScript.TileIn(tilePosition.x, tilePosition.y, 0, "corridor"))
+                        {
+                            Debug.Log("Hay que encontrar pasillo");
+                            roomScript.lostCorridors.Add(tilePosition);
+                        }
                         tilemapDoor.SetTile(tilePosition, null);
                         tilemapWall.SetTile(tilePosition, null);
                         tilemapGround.SetTile(tilePosition, ground);
@@ -135,10 +137,10 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
                             if (rnd.Next(0, 50) == 1)
                             {
                                 Vector3 instPos = tilemapWall.CellToWorld(tilePosition);
-                                GameObject enemy = Instantiate(enemies[rnd.Next(0,3)], instPos, Quaternion.identity);
+                                GameObject enemy = Instantiate(enemies[rnd.Next(0, 3)], instPos, Quaternion.identity);
                                 enemy.transform.parent = room.transform;
                                 enemy.SetActive(false);
-                                if(enemy.CompareTag("Enemy")) roomScript.enemyList.Add(enemy);
+                                if (enemy.CompareTag("Enemy")) roomScript.enemyList.Add(enemy);
                             }
                         }
                     }
@@ -258,7 +260,7 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
     Vector3 GetCenterSquareToWorld(Vector3Int startPosition, int squareSize, string direction)
     {
         Vector3Int centerOfSquare = new Vector3Int();
-        float squareSizeReal = squareSize /2;
+        float squareSizeReal = squareSize / 2;
 
         if (direction == "left")
         {
@@ -298,15 +300,15 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
         }
         else if (direction == "left")
         {
-            trigger.transform.position = new Vector3(trigger.transform.position.x - 1, trigger.transform.position.y +1, trigger.transform.position.z);
+            trigger.transform.position = new Vector3(trigger.transform.position.x - 1, trigger.transform.position.y + 1, trigger.transform.position.z);
         }
-        else if(direction == "up")
+        else if (direction == "up")
         {
             trigger.transform.position = new Vector3(trigger.transform.position.x + 1, trigger.transform.position.y + 1, trigger.transform.position.z);
         }
-        else if(direction == "down")
+        else if (direction == "down")
         {
-            trigger.transform.position = new Vector3(trigger.transform.position.x + 1, trigger.transform.position.y - 1 , trigger.transform.position.z);
+            trigger.transform.position = new Vector3(trigger.transform.position.x + 1, trigger.transform.position.y - 1, trigger.transform.position.z);
         }
         else
         {
@@ -332,26 +334,5 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
         }
         else newPosition = startPosition;
         return newPosition;
-    }
-
-    public void SetRoomsShared(List<GameObject> rooms)
-    {
-        List<Transform> roomsTransform = new List<Transform>();
-        foreach (var room in rooms)
-        {
-            roomsTransform.Add(room.transform);
-        }
-
-        foreach (GameObject room in rooms)
-        {
-            Collider2D[] hitColliders = Physics2D.OverlapBoxAll(room.transform.position, room.transform.localScale, 0f);
-            foreach (var hitCollider in hitColliders)
-            {
-                if(hitCollider.transform != room.transform && roomsTransform.Contains(hitCollider.transform))
-                {
-                    room.GetComponent<Room>().roomsShared.Add(hitCollider.gameObject);
-                }
-            }
-        }
     }
 }
