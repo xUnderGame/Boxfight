@@ -62,9 +62,28 @@ public class PlayerMovement : MonoBehaviour
             if (GameManager.Instance.nearestInteractable.transform.root != GameManager.Instance.pickupPool.transform) return;
             inv.PickupWeapon();
         }
+
         // Interact with nearest
         else if (GameManager.Instance.nearestInteractable.TryGetComponent(out IInteractable interactable))
             interactable?.Interact(gameObject); 
+    }
+
+    // Pauses the game
+    private void OnPause()
+    {
+        if (GameManager.Instance.gameUI.gameOver.activeSelf) return;
+        
+        // Turn off
+        if (GameManager.Instance.gameUI.pause.activeSelf)
+        {
+            GameManager.Instance.gameUI.pause.SetActive(false);
+            Time.timeScale = 1;
+            return;
+        }
+        
+        // Turn on
+        GameManager.Instance.gameUI.pause.SetActive(true);
+        Time.timeScale = 0;
     }
 
     // Melee attacks

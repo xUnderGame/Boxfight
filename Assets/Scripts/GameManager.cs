@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
 
         // Setting GameUI stuff up!
         gameUI.main = GameObject.Find("Game UI");
+        gameUI.pause = gameUI.main.transform.Find("Pause").gameObject;
         gameUI.coins = gameUI.main.transform.Find("Coins").GetComponent<Text>();
         gameUI.gameOver = gameUI.main.transform.Find("GameOver").gameObject;
         gameUI.goText = gameUI.gameOver.transform.Find("Mock").GetComponent<Text>();
@@ -64,6 +65,7 @@ public class GameManager : MonoBehaviour
     // GameUI class for better navigation and structure.
     public class GameUI {
         public GameObject main;
+        public GameObject pause;
         public Text coins;
 
         // Game over

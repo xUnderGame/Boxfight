@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Enemy_Shooter : Enemy
+public class EnemyShooter : Enemy
 {
     [HideInInspector] public Weapon equippedWeapon;
 

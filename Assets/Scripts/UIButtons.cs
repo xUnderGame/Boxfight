@@ -7,6 +7,7 @@ public class UIButtons : MonoBehaviour
 
     // Resets the scene (basically a respawn)
     public void PlayerRespawn() {
+        Time.timeScale = 1;
         Destroy(GameManager.Instance.gameObject);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }

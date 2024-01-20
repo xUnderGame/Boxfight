@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8aba8be05845b2844a41782c303c1c2a, type: 3}
-  m_Name: Zombie
+  m_Name: Creeper
   m_EditorClassIdentifier: 
-  maxHP: 10
-  baseHP: 10
-  baseSpeed: 5
-  baseDmg: 2
+  maxHP: 6
+  baseHP: 6
+  baseSpeed: 3.5
+  baseDmg: 4

@@ -32,7 +32,6 @@ public class InventoryScriptable : ScriptableObject
         weapons[weaponIndex].canShoot = true; // No matter what, re-allow shooting
 
         GameManager.Instance.gameUI.UpdateWeaponsUI(this, oldIndex);
-        Debug.Log($"Weapon swapped with {activeWeapon.name}");
     }
 
     // Picks up a weapon
@@ -42,7 +41,7 @@ public class InventoryScriptable : ScriptableObject
 
         // Buy weapon? No? Yes? Seems like a scam.
         if (pickup.transform.childCount > 0) {
-            var thePriceIsRight = pickup.transform.Find("InteractBuy").Find("Price").gameObject;
+            GameObject thePriceIsRight = pickup.transform.Find("InteractBuy").Find("Price").gameObject;
 
             // Do you have enough money?
             int price = int.Parse(thePriceIsRight.GetComponent<Text>().text);
@@ -73,8 +72,6 @@ public class InventoryScriptable : ScriptableObject
         if (activeWeapon) pickup.SetActive(false);
         else activeWeapon = weapons[0]; // Might cause problems...? (Does not for now)
         GameManager.Instance.gameUI.UpdateWeaponsUI(this);
-
-        Debug.Log($"Picked up weapon {pickup.name}");
     }
 
     // Sets the weapon position where the player is

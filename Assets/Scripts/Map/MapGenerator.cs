@@ -293,6 +293,7 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
         int TileSize = 2;
         Vector3 spawnPosition = GetCenterSquareToWorld(startPosition, squareSize, direction);
         GameObject trigger = Instantiate(triggerPrefab, spawnPosition, Quaternion.identity);
+        trigger.name = trigger.name.Replace("(Clone)", $" {roomsCreated.Count}");
 
         if (direction == "right")
         {
