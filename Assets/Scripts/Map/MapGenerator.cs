@@ -42,7 +42,6 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
 
 
         DrawSquare(new Vector3Int(0, 0, 0), squareSize, 0, "center");
-        SetRoomsShared(roomsCreated);
     }
     void DrawSquare(Vector3Int startPosition, int squareSize, int iterationSizeMapTimes, string direction)
     {
@@ -291,6 +290,7 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
         int TileSize = 2;
         Vector3 spawnPosition = GetCenterSquareToWorld(startPosition, squareSize, direction);
         GameObject trigger = Instantiate(triggerPrefab, spawnPosition, Quaternion.identity);
+        trigger.name = trigger.name.Replace("(Clone)", $" {roomsCreated.Count}");
 
         if (direction == "right")
         {
@@ -332,26 +332,5 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
         }
         else newPosition = startPosition;
         return newPosition;
-    }
-
-    public void SetRoomsShared(List<GameObject> rooms)
-    {
-        List<Transform> roomsTransform = new List<Transform>();
-        foreach (var room in rooms)
-        {
-            roomsTransform.Add(room.transform);
-        }
-
-        foreach (GameObject room in rooms)
-        {
-            Collider2D[] hitColliders = Physics2D.OverlapBoxAll(room.transform.position, room.transform.localScale, 0f);
-            foreach (var hitCollider in hitColliders)
-            {
-                if(hitCollider.transform != room.transform && roomsTransform.Contains(hitCollider.transform))
-                {
-                    room.GetComponent<Room>().roomsShared.Add(hitCollider.gameObject);
-                }
-            }
-        }
     }
 }
