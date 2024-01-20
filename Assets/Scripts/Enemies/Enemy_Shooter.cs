@@ -5,11 +5,11 @@ public class Enemy_Shooter : Enemy
 {
     [HideInInspector] public Weapon equippedWeapon;
 
-    public void OnEnable()
+    public override void OnEnable()
     {
-        base.OnEnable();
         if (currentDmg <= 0) return;
         equippedWeapon = transform.Find("Weapons").GetChild(0).GetComponent<Weapon>();
+        base.OnEnable();
     }
 
     public void FixedUpdate()

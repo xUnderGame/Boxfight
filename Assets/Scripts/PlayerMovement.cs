@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update() { mov.Move(movement.x, movement.y, speed * GameManager.Instance.player.currentSpeed, "free"); }
+    void Update() { mov.Move(movement.x, movement.y, speed * GameManager.Instance.player.currentSpeed); }
 
     // Moves the player.
     private void OnMove(InputValue ctx) { movement = ctx.Get<Vector2>(); }
