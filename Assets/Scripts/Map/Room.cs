@@ -24,17 +24,17 @@ public class Room : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") == false) return;
-
         Player playerScript = collision.GetComponent<Player>();
+
         if (roomsShared.Count == 0)
         {
             TrapIsOn(playerScript, false);
             return;
         }
+
         TrapIsOn(playerScript, true);
         for (int i = 0; i < roomsShared.Count; i++)
         {
-
             roomsShared[i].GetComponent<Room>().TrapIsOn(playerScript, true);
         }
     }
@@ -57,11 +57,12 @@ public class Room : MonoBehaviour
 
     public void TrapIsOn(Player player, bool isShared)
     {
-       if (enemyList.Count != 0 && !player.idRoomsVisited.Contains(id))
+        if (enemyList.Count != 0 && !player.idRoomsVisited.Contains(id))
         {
-          if (lostCorridors.Count != 0) 
-            { 
-                corridorPosition.Add(GetCorridorLost(lostCorridors)); 
+            if (lostCorridors.Count != 0)
+            {
+                 Vector3Int lostcorr = GetCorridorLost(lostCorridors);
+                corridorPosition.Add(lostcorr);
             }
             corridorScript.PrintCorridors(corridorPosition, "block");
             player.idRoomsVisited.Add(id);
@@ -74,8 +75,13 @@ public class Room : MonoBehaviour
         {
             corridorScript.PrintCorridors(corridorPosition, "block");
             player.idRoomsVisited.Add(id);
+            if (lostCorridors.Count != 0)
+            {
+                Vector3Int lostcorr = GetCorridorLost(lostCorridors);
+                corridorPosition.Add(lostcorr);
+            }
         }
-  }
+    }
 
     private Vector3Int GetCorridorLost(List<Vector3Int> lostedCorridors)
     {
@@ -90,9 +96,9 @@ public class Room : MonoBehaviour
         else if (lostCorridors[0].y == lostCorridors[lostCorridors.Count - 1].y)
         {
             if (corridorScript.TileIn(lostedCorridors[0].x + 1, lostedCorridors[0].y, 0, "corridor")) return new Vector3Int(lostedCorridors[0].x + 1, lostedCorridors[0].y, 0);
-            else if (corridorScript.TileIn(lostedCorridors[0].x -1, lostedCorridors[0].y - 1, 0, "corridor")) return new Vector3Int(lostedCorridors[0].x -1, lostedCorridors[0].y, 0);
-            else if (corridorScript.TileIn(lostedCorridors[lostCorridors.Count - 1].x +1, lostedCorridors[lostCorridors.Count - 1].y, 0, "corridor")) return new Vector3Int(lostedCorridors[lostCorridors.Count - 1].x + 1, lostedCorridors[lostCorridors.Count - 1].y, 0);
-            else if (corridorScript.TileIn(lostedCorridors[lostCorridors.Count - 1].x -1, lostedCorridors[lostCorridors.Count - 1].y, 0, "corridor")) return new Vector3Int(lostedCorridors[lostCorridors.Count - 1].x -1, lostedCorridors[lostCorridors.Count - 1].y, 0);
+            else if (corridorScript.TileIn(lostedCorridors[0].x - 1, lostedCorridors[0].y - 1, 0, "corridor")) return new Vector3Int(lostedCorridors[0].x - 1, lostedCorridors[0].y, 0);
+            else if (corridorScript.TileIn(lostedCorridors[lostCorridors.Count - 1].x + 1, lostedCorridors[lostCorridors.Count - 1].y, 0, "corridor")) return new Vector3Int(lostedCorridors[lostCorridors.Count - 1].x + 1, lostedCorridors[lostCorridors.Count - 1].y, 0);
+            else if (corridorScript.TileIn(lostedCorridors[lostCorridors.Count - 1].x - 1, lostedCorridors[lostCorridors.Count - 1].y, 0, "corridor")) return new Vector3Int(lostedCorridors[lostCorridors.Count - 1].x - 1, lostedCorridors[lostCorridors.Count - 1].y, 0);
             else return new Vector3Int(0, 0, 0);
         }
         else return new Vector3Int(0, 0, 0);

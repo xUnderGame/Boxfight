@@ -123,7 +123,8 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
                     {
                         if (corridorScript.TileIn(tilePosition.x, tilePosition.y, 0, "corridor"))
                         {
-                            Debug.Log("Hay que encontrar pasillo");
+                            Debug.Log(room.name);
+
                             roomScript.lostCorridors.Add(tilePosition);
                         }
                         tilemapDoor.SetTile(tilePosition, null);
