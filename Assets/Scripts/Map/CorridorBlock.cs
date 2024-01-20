@@ -55,7 +55,7 @@ public class CorridorBlock : MonoBehaviour
         return tilePlayerPosition;
     }
 
-    private bool TileIn(int x, int y, int z, string typeTile)
+    public bool TileIn(int x, int y, int z, string typeTile)
     {
         Vector3Int position = new Vector3Int(x, y, z);
         if (typeTile == "corridor") return tilemapCorridor.GetTile(position) != null;
@@ -225,15 +225,20 @@ public class CorridorBlock : MonoBehaviour
     {
         for (int i = 0; i < posCorridor.Count; i++)
         {
-            if (type == "block")
-            {
-                GetComponent<TilemapCollider2D>().isTrigger = false;
-                tilemapCorridor.SetTile(posCorridor[i], wall);
+            if (type == "block") {
+
+                if (TileIn(posCorridor[i].x, posCorridor[i].y, posCorridor[i].z, "corridor"))
+                {
+                    tilemapWall.SetTile(posCorridor[i], wall);
+                    tilemapCorridor.SetTile(posCorridor[i], null);
+                }
             }
-            else if (type == "unblock")
-            {
-                GetComponent<TilemapCollider2D>().isTrigger = true;
-                tilemapCorridor.SetTile(posCorridor[i], corridor);
+            else if (type == "unblock") { 
+                if (TileIn(posCorridor[i].x, posCorridor[i].y, posCorridor[i].z, "wall"))
+                {
+                    tilemapCorridor.SetTile(posCorridor[i], corridor);
+                    tilemapWall.SetTile(posCorridor[i], null);
+                }
             }
         }
     }
