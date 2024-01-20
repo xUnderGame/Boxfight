@@ -22,13 +22,13 @@ public class Pistol : Weapon
 
         // Set projectile damage
         DefaultProjectile gunProjectile = tempBullet.GetComponent<DefaultProjectile>();
+        if (transform.parent.parent.CompareTag("Player")) gunProjectile.shotByPlayer = true;
         gunProjectile.bulletDamage = damage;
         gunProjectile.ttl = ws.timeToLive;
-        if (transform.root.CompareTag("Player")) gunProjectile.shotByPlayer = true;
 
         // Discount the player mana and start cooldown coroutine
         StartCoroutine(cd.StartCooldown(firingSpeed, result => canShoot = result, canShoot));
-        if (transform.root.CompareTag("Player")) DiscountMana();
+        if (transform.parent.parent.CompareTag("Player")) DiscountMana();
     }
 
     public override void LoadScriptable()

@@ -10,6 +10,7 @@ public class Sniper : Weapon
     {
         if (!CanShoot()) return;
 
+
         // Defines the angle
         float ang = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg / 2;
 
@@ -21,17 +22,21 @@ public class Sniper : Weapon
 
         // Set projectile damage & add penetration
         SniperProjectile gunProjectile = tempBullet.GetComponent<SniperProjectile>();
+        if (transform.parent.parent.CompareTag("Player")) gunProjectile.shotByPlayer = true;
         gunProjectile.bulletPenetration = bulletPenetration;
         gunProjectile.bulletDamage = damage;
         gunProjectile.ttl = ws.timeToLive;
-        if (transform.root.CompareTag("Player")) gunProjectile.shotByPlayer = true;
 
         // Ignore collision
         Physics2D.IgnoreCollision(transform.parent.parent.GetComponent<Collider2D>(), tempBullet.GetComponent<Collider2D>());
 
+        // Shove character backwards from where they aimed
+        // transform.parent.parent.GetComponent<Rigidbody2D>().AddForce(
+        //     (transform.parent.parent.position - gunProjectile.transform.position).normalized * -40f, ForceMode2D.Impulse);
+
         // Discount the player mana and start cooldown coroutine
         StartCoroutine(cd.StartCooldown(firingSpeed, result => canShoot = result, canShoot));
-        if (transform.root.CompareTag("Player")) DiscountMana();
+        if (transform.parent.parent.CompareTag("Player")) DiscountMana();
     }
 
     public override void LoadScriptable()

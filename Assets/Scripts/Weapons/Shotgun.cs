@@ -27,9 +27,9 @@ public class Shotgun : Weapon
 
             // Set projectile damage
             ShotgunProjectile gunProjectile = tempBullet.GetComponent<ShotgunProjectile>();
+            if (transform.parent.parent.CompareTag("Player")) gunProjectile.shotByPlayer = true;
             gunProjectile.bulletDamage = damage;
             gunProjectile.ttl = ws.timeToLive;
-            if (transform.root.CompareTag("Player")) gunProjectile.shotByPlayer = true;
 
             // Ignores collision
             Physics2D.IgnoreCollision(transform.parent.parent.GetComponent<Collider2D>(), tempBullet.GetComponent<Collider2D>());
@@ -37,7 +37,7 @@ public class Shotgun : Weapon
 
         // Discount the player mana and start cooldown coroutine
         StartCoroutine(cd.StartCooldown(firingSpeed, result => canShoot = result, canShoot));
-        if (transform.root.CompareTag("Player")) DiscountMana();
+        if (transform.parent.parent.CompareTag("Player")) DiscountMana();
     }
 
     public override void LoadScriptable()

@@ -10,8 +10,8 @@ public class Room : MonoBehaviour
     public List<Vector3Int> corridorPosition = new();
     public List<GameObject> roomsShared = new();
 
-    GameObject corridorObject;
-    CorridorBlock corridorScript;
+    private GameObject corridorObject;
+    private CorridorBlock corridorScript;
 
     private void Awake()
     {

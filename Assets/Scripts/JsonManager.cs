@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class JsonManager : MonoBehaviour
@@ -35,9 +34,6 @@ public class JsonManager : MonoBehaviour
     // Saves the user data with new values
     public void SaveDataJSON(UserData save) { File.WriteAllText(jsonpath, JsonUtility.ToJson(save)); }
 }
-
-// Update coins
-
 
 // User data json serializable class
 [Serializable]

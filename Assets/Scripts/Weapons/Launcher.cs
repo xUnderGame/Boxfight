@@ -23,14 +23,14 @@ public class Launcher : Weapon
 
         // Set projectile vars
         GrenadeProjectile gunProjectile = tempBullet.GetComponent<GrenadeProjectile>();
+        if (transform.parent.parent.CompareTag("Player")) gunProjectile.shotByPlayer = true;
         gunProjectile.bulletDamage = damage;
         gunProjectile.shoveForce = shoveForce;
         gunProjectile.ttl = ws.timeToLive;
-        if (transform.root.CompareTag("Player")) gunProjectile.shotByPlayer = true;
 
         // Discount the player mana and start cooldown coroutine
         StartCoroutine(cd.StartCooldown(firingSpeed, result => canShoot = result, canShoot));
-        if (transform.root.CompareTag("Player")) DiscountMana();
+        if (transform.parent.parent.CompareTag("Player")) DiscountMana();
     }
 
     public override void LoadScriptable()
