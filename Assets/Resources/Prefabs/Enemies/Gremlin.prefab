@@ -77,7 +77,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
   m_Color: {r: 1, g: 0.5348661, b: 0.4666667, a: 1}
   m_FlipX: 0
@@ -262,10 +262,6 @@ PrefabInstance:
     - target: {fileID: 4914977504732083170, guid: 626a1fc5819a0b84cafb6580666b2834, type: 3}
       propertyPath: m_Name
       value: Pistol
-      objectReference: {fileID: 0}
-    - target: {fileID: 7128401339639811228, guid: 626a1fc5819a0b84cafb6580666b2834, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7253208939561392380, guid: 626a1fc5819a0b84cafb6580666b2834, type: 3}
       propertyPath: ws

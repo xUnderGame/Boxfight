@@ -26,6 +26,5 @@ public class EnemyMelee : Enemy
 
         // Move away a little after attacking
         rb.AddForce((transform.position - collider.transform.position).normalized * 40f, ForceMode2D.Impulse);
-
     }
 }
