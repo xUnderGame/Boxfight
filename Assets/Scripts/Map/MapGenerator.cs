@@ -24,16 +24,11 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
     private int numSquares = 0;
 
     private List<GameObject> roomsCreated = new();
-
-    private CorridorBlock corridorScript;
     private CorridorBlock corridorScript;
 
     void Awake()
     {
         corridorScript = GameObject.Find("Puente").GetComponent<CorridorBlock>();
-
-        corridorScript = GameObject.Find("Puente").GetComponent<CorridorBlock>();
-
         enemies = Resources.LoadAll<GameObject>("Prefabs/Enemies");
 
         System.Random rnd = new System.Random();
@@ -265,7 +260,6 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
     {
         Vector3Int centerOfSquare = new Vector3Int();
         float squareSizeReal = squareSize / 2;
-        float squareSizeReal = squareSize / 2;
 
         if (direction == "left")
         {
@@ -307,17 +301,13 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
         else if (direction == "left")
         {
             trigger.transform.position = new Vector3(trigger.transform.position.x - 1, trigger.transform.position.y + 1, trigger.transform.position.z);
-            trigger.transform.position = new Vector3(trigger.transform.position.x - 1, trigger.transform.position.y + 1, trigger.transform.position.z);
         }
-        else if (direction == "up")
         else if (direction == "up")
         {
             trigger.transform.position = new Vector3(trigger.transform.position.x + 1, trigger.transform.position.y + 1, trigger.transform.position.z);
         }
         else if (direction == "down")
-        else if (direction == "down")
         {
-            trigger.transform.position = new Vector3(trigger.transform.position.x + 1, trigger.transform.position.y - 1, trigger.transform.position.z);
             trigger.transform.position = new Vector3(trigger.transform.position.x + 1, trigger.transform.position.y - 1, trigger.transform.position.z);
         }
         else
