@@ -15,7 +15,7 @@ public abstract class Character : MonoBehaviour, IDamageable, ILoadScriptable
     [HideInInspector] public float currentSpeed;
     [HideInInspector] public int currentDmg;
 
-    private void Awake()
+    public void Awake()
     {
         anim = GetComponent<AnimationBehaviour>();
         mov = GetComponent<MovementBehaviour>();
@@ -55,6 +55,23 @@ public abstract class Character : MonoBehaviour, IDamageable, ILoadScriptable
                 Quaternion.identity,
                 GameManager.Instance.pickupPool.transform
             );   
+        }
+    }
+
+    protected void DropHealthBit(int amount = 1)
+    {
+        for (int i = 0; i < amount; i++)
+        {
+            Instantiate(
+                GameManager.Instance.healthBitPrefab,
+                new Vector3(
+                    transform.position.x + Random.Range(-1.5f, 1.5f),
+                    transform.position.y + Random.Range(-1.5f, 1.5f),
+                    transform.position.z
+                ),
+                Quaternion.identity,
+                GameManager.Instance.pickupPool.transform
+            );
         }
     }
 

@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public GameObject pickupPool;
     [HideInInspector] public GameObject bulletPool;
     [HideInInspector] public GameObject energyBitPrefab;
+    [HideInInspector] public GameObject healthBitPrefab;
+
     public GameObject nearestInteractable;
 
     public void Awake()
@@ -21,6 +23,7 @@ public class GameManager : MonoBehaviour
 
         // Misc setup...
         energyBitPrefab = (GameObject)Resources.Load("Prefabs/Interactables/Energy Bit");
+        healthBitPrefab = (GameObject)Resources.Load("Prefabs/Interactables/Health Bit");
         pickupPool = GameObject.Find("Pickup Pool");
         bulletPool = GameObject.Find("Bullet Pool");
         playerObject = GameObject.Find("Player");
@@ -33,6 +36,7 @@ public class GameManager : MonoBehaviour
         gameUI.coins = gameUI.main.transform.Find("Coins").GetComponent<Text>();
         gameUI.gameOver = gameUI.main.transform.Find("GameOver").gameObject;
         gameUI.goText = gameUI.gameOver.transform.Find("Mock").GetComponent<Text>();
+        gameUI.roomsVisited = gameUI.main.transform.Find("RoomsVisited").GetComponent<Text>();
         
         // User HP/Energy
         gameUI.hpValue = gameUI.main.transform.Find("HP Bar").Find("Value").GetComponent<Text>();
@@ -67,6 +71,7 @@ public class GameManager : MonoBehaviour
         public GameObject main;
         public GameObject pause;
         public Text coins;
+        public Text roomsVisited;
 
         // Game over
         public GameObject gameOver;

@@ -41,6 +41,7 @@ public class Enemy : Character
             room.enemyList.Remove(gameObject);
             if (room.CheckIfAllEnemiesDead()) room.TrapIsOff();
         }
+        DropHealthBit(Random.Range(1, 2));
 
         // Calling base kill
         base.Kill();

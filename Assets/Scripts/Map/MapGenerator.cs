@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -31,6 +32,7 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
         corridorScript = GameObject.Find("Puente").GetComponent<CorridorBlock>();
 
         enemies = Resources.LoadAll<GameObject>("Prefabs/Enemies");
+
         System.Random rnd = new System.Random();
         int squareSize = rnd.Next(10, 20);
 
@@ -39,8 +41,8 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
             squareSize = squareSize + 1;
         }
 
-
         DrawSquare(new Vector3Int(0, 0, 0), squareSize, 0, "center");
+        GameManager.Instance.gameUI.roomsVisited.text = "0/" + Convert.ToString(numSquares);
     }
     void DrawSquare(Vector3Int startPosition, int squareSize, int iterationSizeMapTimes, string direction)
     {
@@ -134,15 +136,7 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
 
                         if (iterationSizeMapTimes != 1)
                         {
-                            System.Random rnd = new System.Random();
-                            if (rnd.Next(0, 50) == 1)
-                            {
-                                Vector3 instPos = tilemapWall.CellToWorld(tilePosition);
-                                GameObject enemy = Instantiate(enemies[rnd.Next(0, 3)], instPos, Quaternion.identity);
-                                enemy.transform.parent = room.transform;
-                                enemy.SetActive(false);
-                                if (enemy.CompareTag("Enemy")) roomScript.enemyList.Add(enemy);
-                            }
+                            SpawnEnemy(tilePosition, room);
                         }
                     }
                 }
@@ -336,5 +330,31 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
         }
         else newPosition = startPosition;
         return newPosition;
+    }
+
+    private void SpawnEnemy(Vector3Int tilePosition, GameObject room)
+    {
+        System.Random rnd = new System.Random();
+        int rndSpawn = rnd.Next(0, 50);
+        var i = rndSpawn switch
+        {
+            1 => 2,
+            > 48 => 0,
+            > 47 => 1,
+            _ => -1,
+        };
+     
+        if (i == -1) return;
+
+        Vector3 instPos = tilemapWall.CellToWorld(tilePosition);
+        Vector3 instPosCorre = new Vector3(instPos.x + 1, instPos.y + 1, 0);
+
+        GameObject enemy = Instantiate(enemies[i], instPosCorre, Quaternion.identity);
+        enemy.transform.parent = room.transform;
+        if (enemy.CompareTag("Enemy")) {
+            enemy.SetActive(false);
+            room.GetComponent<Room>().enemyList.Add(enemy); 
+        }
+        return;
     }
 }
