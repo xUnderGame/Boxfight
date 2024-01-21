@@ -70,6 +70,7 @@ public class GameManager : MonoBehaviour
     public class GameUI {
         public GameObject main;
         public GameObject pause;
+        public GameObject win;
         public Text coins;
         public Text roomsVisited;
 

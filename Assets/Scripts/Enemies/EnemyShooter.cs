@@ -5,8 +5,7 @@ public class EnemyShooter : Enemy
 {
     [HideInInspector] public Weapon equippedWeapon;
     private GameObject[] weapons;
-    public GameObject weaponsObject;
-    
+
     public override void OnEnable()
     {
         if (currentDmg <= 0 || equippedWeapon != null) return;

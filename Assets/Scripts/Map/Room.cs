@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Room : MonoBehaviour
 {
+    public bool tutorial = false;
     public int id;
     public int size;
     [SerializeField] public List<GameObject> enemyList = new();
@@ -56,6 +57,11 @@ public class Room : MonoBehaviour
 
     public void TrapIsOff()
     {
+        if (tutorial == true) 
+        {
+            return;
+        }
+
         corridorScript.PrintCorridors(corridorPosition, "unblock");
         GameManager.Instance.player.idRoomsVisited.Add(id);
         foreach (GameObject room in roomsShared)
@@ -70,6 +76,7 @@ public class Room : MonoBehaviour
 
     public void TrapIsOn()
     {
+        if (tutorial == true) return;
         if (lostCorridors.Count != 0)
         {
             Vector3Int lostcorr = GetCorridorLost();
@@ -85,6 +92,7 @@ public class Room : MonoBehaviour
 
     private Vector3Int GetCorridorLost()
     {
+    
         if (lostCorridors[0].x == lostCorridors[lostCorridors.Count -1].x)
         {
             if (corridorScript.TileIn(lostCorridors[0].x, lostCorridors[0].y + 1, 0, "corridor"))
