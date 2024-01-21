@@ -27,14 +27,8 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
     private List<GameObject> roomsCreated = new();
     private CorridorBlock corridorScript;
 
-    // Enemy weapon variations
-    private List<GameObject> pistolVariations;
-
     void Awake()
-    {
-        // Fetch enemy weapon variations
-        pistolVariations = Resources.LoadAll<GameObject>("Scriptables/Weapons/Pistols").ToList();
-        
+    {   
         corridorScript = GameObject.Find("Puente").GetComponent<CorridorBlock>();
         enemies = Resources.LoadAll<GameObject>("Prefabs/Enemies");
 
@@ -351,6 +345,7 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
 
         GameObject enemy = Instantiate(enemies[i], instPosCorre, Quaternion.identity);
         enemy.transform.parent = room.transform;
+
         if (enemy.CompareTag("Enemy")) {
             enemy.SetActive(false);
             room.GetComponent<Room>().enemyList.Add(enemy); 

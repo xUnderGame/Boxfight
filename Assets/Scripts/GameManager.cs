@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +16,15 @@ public class GameManager : MonoBehaviour
 
     public GameObject nearestInteractable;
 
+
+    // Enemy weapon variations
+    public List<PistolScriptable> pistolVariations;
+    public List<ShotgunScriptable> shotgunVariations;
+    public List<SniperScriptable> sniperVariations;
+    public List<LauncherScriptable> launcherVariations;
+    public List<GameObject> weapons;
+    
+
     public void Awake()
     {
         // GameManager Instance
@@ -29,6 +39,13 @@ public class GameManager : MonoBehaviour
         playerObject = GameObject.Find("Player");
         player = playerObject.GetComponent<Player>();
         player.inv.ResetInventory(); // Reset the inventory scriptable every time the game is run
+
+        // Fetch enemy weapon variations
+        pistolVariations = Resources.LoadAll<PistolScriptable>("Scriptables/Weapons/Pistols/Enemies").ToList();
+        shotgunVariations = Resources.LoadAll<ShotgunScriptable>("Scriptables/Weapons/Shotguns/Enemies").ToList();
+        sniperVariations = Resources.LoadAll<SniperScriptable>("Scriptables/Weapons/Snipers/Enemies").ToList();
+        launcherVariations = Resources.LoadAll<LauncherScriptable>("Scriptables/Weapons/Launchers/Enemies").ToList();
+        weapons = Resources.LoadAll<GameObject>("Prefabs/Weapons").ToList();
 
         // Setting GameUI stuff up!
         gameUI.main = GameObject.Find("Game UI");
