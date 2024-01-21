@@ -13,5 +13,7 @@ public class UIButtons : MonoBehaviour
     }
 
     // Changes to a different scene.
-    public void ChangeScene(string sceneName) { SceneManager.LoadScene(sceneName); }
+    public void ChangeScene(string sceneName) { SceneManager.LoadScene(sceneName);}
+
+    public void Exit() { Application.Quit(); }
 }

@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class TilemapConnectedSquaresDrawer : MonoBehaviour
 {
+    public bool menu = false;
     public GameObject triggerPrefab;
 
     public Tilemap tilemapGround;
@@ -20,7 +22,7 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
 
 
     //Apartir de 7 da errores
-    private int iterationSizeMap = 3;
+    public int iterationSizeMap = 3;
     private int numSquares = 0;
     private List<GameObject> roomsCreated = new();
     private CorridorBlock corridorScript;
@@ -45,7 +47,7 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
         }
 
         DrawSquare(new Vector3Int(0, 0, 0), squareSize, 0, "center");
-        GameManager.Instance.gameUI.roomsVisited.text = "0/" + numSquares.ToString();
+        if(menu == false) GameManager.Instance.gameUI.roomsVisited.text = "0/" + numSquares.ToString();
     }
     void DrawSquare(Vector3Int startPosition, int squareSize, int iterationSizeMapTimes, string direction)
     {
@@ -128,14 +130,6 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
                     {
                         if (corridorScript.TileIn(tilePosition.x, tilePosition.y, 0, "corridor"))
                         {
-                            Debug.Log(room.name);
-
-                            roomScript.lostCorridors.Add(tilePosition);
-                        }
-                        if (corridorScript.TileIn(tilePosition.x, tilePosition.y, 0, "corridor"))
-                        {
-                            Debug.Log(room.name);
-
                             roomScript.lostCorridors.Add(tilePosition);
                         }
                         tilemapDoor.SetTile(tilePosition, null);

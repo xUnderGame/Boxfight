@@ -36,7 +36,7 @@ public abstract class Character : MonoBehaviour, IDamageable, ILoadScriptable
     // Kill character
     public virtual void Kill()
     {
-        Debug.Log($"{gameObject.name} died!");
+       // Debug.Log($"{gameObject.name} died!");
         Destroy(gameObject);
     }
 

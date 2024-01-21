@@ -59,6 +59,8 @@ public class Room : MonoBehaviour
     {
         if (tutorial == true) 
         {
+            Time.timeScale = 0;
+            GameManager.Instance.gameUI.win.SetActive(true);
             return;
         }
 
