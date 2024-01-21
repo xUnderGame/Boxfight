@@ -18,8 +18,9 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
     public TileBase door;
     public TileBase wall;
 
+
     //Apartir de 7 da errores
-    private int iterationSizeMap = 3;
+    public int iterationSizeMap = 3;
 
     private int numSquares = 0;
 
