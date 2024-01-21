@@ -103,7 +103,6 @@ public class InventoryScriptable : ScriptableObject
         weapons[weaponIndex] = activeWeapon;
         activeWeapon.tag = "Equipped";
 
-        Debug.Log($"Swapped active weapon with {pickup.name}");
         GameManager.Instance.nearestInteractable = null;
         GameManager.Instance.gameUI.UpdateWeaponsUI(this, MirrorWeaponIndex());
     }

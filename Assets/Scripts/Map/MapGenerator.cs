@@ -1,5 +1,5 @@
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -20,15 +20,19 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
 
 
     //Apartir de 7 da errores
-    public int iterationSizeMap = 3;
-
+    private int iterationSizeMap = 3;
     private int numSquares = 0;
-
     private List<GameObject> roomsCreated = new();
     private CorridorBlock corridorScript;
 
+    // Enemy weapon variations
+    private List<GameObject> pistolVariations;
+
     void Awake()
     {
+        // Fetch enemy weapon variations
+        pistolVariations = Resources.LoadAll<GameObject>("Scriptables/Weapons/Pistols").ToList();
+        
         corridorScript = GameObject.Find("Puente").GetComponent<CorridorBlock>();
         enemies = Resources.LoadAll<GameObject>("Prefabs/Enemies");
 
@@ -41,7 +45,7 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
         }
 
         DrawSquare(new Vector3Int(0, 0, 0), squareSize, 0, "center");
-        GameManager.Instance.gameUI.roomsVisited.text = "0/" + Convert.ToString(numSquares);
+        GameManager.Instance.gameUI.roomsVisited.text = "0/" + numSquares.ToString();
     }
     void DrawSquare(Vector3Int startPosition, int squareSize, int iterationSizeMapTimes, string direction)
     {
@@ -324,23 +328,20 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
 
     public Vector3Int AdjustCorridorToList(Vector3Int startPosition, string direction)
     {
-        Vector3Int newPosition = new Vector3Int();
         if (direction == "left")
         {
-            newPosition = new Vector3Int(startPosition.x - 1, startPosition.y, startPosition.z);
+            return new Vector3Int(startPosition.x - 1, startPosition.y, startPosition.z);
         }
         else if (direction == "down")
         {
-            newPosition = new Vector3Int(startPosition.x, startPosition.y - 1, startPosition.z);
+            return new Vector3Int(startPosition.x, startPosition.y - 1, startPosition.z);
         }
-        else newPosition = startPosition;
-        return newPosition;
+        else return startPosition;
     }
 
     private void SpawnEnemy(Vector3Int tilePosition, GameObject room)
     {
-        System.Random rnd = new System.Random();
-        int rndSpawn = rnd.Next(0, 50);
+        int rndSpawn = Random.Range(0, 51);
         var i = rndSpawn switch
         {
             1 => 2,
