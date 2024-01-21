@@ -141,7 +141,10 @@ public class GameManager : MonoBehaviour
         public void UpdateWeaponsUI(InventoryScriptable sc, int oldIndex = 1)
         {
             // Primary weapon sprite and mana cost
-            RawImage primaryImage = primaryWeapon.transform.Find("Sprite").GetComponent<RawImage>();
+            GameObject w1Sprite = primaryWeapon.transform.Find("Sprite").gameObject;
+            if (!w1Sprite.activeSelf) w1Sprite.SetActive(true);
+
+            RawImage primaryImage = w1Sprite.GetComponent<RawImage>();
             primaryImage.texture = sc.activeWeapon.weaponSprite.texture;
             primaryImage.color = sc.activeWeapon.gameObject.GetComponent<SpriteRenderer>().color;
 
@@ -150,7 +153,10 @@ public class GameManager : MonoBehaviour
 
             // Secondary weapon sprite and mana cost
             if (sc.weapons.Count != sc.weapons.Capacity) return;
-            RawImage secondaryImage = secondaryWeapon.transform.Find("Sprite").GetComponent<RawImage>();
+            GameObject w2Sprite = secondaryWeapon.transform.Find("Sprite").gameObject;
+            if (!w2Sprite.activeSelf) w2Sprite.SetActive(true);
+
+            RawImage secondaryImage = w2Sprite.GetComponent<RawImage>();
             secondaryImage.texture = sc.weapons[oldIndex].weaponSprite.texture;
             secondaryImage.color = sc.weapons[oldIndex].gameObject.GetComponent<SpriteRenderer>().color;
             
