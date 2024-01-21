@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
         gameUI.gameOver = gameUI.main.transform.Find("GameOver").gameObject;
         gameUI.goText = gameUI.gameOver.transform.Find("Mock").GetComponent<Text>();
         gameUI.roomsVisited = gameUI.main.transform.Find("RoomsVisited").GetComponent<Text>();
+        gameUI.win = gameUI.main.transform.Find("Win").gameObject;
         
         // User HP/Energy
         gameUI.hpValue = gameUI.main.transform.Find("HP Bar").Find("Value").GetComponent<Text>();
