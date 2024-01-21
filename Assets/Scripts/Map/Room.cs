@@ -9,8 +9,11 @@ public class Room : MonoBehaviour
     public int id;
     public int size;
     [SerializeField] public List<GameObject> enemyList = new();
+    [SerializeField] public List<GameObject> enemyList = new();
     public List<Vector3Int> corridorPosition = new();
     public List<GameObject> roomsShared = new();
+
+    public List<Vector3Int> lostCorridors = new();
 
     public List<Vector3Int> lostCorridors = new();
 
@@ -52,6 +55,7 @@ public class Room : MonoBehaviour
     {
         if (enemyList.Count != 0) return false;
         return !roomsShared.Any(room => { return room.GetComponent<Room>().enemyList.Count != 0; });
+
     }
 
     public void TrapIsOff()
