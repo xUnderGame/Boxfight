@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 movement = new();
     private GameObject meleeAttack;
     private InventoryScriptable inv;
+    private Animator animator;
     [HideInInspector] public CooldownBehaviour cd;
     [HideInInspector] public bool canMeleeCD;
 
@@ -20,11 +21,17 @@ public class PlayerMovement : MonoBehaviour
         mov = GetComponent<MovementBehaviour>();
         inv = GetComponent<Player>().inv;
         cd = GetComponent<CooldownBehaviour>();
+        animator = GetComponent<Animator>();
         canMeleeCD = true;
     }
 
     // Update is called once per frame
-    void Update() { mov.Move(movement.x, movement.y, speed * GameManager.Instance.player.currentSpeed); }
+    void Update() {
+        mov.Move(movement.x, movement.y, speed * GameManager.Instance.player.currentSpeed); 
+
+        animator.SetFloat("X",movement.x);
+        animator.SetFloat("Y",movement.y);
+    }
 
     // Moves the player.
     private void OnMove(InputValue ctx) { movement = ctx.Get<Vector2>(); }

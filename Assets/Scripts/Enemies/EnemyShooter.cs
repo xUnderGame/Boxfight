@@ -11,7 +11,7 @@ public class EnemyShooter : Enemy
         if (currentDmg <= 0 || equippedWeapon != null) return;
  
         // Equip random weapon
-        GameObject weapon = Instantiate(GameManager.Instance.weapons[Random.Range(1, 4)],gameObject.transform);
+        GameObject weapon = Instantiate(GameManager.Instance.weapons[Random.Range(0, GameManager.Instance.weapons.Count)], transform);
         equippedWeapon = weapon.GetComponent<Weapon>();
         
         // Assigns a random weapon scriptable to the enemy

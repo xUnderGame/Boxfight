@@ -336,8 +336,9 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
         var i = rndSpawn switch
         {
             1 => 2,
-            > 48 => 0,
-            > 47 => 1,
+            > 49 => 0,
+            > 48 => 1,
+            > 47 => 3,
             _ => -1,
         };
 
