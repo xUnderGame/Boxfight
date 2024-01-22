@@ -29,7 +29,7 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
     private CorridorBlock corridorScript;
 
     void Awake()
-    {   
+    {
         corridorScript = GameObject.Find("Puente").GetComponent<CorridorBlock>();
         enemies = Resources.LoadAll<GameObject>("Prefabs/Enemies");
 
@@ -42,7 +42,7 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
         }
 
         DrawSquare(new Vector3Int(0, 0, 0), squareSize, 0, "center");
-        if(menu == false) GameManager.Instance.gameUI.roomsVisited.text = "0/" + numSquares.ToString();
+        if (menu == false) GameManager.Instance.gameUI.roomsVisited.text = "0/" + numSquares.ToString();
     }
     void DrawSquare(Vector3Int startPosition, int squareSize, int iterationSizeMapTimes, string direction)
     {
@@ -131,10 +131,12 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
                         tilemapWall.SetTile(tilePosition, null);
                         tilemapGround.SetTile(tilePosition, ground);
 
-
-                        if (iterationSizeMapTimes != 1)
+                        if (menu != true)
                         {
-                            SpawnEnemy(tilePosition, room);
+                            if (iterationSizeMapTimes != 1)
+                            {
+                                SpawnEnemy(tilePosition, room);
+                            }
                         }
                     }
                 }
@@ -338,7 +340,7 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
             > 47 => 1,
             _ => -1,
         };
-     
+
         if (i == -1) return;
 
         Vector3 instPos = tilemapWall.CellToWorld(tilePosition);
@@ -347,9 +349,10 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
         GameObject enemy = Instantiate(enemies[i], instPosCorre, Quaternion.identity);
         enemy.transform.parent = room.transform;
 
-        if (enemy.CompareTag("Enemy")) {
+        if (enemy.CompareTag("Enemy"))
+        {
             enemy.SetActive(false);
-            room.GetComponent<Room>().enemyList.Add(enemy); 
+            room.GetComponent<Room>().enemyList.Add(enemy);
         }
         return;
     }
