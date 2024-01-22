@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class MusicBox : MonoBehaviour
 {
-    [HideInInspector] public static MusicBox Instance { get; private set; }
-    // Start is called before the first frame update
+    [HideInInspector] public static MusicBox Instance;
+
+
     void Awake()
     {
         if (Instance) { Destroy(gameObject); return; }
         else {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(transform.root.gameObject);
         }
     }
 }

@@ -216,7 +216,8 @@ PrefabInstance:
       value: Menu UI
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8966247296201747649, guid: fb4e15c3767171840bcbe86e7ed8e86e, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fb4e15c3767171840bcbe86e7ed8e86e, type: 3}
@@ -483,7 +484,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 597520090}
   - {fileID: 1032525417}
   - {fileID: 513824661}
   - {fileID: 2040598901}
-  - {fileID: 597520090}
