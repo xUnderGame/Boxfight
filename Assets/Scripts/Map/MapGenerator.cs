@@ -31,7 +31,10 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
     {
         corridorScript = GameObject.Find("Puente").GetComponent<CorridorBlock>();
         enemies = Resources.LoadAll<GameObject>("Prefabs/Enemies");
+    }
 
+    private void Start()
+    {
         System.Random rnd = new System.Random();
         int squareSize = rnd.Next(10, 20);
 

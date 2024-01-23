@@ -5,13 +5,15 @@ using UnityEngine;
 public class EnemyShooter : Enemy
 {
     [HideInInspector] public Weapon equippedWeapon;
+   
 
     public override void OnEnable()
     {
-        if (currentDmg <= 0 || equippedWeapon != null) return;
- 
+        if (currentDmg <= 0 || equippedWeapon != null || GameManager.Instance.weapons == null) return;
+    
         // Equip random weapon
-        GameObject weapon = Instantiate(GameManager.Instance.weapons[Random.Range(0, GameManager.Instance.weapons.Count)], transform);
+        GameObject weapon = Instantiate(GameManager.Instance.weapons[Random.Range(1, GameManager.Instance.weapons.Count)], transform);
+        //GameObject weapon = Instantiate(GameManager.Instance.weapons[3], transform);
         equippedWeapon = weapon.GetComponent<Weapon>();
         
         // Assigns a random weapon scriptable to the enemy

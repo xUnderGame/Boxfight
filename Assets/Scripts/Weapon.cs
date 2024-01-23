@@ -9,6 +9,7 @@ public abstract class Weapon : MonoBehaviour, ILoadScriptable
     [HideInInspector] public Sprite weaponSprite;
     [HideInInspector] public GameObject projectile;
     [HideInInspector] public bool canShoot;
+    [HideInInspector] public AudioSource audio;
 
     protected CooldownBehaviour cd;
     
@@ -18,6 +19,7 @@ public abstract class Weapon : MonoBehaviour, ILoadScriptable
         // weaponSprite = Resources.Load("Prefabs/Weapons/Pistol").GetComponent<Sprite>();
         projectile = (GameObject)Resources.Load("Prefabs/Projectiles/Default"); // Fallback weapon projectile
         cd = GetComponent<CooldownBehaviour>();
+        audio = GetComponent<AudioSource>();
         canShoot = true;
     }
 

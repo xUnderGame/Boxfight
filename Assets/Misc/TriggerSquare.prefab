@@ -119,11 +119,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f58dd6a8bbd2eb14c82807c61aa4c3db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tutorial: 0
   id: 0
   size: 0
   enemyList: []
   corridorPosition: []
   roomsShared: []
+  lostCorridors: []
 --- !u!114 &-3823519070908396713
 MonoBehaviour:
   m_ObjectHideFlags: 0

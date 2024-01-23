@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class Enemy : Character
 {
-    private Image hpBar = null;
+    private Image hpBar = null; 
 
     public virtual void OnEnable()
     {
