@@ -18,4 +18,5 @@ MonoBehaviour:
   timeToLive: 3.5
   weaponSprite: {fileID: 21300000, guid: d157a9b0e2f437a4298e83f660f7c22e, type: 3}
   projectile: {fileID: 1180622746647987742, guid: d6b61b5da75b0a545a537348d536e8dd, type: 3}
+  color: {r: 1, g: 1, b: 1, a: 1}
   shoveForce: -50

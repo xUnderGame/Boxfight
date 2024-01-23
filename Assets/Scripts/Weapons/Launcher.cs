@@ -33,6 +33,9 @@ public class Launcher : Weapon
         // Discount the player mana and start cooldown coroutine
         StartCoroutine(cd.StartCooldown(firingSpeed, result => canShoot = result, canShoot));
         if (transform.parent.parent.CompareTag("Player")) DiscountMana();
+
+        // Play the weapon SFX
+        audioSource.PlayOneShot(audioSource.clip);
     }
 
     public override void LoadScriptable()
@@ -44,6 +47,6 @@ public class Launcher : Weapon
         projectile = ws.projectile;
         shoveForce = ws.shoveForce;
         
-        SetWeaponSprite(weaponSprite);
+        SetWeaponSprite(weaponSprite, ws.color);
     }
 }

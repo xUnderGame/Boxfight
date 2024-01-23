@@ -175,6 +175,7 @@ MonoBehaviour:
   currentHP: 0
   currentSpeed: 0
   currentDmg: 0
+  audio: {fileID: 0}
 --- !u!114 &1912014839119199164
 MonoBehaviour:
   m_ObjectHideFlags: 0

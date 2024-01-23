@@ -38,7 +38,9 @@ public class Shotgun : Weapon
         // Discount the player mana and start cooldown coroutine
         StartCoroutine(cd.StartCooldown(firingSpeed, result => canShoot = result, canShoot));
         if (transform.parent.parent.CompareTag("Player")) DiscountMana();
-        audio.Play();
+        
+        // Play the weapon SFX
+        audioSource.PlayOneShot(audioSource.clip);
     }
 
     public override void LoadScriptable()
@@ -51,6 +53,6 @@ public class Shotgun : Weapon
         bulletSpread = ws.bulletSpread;
         projectile = ws.projectile;
 
-        SetWeaponSprite(weaponSprite);
+        SetWeaponSprite(weaponSprite, ws.color);
     }
 }

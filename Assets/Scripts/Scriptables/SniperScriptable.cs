@@ -9,5 +9,6 @@ public class SniperScriptable : ScriptableObject
     public float timeToLive;
     public Sprite weaponSprite;
     public GameObject projectile;
+    public Color color;
     public int bulletPenetration;
 }

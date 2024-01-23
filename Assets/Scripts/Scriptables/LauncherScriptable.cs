@@ -9,5 +9,6 @@ public class LauncherScriptable : ScriptableObject
     public float timeToLive;
     public Sprite weaponSprite;
     public GameObject projectile;
+    public Color color;
     public float shoveForce;
 }

@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class AnimationBehaviour : MonoBehaviour
 {
-
     public Animator animator;
     private SpriteRenderer spriteRenderer;
     private void Awake()

@@ -18,3 +18,4 @@ MonoBehaviour:
   timeToLive: 5
   weaponSprite: {fileID: 21300000, guid: ad7e995f036dcb24ab9761beb3a327eb, type: 3}
   projectile: {fileID: 1180622746647987742, guid: 82ef4f3b7466f764389d76344b41faef, type: 3}
+  color: {r: 0.990566, g: 0.67876107, b: 0.2663314, a: 1}

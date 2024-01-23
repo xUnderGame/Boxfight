@@ -9,4 +9,5 @@ public class PistolScriptable : ScriptableObject
     public float timeToLive;
     public Sprite weaponSprite;
     public GameObject projectile;
+    public Color color;
 }
