@@ -18,42 +18,26 @@ public class CorridorBlock : MonoBehaviour
 
     private bool cantBeFirstStep = true;
 
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        //if (other.CompareTag("Player"))
-        //{
-        //    TilemapCollider2D collider = GetComponent<TilemapCollider2D>();
-        //    collider.isTrigger = false;
-        //    Vector3 posPlayer = other.transform.position;
-        //    Vector3Int tilePlayerPosition = tilemapCorridor.WorldToCell(posPlayer);
-
-        //    Vector3Int firstPoint = GetAproxCorridor(tilePlayerPosition);
-        //    posWalled.Add(firstPoint);
-        //    tilemapCorridor.SetTile(firstPoint, wall);
-        //    PrintAllCorridors(firstPoint, "");
-        //}
-    }
-
-    private Vector3Int GetAproxCorridor(Vector3Int tilePlayerPosition)
-    {
-        if (TileIn(tilePlayerPosition.x + 1, tilePlayerPosition.y, tilePlayerPosition.z, "corridor"))
-        {
-            tilePlayerPosition = new Vector3Int(tilePlayerPosition.x + 1, tilePlayerPosition.y, tilePlayerPosition.z);
-        }
-        else if (TileIn(tilePlayerPosition.x - 1, tilePlayerPosition.y, tilePlayerPosition.z, "corridor"))
-        {
-            tilePlayerPosition = new Vector3Int(tilePlayerPosition.x - 1, tilePlayerPosition.y, tilePlayerPosition.z);
-        }
-        else if (TileIn(tilePlayerPosition.x, tilePlayerPosition.y + 1, tilePlayerPosition.z, "corridor"))
-        {
-            tilePlayerPosition = new Vector3Int(tilePlayerPosition.x, tilePlayerPosition.y + 1, tilePlayerPosition.z);
-        }
-        else
-        {
-            tilePlayerPosition = new Vector3Int(tilePlayerPosition.x, tilePlayerPosition.y - 1, tilePlayerPosition.z);
-        }
-        return tilePlayerPosition;
-    }
+    //private Vector3Int GetAproxCorridor(Vector3Int tilePlayerPosition)
+    //{
+    //    if (TileIn(tilePlayerPosition.x + 1, tilePlayerPosition.y, tilePlayerPosition.z, "corridor"))
+    //    {
+    //        tilePlayerPosition = new Vector3Int(tilePlayerPosition.x + 1, tilePlayerPosition.y, tilePlayerPosition.z);
+    //    }
+    //    else if (TileIn(tilePlayerPosition.x - 1, tilePlayerPosition.y, tilePlayerPosition.z, "corridor"))
+    //    {
+    //        tilePlayerPosition = new Vector3Int(tilePlayerPosition.x - 1, tilePlayerPosition.y, tilePlayerPosition.z);
+    //    }
+    //    else if (TileIn(tilePlayerPosition.x, tilePlayerPosition.y + 1, tilePlayerPosition.z, "corridor"))
+    //    {
+    //        tilePlayerPosition = new Vector3Int(tilePlayerPosition.x, tilePlayerPosition.y + 1, tilePlayerPosition.z);
+    //    }
+    //    else
+    //    {
+    //        tilePlayerPosition = new Vector3Int(tilePlayerPosition.x, tilePlayerPosition.y - 1, tilePlayerPosition.z);
+    //    }
+    //    return tilePlayerPosition;
+    //}
 
     public bool TileIn(int x, int y, int z, string typeTile)
     {

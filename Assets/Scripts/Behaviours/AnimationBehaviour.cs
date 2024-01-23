@@ -15,6 +15,4 @@ public class AnimationBehaviour : MonoBehaviour
     {
         animator.SetBool("Death", true);
     }
-
-
 }
