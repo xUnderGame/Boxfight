@@ -65,11 +65,11 @@ public class Room : MonoBehaviour
         }
 
         corridorScript.PrintCorridors(corridorPosition, "unblock");
-        GameManager.Instance.player.idRoomsVisited.Add(id);
+        if (!GameManager.Instance.player.idRoomsVisited.Contains(id)) GameManager.Instance.player.idRoomsVisited.Add(id);
         foreach (GameObject room in roomsShared)
         {
             corridorScript.PrintCorridors(room.GetComponent<Room>().corridorPosition, "unblock");
-            GameManager.Instance.player.idRoomsVisited.Add(room.GetComponent<Room>().id);
+            if(!GameManager.Instance.player.idRoomsVisited.Contains(room.GetComponent<Room>().id)) GameManager.Instance.player.idRoomsVisited.Add(room.GetComponent<Room>().id);
         }
 
         string numRooms = GameManager.Instance.gameUI.roomsVisited.text.Split("/")[1];

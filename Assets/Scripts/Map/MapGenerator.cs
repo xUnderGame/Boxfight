@@ -345,6 +345,10 @@ public class TilemapConnectedSquaresDrawer : MonoBehaviour
         };
 
         if (i == -1) return;
+        if (corridorScript.TileIn(tilePosition.x + 1, tilePosition.y, 0, "corridor") ||
+        corridorScript.TileIn(tilePosition.x - 1, tilePosition.y, 0, "corridor") ||
+        corridorScript.TileIn(tilePosition.x, tilePosition.y + 1, 0, "corridor") ||
+        corridorScript.TileIn(tilePosition.x, tilePosition.y - 1, 0, "corridor")) return;
 
         Vector3 instPos = tilemapWall.CellToWorld(tilePosition);
         Vector3 instPosCorre = new Vector3(instPos.x + 1, instPos.y + 1, 0);
