@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fe49b0f39f6aec4bbb70bc4b2859ebd, type: 3}
+  m_Name: Default Enemy Launcher
+  m_EditorClassIdentifier: 
+  energyCost: 0
+  damage: 2
+  firingSpeed: 3
+  timeToLive: 3.5
+  weaponSprite: {fileID: 21300000, guid: d157a9b0e2f437a4298e83f660f7c22e, type: 3}
+  projectile: {fileID: 1180622746647987742, guid: d6b61b5da75b0a545a537348d536e8dd, type: 3}
+  color: {r: 1, g: 1, b: 1, a: 1}
+  shoveForce: -35

@@ -3,17 +3,21 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Equipped
+  - Weapon
+  - Enemy
+  - Room
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Projectiles
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Pickups
+  - IgnoreDamage
+  - Background
   - 
   - 
   - 
