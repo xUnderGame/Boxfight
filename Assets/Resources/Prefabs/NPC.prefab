@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2856487868156480403}
   - component: {fileID: 6951270260012608970}
   - component: {fileID: 6677992240884782106}
+  - component: {fileID: 1122284580885886821}
   m_Layer: 0
   m_Name: NPC
   m_TagString: Untagged
@@ -76,8 +77,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
-  m_Color: {r: 0.5566038, g: 0.5566038, b: 0.5566038, a: 1}
+  m_Sprite: {fileID: 1785750825, guid: bfc195410cd335147bf8966a2c874e05, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -146,8 +147,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 2}
+  m_Offset: {x: -0.060646534, y: -0.072775364}
+  m_Size: {x: 3.110489, y: 4.1347466}
   m_Direction: 0
 --- !u!114 &6677992240884782106
 MonoBehaviour:
@@ -169,3 +170,24 @@ MonoBehaviour:
   currentSpeed: 0
   currentDmg: 0
   dialogScriptable: {fileID: 11400000, guid: 5586c1ecffa4e464e8542d9a95e55708, type: 2}
+--- !u!95 &1122284580885886821
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2236366691701831231}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f1468a85e0e60a54ca2b3f165a9add2f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

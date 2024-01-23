@@ -84,6 +84,8 @@ public class GameManager : MonoBehaviour
             gameUI.choicesSubUI.transform.Find("Choice4").Find("Text").gameObject.GetComponent<Text>()));
     }
 
+   
+
     // GameUI class for better navigation and structure.
     public class GameUI {
         public GameObject main;
@@ -193,6 +195,13 @@ public class GameManager : MonoBehaviour
         public void ToggleChoicesSubUI(bool status) { choicesSubUI.SetActive(status); }
 
         // Toggle gameover UI
-        public void ToggleGameOverUI(bool status) { gameOver.SetActive(status); }
+        public void ToggleGameOverUI(bool status) { gameOver.SetActive(status); }  
+        
+         public void SetWin()
+    {
+        Time.timeScale = 0f;
+        win.SetActive(true);
     }
+    }
+
 }

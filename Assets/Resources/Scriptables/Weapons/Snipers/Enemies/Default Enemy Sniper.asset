@@ -16,6 +16,6 @@ MonoBehaviour:
   damage: 3
   firingSpeed: 4
   timeToLive: 3
-  weaponSprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  weaponSprite: {fileID: 21300000, guid: e15aca73edd33d047a8cdf422fb295bf, type: 3}
   projectile: {fileID: 1180622746647987742, guid: 44761aab9d87084418b270efde41ce19, type: 3}
   bulletPenetration: 0

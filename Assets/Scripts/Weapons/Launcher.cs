@@ -28,6 +28,8 @@ public class Launcher : Weapon
         gunProjectile.shoveForce = shoveForce;
         gunProjectile.ttl = ws.timeToLive;
 
+
+        audio.Play();
         // Discount the player mana and start cooldown coroutine
         StartCoroutine(cd.StartCooldown(firingSpeed, result => canShoot = result, canShoot));
         if (transform.parent.parent.CompareTag("Player")) DiscountMana();

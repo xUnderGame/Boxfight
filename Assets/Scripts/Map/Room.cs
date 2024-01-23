@@ -74,6 +74,8 @@ public class Room : MonoBehaviour
 
         string numRooms = GameManager.Instance.gameUI.roomsVisited.text.Split("/")[1];
         GameManager.Instance.gameUI.roomsVisited.text = Convert.ToInt32(GameManager.Instance.player.idRoomsVisited.Count) + "/" + numRooms;
+
+        if (GameManager.Instance.player.idRoomsVisited.Count >= Convert.ToInt32(numRooms)) GameManager.Instance.gameUI.SetWin();
     }
 
     public void TrapIsOn()
