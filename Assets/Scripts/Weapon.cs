@@ -9,7 +9,7 @@ public abstract class Weapon : MonoBehaviour, ILoadScriptable
     [HideInInspector] public Sprite weaponSprite;
     [HideInInspector] public GameObject projectile;
     [HideInInspector] public bool canShoot;
-    [HideInInspector] public AudioSource audio;
+    [HideInInspector] public AudioSource audioSource;
 
     protected CooldownBehaviour cd;
     
@@ -19,7 +19,7 @@ public abstract class Weapon : MonoBehaviour, ILoadScriptable
         // weaponSprite = Resources.Load("Prefabs/Weapons/Pistol").GetComponent<Sprite>();
         projectile = (GameObject)Resources.Load("Prefabs/Projectiles/Default"); // Fallback weapon projectile
         cd = GetComponent<CooldownBehaviour>();
-        audio = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
         canShoot = true;
     }
 
@@ -50,7 +50,12 @@ public abstract class Weapon : MonoBehaviour, ILoadScriptable
     }
 
     // Sets the weapon sprite (not the UI texture!)
-    public void SetWeaponSprite(Sprite sprite) { gameObject.GetComponent<SpriteRenderer>().sprite = sprite; }
+    public void SetWeaponSprite(Sprite sprite, Color color)
+    {
+        SpriteRenderer sr = gameObject.GetComponent<SpriteRenderer>();
+        sr.sprite = sprite;
+        sr.color = color;
+    }
 
     // Points weapon to cursor
     public void PointWeaponAtCursor()

@@ -9,6 +9,7 @@ public class ShotgunScriptable : ScriptableObject
     public float timeToLive;
     public Sprite weaponSprite;
     public GameObject projectile;
+    public Color color;
     public int bulletsPerShot;
     public int bulletSpread;
 }

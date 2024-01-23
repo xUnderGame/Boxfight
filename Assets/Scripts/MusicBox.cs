@@ -6,13 +6,10 @@ public class MusicBox : MonoBehaviour
 {
     [HideInInspector] public static MusicBox Instance;
 
-
     void Awake()
     {
         if (Instance) { Destroy(gameObject); return; }
-        else {
-            Instance = this;
-            DontDestroyOnLoad(transform.root.gameObject);
-        }
+        else { Instance = this; }
+        DontDestroyOnLoad(transform.root.gameObject);
     }
 }

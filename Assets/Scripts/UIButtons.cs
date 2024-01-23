@@ -14,7 +14,7 @@ public class UIButtons : MonoBehaviour
 
     // Changes to a different scene.
     public void ChangeScene(string sceneName) {
-        if(sceneName != "UG 1" && sceneName != "Tutorial") Destroy(GameManager.Instance.gameObject);
+        Time.timeScale = 1;
         SceneManager.LoadScene(sceneName);
     }
 

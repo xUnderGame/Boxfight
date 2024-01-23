@@ -5,19 +5,12 @@ public class GrenadeProjectile : Projectile
 {
     [HideInInspector] public float shoveForce;
     [HideInInspector] public bool shotByPlayer;
-    private AudioSource audio;
+    private AudioSource audioSource;
     private Coroutine tick;
 
-    // Has a funny bug where if you switch weapon the same frame after shooting,
-    // it gains the stats of the other weapon.
-    // I'm leaving it in as a "mechanic" now.
-
-    private void Awake()
-    {
-        audio = GetComponent<AudioSource>();
-    }
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         tick = StartCoroutine(BulletTimer());
 
         // Projectile info
@@ -49,7 +42,7 @@ public class GrenadeProjectile : Projectile
     public IEnumerator Explode()
     {
         gameObject.transform.Find("DamageArea").gameObject.SetActive(true);
-        audio.Play();
+        audioSource.PlayOneShot(audioSource.clip);
 
         yield return new WaitForSeconds(0.8f);
         Destroy(gameObject);

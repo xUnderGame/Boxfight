@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 93d14893cb65d244db127acc26d58d36, type: 3}
-  m_Name: More Ammo Shotgun
+  m_Name: Accurate Shotgun
   m_EditorClassIdentifier: 
-  energyCost: 4
+  energyCost: 6
   damage: 4
   firingSpeed: 0.5
   timeToLive: 3
   weaponSprite: {fileID: 21300000, guid: eef8aa12af2bbdd4ea6954b213159c0a, type: 3}
   projectile: {fileID: 1180622746647987742, guid: 8647b756ed1957548b9b66158ba06863, type: 3}
-  bulletsPerShot: 8
+  color: {r: 0.99215686, g: 0.6784314, b: 0.26666668, a: 1}
+  bulletsPerShot: 5
   bulletSpread: 10

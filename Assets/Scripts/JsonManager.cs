@@ -14,7 +14,6 @@ public class JsonManager : MonoBehaviour
         // Only one JsonManager on scene.
         if (!Instance) Instance = this;
         else { Destroy(gameObject); return; }
-        DontDestroyOnLoad(gameObject);
 
         // Default status
         jsonpath = $"{Application.persistentDataPath}/userdata.json";

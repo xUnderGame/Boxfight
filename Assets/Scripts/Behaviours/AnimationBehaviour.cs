@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class AnimationBehaviour : MonoBehaviour
 {
-
     public Animator animator;
     private SpriteRenderer spriteRenderer;
     private void Awake()
@@ -15,6 +14,4 @@ public class AnimationBehaviour : MonoBehaviour
     {
         animator.SetBool("Death", true);
     }
-
-
 }
