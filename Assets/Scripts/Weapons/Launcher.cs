@@ -29,7 +29,7 @@ public class Launcher : Weapon
         gunProjectile.ttl = ws.timeToLive;
 
 
-        audio.Play();
+        GetComponent<AudioSource>().Play();
         // Discount the player mana and start cooldown coroutine
         StartCoroutine(cd.StartCooldown(firingSpeed, result => canShoot = result, canShoot));
         if (transform.parent.parent.CompareTag("Player")) DiscountMana();
