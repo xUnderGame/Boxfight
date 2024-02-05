@@ -27,11 +27,9 @@ public class EnemyCreeper : Enemy
         
         // Shove character
         collider.GetComponent<Rigidbody2D>().AddForce((transform.position - collider.transform.position).normalized * -35f, ForceMode2D.Impulse);
-        GetComponent<AudioSource>().Play();
-        anim.Bom();
         
         // Play audiosource and die
-        audioSource.PlayOneShot(audioSource.clip);
+        if (gameObject.activeSelf) audioSource.PlayOneShot(audioSource.clip);
         anim.Bom();
     }
 }

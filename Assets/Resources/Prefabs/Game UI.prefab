@@ -2838,7 +2838,7 @@ GameObject:
   - component: {fileID: 1842287894821915154}
   - component: {fileID: 7366342607616351978}
   m_Layer: 5
-  m_Name: Coins (1)
+  m_Name: Room Counter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

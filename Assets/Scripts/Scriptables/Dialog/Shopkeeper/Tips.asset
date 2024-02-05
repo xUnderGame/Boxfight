@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Tips
   m_EditorClassIdentifier: 
   dialog:
-  - Don't get killed! That's the best tip i can give you.
-  - Oh, and also, watch for the creepers, they deal a TON of damage.
+  - Don't get killed! That's the best tip I can give you.
+  - Oh, and also, watch out for creepers, they deal a TON of damage.
   - You're welcome!
   events:
   - userDialog:
@@ -25,6 +25,6 @@ MonoBehaviour:
       - {fileID: 11400000}
     executeAtIndex: 1
   npcName: Shopkeeper
-  textSpeed: 0.05
+  textSpeed: 0.02
   canBeSkipped: 1
   stopCharacterMovement: 1

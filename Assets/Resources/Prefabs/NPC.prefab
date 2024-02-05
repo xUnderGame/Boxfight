@@ -169,7 +169,7 @@ MonoBehaviour:
   currentHP: 0
   currentSpeed: 0
   currentDmg: 0
-  dialogScriptable: {fileID: 11400000, guid: 5586c1ecffa4e464e8542d9a95e55708, type: 2}
+  dialogScriptable: {fileID: 0}
 --- !u!95 &1122284580885886821
 Animator:
   serializedVersion: 5

@@ -211,13 +211,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2807238242280270164, guid: fb4e15c3767171840bcbe86e7ed8e86e, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1032525416}
+    - target: {fileID: 2807238242280270164, guid: fb4e15c3767171840bcbe86e7ed8e86e, type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4462473094004745068, guid: fb4e15c3767171840bcbe86e7ed8e86e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Game
+      objectReference: {fileID: 0}
     - target: {fileID: 6717916633387915388, guid: fb4e15c3767171840bcbe86e7ed8e86e, type: 3}
       propertyPath: m_Name
       value: Menu UI
       objectReference: {fileID: 0}
     - target: {fileID: 8623342171013489936, guid: fb4e15c3767171840bcbe86e7ed8e86e, type: 3}
       propertyPath: m_Text
-      value: HIT & RUN
+      value: BOXFIGHT
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -276,6 +288,10 @@ PrefabInstance:
     - target: {fileID: 7414018023816389171, guid: 53d189c187cd32c4498a39418ab31e8a, type: 3}
       propertyPath: m_Name
       value: MusicBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 9122630201574204835, guid: 53d189c187cd32c4498a39418ab31e8a, type: 3}
+      propertyPath: m_Volume
+      value: 0.15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -505,6 +521,10 @@ PrefabInstance:
     - target: {fileID: 850352337685358484, guid: a2f3a1e5b06374746acbefe51cc68d1d, type: 3}
       propertyPath: m_Name
       value: Grid
+      objectReference: {fileID: 0}
+    - target: {fileID: 850352337685358484, guid: a2f3a1e5b06374746acbefe51cc68d1d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1267241007973494021, guid: a2f3a1e5b06374746acbefe51cc68d1d, type: 3}
       propertyPath: m_LocalPosition.x

@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class UIButtons : MonoBehaviour
 {
-    public void GoToMainMenu() { ChangeScene("Main Menu"); }
+    public void GoToMainMenu() { ChangeScene("Menu"); }
 
     // Resets the scene (basically a respawn)
     public void PlayerRespawn() {
@@ -14,7 +14,7 @@ public class UIButtons : MonoBehaviour
 
     // Changes to a different scene.
     public void ChangeScene(string sceneName) {
-        if(sceneName != "UG 1" && sceneName != "Tutorial") Destroy(GameManager.Instance.gameObject);
+        if(sceneName != "Game" && sceneName != "Tutorial") Destroy(GameManager.Instance.gameObject);
         Time.timeScale = 1;
         SceneManager.LoadScene(sceneName);
     }

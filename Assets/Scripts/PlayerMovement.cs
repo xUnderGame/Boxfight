@@ -106,7 +106,7 @@ public class PlayerMovement : MonoBehaviour
     // Interactables and damageables. (CHANGE .NAME CONDITION LATER, USED FOR TESTING RN)
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.name != "NPC" && other.TryGetComponent(out IInteractable interactable)) interactable?.Interact(gameObject);
+        if (!other.CompareTag("NPC") && other.TryGetComponent(out IInteractable interactable)) interactable?.Interact(gameObject);
         // if (other.TryGetComponent(out IDamageable damageable)) damageable?.Hurt();
     }
 }

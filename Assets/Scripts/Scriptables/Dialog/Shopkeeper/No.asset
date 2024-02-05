@@ -25,6 +25,6 @@ MonoBehaviour:
       - {fileID: 11400000}
     executeAtIndex: 1
   npcName: Shopkeeper
-  textSpeed: 0.05
+  textSpeed: 0.02
   canBeSkipped: 1
   stopCharacterMovement: 1

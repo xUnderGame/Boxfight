@@ -31,5 +31,5 @@ MonoBehaviour:
     executeAtIndex: 2
   npcName: NPC
   textSpeed: 0.05
-  canBeSkipped: 1
+  canBeSkipped: 0
   stopCharacterMovement: 1
