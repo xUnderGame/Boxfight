@@ -1167,6 +1167,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NPC
       objectReference: {fileID: 0}
+    - target: {fileID: 2236366691701831231, guid: 19be16faaecec364bba279ec1799b911, type: 3}
+      propertyPath: m_TagString
+      value: NPC
+      objectReference: {fileID: 0}
     - target: {fileID: 6677992240884782106, guid: 19be16faaecec364bba279ec1799b911, type: 3}
       propertyPath: dialogScriptable
       value: 

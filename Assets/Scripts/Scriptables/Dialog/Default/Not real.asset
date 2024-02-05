@@ -13,12 +13,9 @@ MonoBehaviour:
   m_Name: Not real
   m_EditorClassIdentifier: 
   dialog:
-  - Ah.
-  - Well, I...
-  - ...Kinda thought so, actually.
-  - And that's okay.
+  - That's fine.
   events: []
   npcName: NPC - Real'nt
-  textSpeed: 0.15
-  canBeSkipped: 1
+  textSpeed: 0.25
+  canBeSkipped: 0
   stopCharacterMovement: 1
